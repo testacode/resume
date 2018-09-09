@@ -1,2 +1,0 @@
-# resume
-Created with CodeSandbox
