@@ -60,8 +60,8 @@ const Contractor = styled.div`
 
 const isContractor = value => value ? ' (*)' : '';
 
-const Item = ({ 
-  className, since, title, task, skills, description, contractor 
+const Item = ({
+  className, since, title, task, skills, description, contractor
 }) => (
   <StyledItem className='item'>
     <div className={`logo ${className}`} />
