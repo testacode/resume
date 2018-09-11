@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledItem = styled.div`
+  width: 100%;
   margin: 0 0 25px;
 `;
 
@@ -79,7 +80,7 @@ Item.propTypes = {
   task: PropTypes.string.isRequired,
   skills: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  globant: PropTypes.string,
+  globant: PropTypes.bool,
 };
 
 Item.defaultProps = {

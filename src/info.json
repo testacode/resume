@@ -1,0 +1,200 @@
+{
+  "title": "Carlos Monti Resume",
+  "name": "Carlos Monti",
+  "position": "Senior Front-End Developer",
+  "sections": {
+    "introduction": "I am a front-end developer passionate about learning while creating robust well-finished products.",
+    "summary": [
+      {
+        "title": "Career Summary",
+        "items": [
+          "10+ years of professional experience in software engineering.",
+          [
+            "Mainly in e-commerce markets. Vast experience working with geo distributed teams."
+          ],
+          [
+            "Skills in communication",
+            "analysis and quality for software development."
+          ],
+          [
+            "Comfortable on communicating with clients on regular basis."
+          ],
+          [
+            "Comfortable also with the use of Agile methodologies."
+          ],
+          [
+            "As a web-oriented developer",
+            "I had worked with high traffic websites using SOA architectures mostly",
+            "but not only."
+          ],
+          [
+            "Value discipline",
+            "excellence and product orientation."
+          ]
+        ]
+      },
+      {
+        "title": "Proficient in",
+        "items": [
+          "Teams management using Agile Methodologies (Scrum).",
+          [
+            "Software engineering."
+          ],
+          [
+            "Motivation and leadership skills."
+          ],
+          [
+            "Risk management."
+          ],
+          [
+            "Web Based systems."
+          ],
+          [
+            "Javascript."
+          ],
+          [
+            "Styling."
+          ],
+          [
+            "Unit Testing."
+          ]
+        ]
+      },
+      {
+        "title": "Languages",
+        "items": [
+          "Spanish.",
+          [
+            "English."
+          ]
+        ]
+      }
+    ],
+    "skills": {
+      "title": "Skills",
+      "items": [
+        {
+          "title": "HTML/CSS",
+          "skills": "HTML5, CSS3, Sass, Less, Responsive Web Design, Bootstrap, Styled-Components, CSS in JS"
+        },
+        {
+          "title": "Javascript",
+          "skills": "React, Angular, Redux, Redux-Saga, Webpack, Grunt, Gulp"
+        },
+        {
+          "title": "Backend",
+          "skills": "Node.js, PHP, MySQL, MongoDB, Rest-API"
+        },
+        {
+          "title": "Dev Tools",
+          "skills": "Gulp, Grunt, Webpack, Git, NPM"
+        },
+        {
+          "title": "UI/UX",
+          "skills": "Adobe PS/AI, Sketch, Zeplin, Invision"
+        }
+      ]
+    },
+    "experience": {
+      "title": "Experience",
+      "items": [
+        {
+          "name": "Elementum",
+          "since": "Since Aug/2017",
+          "position": "Front End Web Developer for UI interface on Data Acquisitions Management team.",
+          "technology": "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
+          "description": "Create a React “Single Page Application” Portal for managing clients sensible (Starbucks, OSI Group, Philips, Flex) data right from scratch. The Portal enables the user to upload spreadsheet files that are uploaded to an S3 bucket from Amazon and gets processed by the back-end services. Then returns a feedback file which enables the client to have clear view of the processed results and also enables the user to see the data and the progress of the data processed. For this project I worked on the web interface, app design architecture and usability.",
+          "contractor": false
+        },
+        {
+          "name": "Deloitte",
+          "since": "Since Feb/2016 - Jul/2017",
+          "position": "Senior Front End Web Developer for Deloitte.",
+          "technology": "Angular (1.6), Lodash/Underscore, Karma/Jasmine",
+          "description": "Development for a punctual project called “Rmss” (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.",
+          "contractor": true
+        },
+        {
+          "name": "Thomas Cook",
+          "since": "Since Dec/2015 - Jan/2016",
+          "position": "Senior Front End Web Developer for Thomas Cook.",
+          "technology": "Angular (1.5), Lodash/Underscore, Karma/Jasmine",
+          "description": "Development for the global page of Thomas Cook (thomascook.com). Lets the user to book flights, hotels, etc. all over Europe",
+          "contractor": true
+        },
+        {
+          "name": "Thomas Cook",
+          "since": "Since Dec/2015 - Jan/2016",
+          "position": "Senior Front End Web Developer for Thomas Cook CMS.",
+          "technology": "Angular (1.5), Lodash/Underscore, Karma/Jasmine, Node JS, Magnolia CMS",
+          "description": "Development for a Customized Magnolia CMS used by Product Owners of Thomas Cook that lets users adding content to the dynamic pages of the global site (thomascook.com)",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since Jan/2015 - Dec/2015",
+          "position": "Senior Web Developer for Disney Cruise Line.",
+          "technology": "Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
+          "description": "Development of the renewed e-commerce site for placing cruise reservations with Disney’s Cruise Line assuring best coding practices and also giving assistance to any newcomer to the project.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since Jan/2015 - Dec/2015",
+          "position": "Senior Web Developer for Disney Cruise Line.",
+          "technology": "Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
+          "description": "Development of the renewed e-commerce site for placing cruise reservations with Disney’s Cruise Line assuring best coding practices and also giving assistance to any newcomer to the project.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since Aug/2014 - Dec/2014",
+          "position": "Senior Web Developer for Disney Visa Instant Credit.",
+          "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave",
+          "description": "Development of the also renewed e-commerce site for applying to the Disney Visa Credit Card.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since May/2014 - Jul/2014",
+          "position": "Senior Web Developer for Fast Pass Plus (FP+) & Fast Food Plus (FF+).",
+          "technology": "Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
+          "description": "Development of the also renewed e-commerce site for applying to the Disney Visa Credit Card.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since Dec/2013 - Feb/2014",
+          "position": "Semi-Senior Web Developer for My Disney Experience Itinerary.",
+          "technology": "Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
+          "description": "Development of the Plan and Share your Disney Vacation Itinerary.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since Sep/2011 - Nov/2013",
+          "position": "Semi-Senior Web Developer for My Disney Experience (Responsive).",
+          "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave",
+          "description": "Development of the responsive view for the MDX site.",
+          "contractor": true
+        },
+        {
+          "name": "Walt Disney Parks and Resorts",
+          "since": "Since May/2011 - Oct/2011",
+          "position": "Semi-Senior Web Developer for Disney Online Check In.",
+          "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave",
+          "description": "Development of the Disney Online Check In service that lets the user prepare the checking to any Disney Resort before arriving.",
+          "contractor": true
+        },
+        {
+          "name": "Gameloft",
+          "since": "Since Aug/2010 - Feb/2011",
+          "position": "Semi-Senior Web Developer for My Disney Experience.",
+          "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave",
+          "description": "Development of the new Disney Personal Experience Portal - My Disney Experience (2.0).",
+          "contractor": true
+        }
+      ]
+    }
+  }
+}
