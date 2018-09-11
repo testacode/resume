@@ -1,6 +1,8 @@
 import React from 'react';
+import { chunk, uniqueId } from 'lodash';
 import styled from 'styled-components';
 import { Grid, Row, Col, Typography } from '@smooth-ui/core-sc';
+import data from '../../info.json';
 
 const StyledSkills = styled.div`
   margin: 30px 0 10px;
@@ -22,45 +24,20 @@ const StyledParagraph = styled.p`
 
 const Skills = () => (
   <StyledSkills className='skills'>
-    <StyledTitle variant='h2'>Skills</StyledTitle>
+    <StyledTitle variant='h2'>{data.sections.skills.title}</StyledTitle>
     <Grid>
-      <Row>
-        <Col>
-          <StyledH4 variant='h4' color='#333'>HTML/CSS</StyledH4>
-          <StyledParagraph>
-            HTML5, CSS3, Sass, Less, Responsive Web Design, Bootstrap, Styled-Components, CSS in JS
-          </StyledParagraph>
-        </Col>
-        <Col>
-          <StyledH4 variant='h4' color='#333'>Javascript</StyledH4>
-          <StyledParagraph>
-            React, Angular, Redux, Redux-Saga, Webpack, Grunt, Gulp
-          </StyledParagraph>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <StyledH4 variant='h4' color='#333'>Back-end</StyledH4>
-          <StyledParagraph>
-            Node.js, PHP, MySQL, MongoDB, Rest-API
-          </StyledParagraph>
-        </Col>
-        <Col>
-          <StyledH4 variant='h4' color='#333'>Dev Tools</StyledH4>
-          <StyledParagraph>
-            Gulp, Grunt, Webpack, Git, NPM
-          </StyledParagraph>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <StyledH4 variant='h4' color='#333'>UI/UX</StyledH4>
-          <StyledParagraph>
-            Adobe PS/AI, Sketch, Zeplin, Invision
-          </StyledParagraph>
-        </Col>
-        <Col></Col>
-      </Row>
+      {chunk(data.sections.skills.items, 2).map(group => (
+        <Row key={uniqueId()}>
+          {group.map(item => (
+            <Col key={item.title}>
+              <StyledH4 variant='h4' color='#333'>{item.title}</StyledH4>
+              <StyledParagraph>
+                {item.skills}
+              </StyledParagraph>
+            </Col>
+          ))}
+        </Row>
+      ))}
     </Grid>
   </StyledSkills>
 );

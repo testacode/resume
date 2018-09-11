@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import data from '../../info.json';
 
 const StyledIntro = styled.div`
   font-size: 2.5rem;
@@ -10,7 +11,7 @@ const StyledIntro = styled.div`
 
 const Introduction = () => (
   <StyledIntro className='introduction'>
-    I am a front-end developer passionate about learning while creating robust well-finished products. 
+    {data.sections.introduction}
   </StyledIntro>
 );
 
