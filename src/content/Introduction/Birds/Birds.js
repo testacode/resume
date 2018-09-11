@@ -1,5 +1,5 @@
 /**
- * Got it from https://fournier-pere-fils.com/home
+ * Got the birds from https://fournier-pere-fils.com/home
  */
 import React from 'react';
 import styled from 'styled-components';

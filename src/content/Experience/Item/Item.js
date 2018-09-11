@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledItem = styled.div`
+  width: 100%;
   margin: 0 0 25px;
 `;
 
@@ -10,9 +11,6 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
-`;
-
-const StyledImg = styled.div`
 `;
 
 const Since = styled.div`
@@ -33,9 +31,10 @@ const Task = styled.div`
 `;
 
 const Skills = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: black;
   font-style: italic;
+  font-weight: 300;
 `;
 
 const Description = styled.q`
@@ -48,6 +47,7 @@ const Description = styled.q`
   background: #eee;
   border-radius: 5px;
   border: 1px solid #ddd;
+  font-weight: 300;
 `;
 
 const Contractor = styled.div`
@@ -58,17 +58,21 @@ const Contractor = styled.div`
   text-align: right;
 `;
 
-const Item = ({ className, since, title, task, skills, description, globant }) => (
+const isContractor = value => value ? ' (*)' : '';
+
+const Item = ({ 
+  className, since, title, task, skills, description, contractor 
+}) => (
   <StyledItem className='item'>
-    <StyledImg className={`logo ${className}`} />
+    <div className={`logo ${className}`} />
     <StyledWrapper>
-      <Title>{title}</Title>
-      <Since>{since}</Since>
+        <Title>{title + isContractor(contractor)}</Title>
+        <Since>{`- ${since}`}</Since>
     </StyledWrapper>
     <Task>{task}</Task>
     <Skills>{skills}</Skills>
     <Description>{description}</Description>
-    {globant && <Contractor>* Globant Contractor</Contractor>}
+    {contractor && <Contractor>{contractor}</Contractor>}
   </StyledItem>
 );
 
@@ -79,12 +83,12 @@ Item.propTypes = {
   task: PropTypes.string.isRequired,
   skills: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  globant: PropTypes.string,
+  contractor: PropTypes.string,
 };
 
 Item.defaultProps = {
   className: null,
-  globant: false
+  contractor: null
 };
 
 export default Item;

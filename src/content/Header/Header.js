@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { name, position } from '../../info.json';
+
 const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -29,8 +31,8 @@ const StyledH2 = styled.h2`
 
 const Header = () => (
   <StyledWrapper className='header'>
-    <StyledSuperTitle>Carlos Monti</StyledSuperTitle>
-    <StyledH2>Senior Front-End Developer</StyledH2>
+    <StyledSuperTitle>{name}</StyledSuperTitle>
+    <StyledH2>{position}</StyledH2>
   </StyledWrapper>
 );
 

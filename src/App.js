@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, Row, Col } from '@smooth-ui/core-sc';
 
-import Content from './Content';
-import Header from './Content/Header';
+import Content from './content';
+import Header from './content/Header';
 import Paper from './components/Paper';
-import Birds from './Content/Introduction/Birds';
+import Birds from './content/Introduction/Birds';
 
 const App = () => (
   <div className='app'>
@@ -12,11 +12,11 @@ const App = () => (
     <Paper width='90rem'>
       <Grid>
         <Row>
-          <Col></Col>
+          <Col />
           <Col xs={6}>
             <Header />
           </Col>
-          <Col></Col>
+          <Col />
         </Row>
         <Row justifyContent='center'>
           <Content />
