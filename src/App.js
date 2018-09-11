@@ -4,7 +4,7 @@ import { Grid, Row, Col } from '@smooth-ui/core-sc';
 import Content from './content';
 import Header from './content/Header';
 import Paper from './components/Paper';
-import Birds from './content/Introduction/Birds';
+import Birds from './components/Birds';
 
 const App = () => (
   <div className='app'>

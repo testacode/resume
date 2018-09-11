@@ -1,18 +1,21 @@
-*, 
+/*
+  Base Styles 
+*/
+
+*,
 *::before,
 *::after {
 	box-sizing: border-box;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 0.7em;
 }
 
 body {
   font-size: 1.6rem;
   background-color: #858577;
   background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
-  /*Got it from: https://www.transparenttextures.com*/
 }
 
 html, body {
