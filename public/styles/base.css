@@ -1,0 +1,39 @@
+*, 
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  background-color: #858577;
+  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+  /*Got it from: https://www.transparenttextures.com*/
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+ul {
+  line-height: 2.5rem;
+}
+
+p {
+  color: #444;
+}
+
+p, div {
+  line-height: 2rem;
+}
