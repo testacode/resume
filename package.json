@@ -5,7 +5,7 @@
   "keywords": [
     "resume"
   ],
-  "homepage": "http://carlosmonti.gitlab.io/resume",
+  "homepage": "https://carlosmonti.gitlab.io/resume",
   "private": true,
   "dependencies": {
     "@smooth-ui/core-sc": "^5.0.0",
