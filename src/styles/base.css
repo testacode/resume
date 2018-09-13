@@ -1,5 +1,5 @@
 /*
-  Base Styles 
+  Base Styles
 */
 
 *,
@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.6em;
   background-color: #858577;
   background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
 }
