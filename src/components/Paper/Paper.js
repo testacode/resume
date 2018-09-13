@@ -9,7 +9,7 @@ const StyledPaper = styled.div`
   &.paper {
     z-index: 10;
     background: #fff;
-    padding: 8rem 8rem 8rem;
+    padding: 9rem;
     position: relative;
   }
 
