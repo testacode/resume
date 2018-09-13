@@ -8,9 +8,8 @@ import styled from 'styled-components';
 const StyledPaper = styled.div`
   &.paper {
     z-index: 10;
-    width: ${props => props.width};
     background: #fff;
-    padding: 30px 30px 50px;
+    padding: 8rem 8rem 8rem;
     position: relative;
   }
 
@@ -46,21 +45,15 @@ const StyledPaper = styled.div`
   }
 `;
 
-const Paper = ({ children, width }) => (
-  <StyledPaper 
-    width={width}
+const Paper = ({ children }) => (
+  <StyledPaper
     className='paper'>
     {children}
   </StyledPaper>
 );
 
-Paper.propTypes = { 
-  children: PropTypes.node.isRequired,
-  width: PropTypes.string
-};
-
-Paper.defaultProps = {
-  width: 'inherit'
+Paper.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default Paper;

@@ -16,7 +16,7 @@ const StyledSuperTitle = styled.h1`
   border-radius: 0 12px;
   background-color: black;
   color: white;
-  font-size: 3.1rem;
+  font-size: 3.2rem;
   font-family: Georgia, serif;
   font-style: italic;
   letter-spacing: .1rem;

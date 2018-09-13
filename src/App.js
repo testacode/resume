@@ -9,7 +9,7 @@ import Birds from './components/Birds';
 const App = () => (
   <div className='app'>
     <Birds />
-    <Paper width='90rem'>
+    <Paper>
       <Grid>
         <Row>
           <Col />
