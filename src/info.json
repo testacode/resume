@@ -9,64 +9,31 @@
         "title": "Career Summary",
         "items": [
           "10+ years of professional experience in software engineering.",
-          [
-            "Mainly in e-commerce markets. Vast experience working with geo distributed teams."
-          ],
-          [
-            "Skills in communication",
-            "analysis and quality for software development."
-          ],
-          [
-            "Comfortable on communicating with clients on regular basis."
-          ],
-          [
-            "Comfortable also with the use of Agile methodologies."
-          ],
-          [
-            "As a web-oriented developer",
-            "I had worked with high traffic websites using SOA architectures mostly",
-            "but not only."
-          ],
-          [
-            "Value discipline",
-            "excellence and product orientation."
-          ]
+          "Mainly in e-commerce markets. Vast experience working with geo distributed teams.",
+          "Skills in communication, analysis and quality for software development.",
+          "Comfortable on communicating with clients on regular basis.",
+          "Comfortable also with the use of Agile methodologies.",
+          "As a web-oriented developer, I worked with SOA architectures mostly, but not only.",
+          "Value discipline, excellence and product orientation."
         ]
       },
       {
         "title": "Proficient in",
         "items": [
           "Teams management using Agile Methodologies (Scrum).",
-          [
-            "Software engineering."
-          ],
-          [
-            "Motivation and leadership skills."
-          ],
-          [
-            "Risk management."
-          ],
-          [
-            "Web Based systems."
-          ],
-          [
-            "Javascript."
-          ],
-          [
-            "Styling."
-          ],
-          [
-            "Unit Testing."
-          ]
+          "Software engineering. Motivation and leadership skills.",
+          "Risk management.",
+          "Web Based systems.",
+          "Javascript.",
+          "Styling.",
+          "Unit Testing."
         ]
       },
       {
         "title": "Languages",
         "items": [
           "Spanish.",
-          [
-            "English."
-          ]
+          "English."
         ]
       }
     ],
@@ -197,7 +164,7 @@
     "information": {
       "title": "Additional Information",
       "items": [
-        "I have an 11 year old daughter called Alma.",
+        "I have a daughter called Alma.",
         "I love to travel.",
         "I like playing with arduinos (IoT).",
         "I play the guitar and sing when I can."
