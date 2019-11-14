@@ -14,14 +14,9 @@
       "state": "Argentina",
       "zip": "1605"
     },
-    "website": "http://carlosmonti.gitlab.io",
+    "website": "http://carlosmonti.gitlab.io/resume",
     "resumedownload": "https://gitlab.com/carlosmonti/carlosmonti.gitlab.io/raw/master/public/resume-carlos-monti.pdf",
     "social": [
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/carlosmonti",
-        "className": "fa fa-facebook"
-      },
       {
         "name": "twitter",
         "url": "https://twitter.com/xmontc",
