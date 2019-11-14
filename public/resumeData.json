@@ -1,0 +1,175 @@
+{
+  "main": {
+    "name": "Carlos Monti",
+    "occupation": "Front End Developer",
+    "description": "I am passionate about learning while creating robust well-finished products",
+    "image": "avatar.png",
+    "bio": "I'm father of Alma, and since 10+ years a web software developer. At the moment working very comfortably with ReactJS, Redux, Redux Saga, Styled Components in a SOA (Service Oriented Architecture).",
+    "contactmessage": "If you would like to contact me then please throw a message through the contact form that I will respond to as soon as I can.",
+    "email": "",
+    "phone": "",
+    "address": {
+      "street": "Vicente López",
+      "city": "Buenos Aires",
+      "state": "Argentina",
+      "zip": "1605"
+    },
+    "website": "http://carlosmonti.gitlab.io",
+    "resumedownload": "https://gitlab.com/carlosmonti/carlosmonti.gitlab.io/raw/master/public/resume-carlos-monti.pdf",
+    "social": [
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/carlosmonti",
+        "className": "fa fa-facebook"
+      },
+      {
+        "name": "twitter",
+        "url": "https://twitter.com/xmontc",
+        "className": "fa fa-twitter"
+      },
+      {
+        "name": "linkedin",
+        "url": "https://www.linkedin.com/in/carlosmonti/",
+        "className": "fa fa-linkedin"
+      },
+      {
+        "name": "instagram",
+        "url": "https://www.instagram.com/carlosmonti/",
+        "className": "fa fa-instagram"
+      },
+      {
+        "name": "github",
+        "url": "https://github.com/testacode",
+        "className": "fa fa-github"
+      },
+      {
+        "name": "skype",
+        "url": "skype:carlos.monti83?call",
+        "className": "fa fa-skype"
+      }
+    ]
+  },
+  "resume": {
+    "skillmessage": "Skill I've earned through years",
+    "education": [
+      {
+        "school": "Escuela Multimedial Da Vinci",
+        "degree": "Desarrollo Multimedia",
+        "graduated": "Not graduated (3 years)",
+        "description": "Learned basic procedural coding, repetition structures, graphic design, image and sound composition."
+      },
+      {
+        "school": "Escuelas de las Americas Nº 5",
+        "degree": "Economics Science Bachelor",
+        "graduated": "March 2002"
+      }
+    ],
+    "work": [
+      {
+        "company": "Elementum",
+        "title": "Front End Web Developer",
+        "years": "August 2017 - Present",
+        "technology": "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
+        "description": "Create a React “Single Page Application” Portal for managing clients sensible data right from scratch. The Portal enables the user to upload spreadsheet files that gets processed. Then returns a feedback which enables the client to have clear view of the processed results and also enables the user to see the data and the progress of the data processed. For this project I worked on the web interface, app design architecture and usability."
+      },
+      {
+        "company": "Deloitte",
+        "title": "Senior Front End Web Developer",
+        "years": "February 2016 - July 2017",
+        "technology": "Angular (1.6), Lodash/Underscore, Karma/Jasmine",
+        "description": "Development for a punctual project called “Rmss” (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.",
+        "contractor": "* Globant Contractor"
+      },
+      {
+        "company": "Thomas Cook",
+        "title": "Senior Front End Web Developer",
+        "years": "December 2015 - January 2016",
+        "technology": "Angular (1.3), Lodash/Underscore, Karma/Jasmine",
+        "description": "Development for the global page of Thomas Cook (thomascook.com). Lets the user to book flights, hotels, etc. all over Europe",
+        "contractor": "* Globant Contractor"
+      },
+      {
+        "company": "Walt Disney Parks and Resorts",
+        "title": "Senior Front End Web Developer",
+        "years": "May 2011 - December 2015",
+        "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave, Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
+        "description": "Development of the new Disney Personal Experience Portal - My Disney Experience (2.0)",
+        "contractor": "* Globant Contractor"
+      }
+    ],
+    "skills": [
+      {
+        "name": "Git",
+        "level": "60%"
+      },
+      {
+        "name": "Illustrator",
+        "level": "55%"
+      },
+      {
+        "name": "Photoshop",
+        "level": "60%"
+      },
+      {
+        "name": "ReactJs",
+        "level": "90%"
+      },
+      {
+        "name": "Webpack",
+        "level": "90%"
+      },
+      {
+        "name": "Redux",
+        "level": "90%"
+      },
+      {
+        "name": "Redux Saga",
+        "level": "90%"
+      },
+      {
+        "name": "Styled Components",
+        "level": "90%"
+      },
+      {
+        "name": "CSS",
+        "level": "90%"
+      },
+      {
+        "name": "HTML5",
+        "level": "100%"
+      },
+      {
+        "name": "Angular",
+        "level": "80%"
+      },
+      {
+        "name": "Databases",
+        "level": "60%"
+      },
+      {
+        "name": "Agile Methodology",
+        "level": "90%"
+      },
+      {
+        "name": "Unit Testing",
+        "level": "90%"
+      }
+    ]
+  },
+  "testimonials": {
+    "testimonials": [
+      {
+        "text": "Carlos has proven to be a great developer and definitely a hard worker. He is always willing to give a hand whenever he can. He is a detail oriented professional, and a great person to work with.",
+        "user": "F. Jauregui"
+      },
+      {
+        "text": "Carlos is a really dedicated professional, with excellent interpersonal skills, committed and goal-oriented. He is efficient, solution oriented and really easy to work with- even if I managed him remotely (Montreal/Buenos Aires)-. It was a real pleasure to work with Carlos and personally recommend this talented professional , which is a real asset for any company…I hope to work with him again in a near future.",
+        "user": "S. Kecili"
+      },
+      {
+        "text": "I've had the pleasure of sharing a team with Carlos during the two years I’ve worked for Disney in Globant. Charlie is an asset for any team, both in spirit and deed. He has amazing energy and charm, and is able to lift any team's morale just by being there, and being Charlie. He also happens to be a naturally gifted front end developer, with a great eye for style, and an encyclopedic knowledge of CSS and HTML. He's been the team's point of reference for both technologies for as long as I've worked with him. Working with Carlos will be one of the things I miss the most about the Disney project.",
+        "user": "J. Lorenzana"
+      }
+    ]
+  }
+}
