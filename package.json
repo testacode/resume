@@ -7,7 +7,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@smooth-ui/core-sc": "5.0.0",
+    "@smooth-ui/core-sc": "5.1.3",
     "lodash": "4.17.10",
     "normalize.css": "8.0.1",
     "prop-types": "15.7.2",
