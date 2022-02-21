@@ -16,6 +16,8 @@
     },
     "website": "http://carlosmonti.gitlab.io/resume",
     "resumedownload": "https://gitlab.com/carlosmonti/resume/raw/master/public/resume-carlos-monti.pdf",
+    "atsresumepdf": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.pdf",
+    "atsresumedocx": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.docx",
     "social": [
       {
         "name": "twitter",
@@ -61,9 +63,16 @@
     ],
     "work": [
       {
+        "company": "Blockchain.com",
+        "title": "Front End Web Developer",
+        "years": "January 2022 - Present",
+        "technology": "ReactJS, Webpack, Redux, Redux-Saga, ESLint.",
+        "description": "So far, started working on the non-custodial wallet."
+      },
+      {
         "company": "Elementum",
         "title": "Front End Web Developer",
-        "years": "August 2017 - Present",
+        "years": "August 2017 - January 2022",
         "technology": "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
         "description": "Create a React “Single Page Application” Portal for managing clients sensible data right from scratch. The Portal enables the user to upload spreadsheet files that gets processed. Then returns a feedback which enables the client to have clear view of the processed results and also enables the user to see the data and the progress of the data processed. For this project I worked on the web interface, app design architecture and usability."
       },
@@ -132,10 +141,6 @@
       {
         "name": "HTML5",
         "level": "100%"
-      },
-      {
-        "name": "Angular",
-        "level": "80%"
       },
       {
         "name": "Databases",
