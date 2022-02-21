@@ -5,7 +5,8 @@ class About extends Component {
     if (this.props.data) {
       var profilepic = 'images/' + this.props.data.image;
       var bio = this.props.data.bio;
-      var resumeDownload = this.props.data.resumedownload;
+      var atsResumePDF = this.props.data.atsresumepdf;
+      var atsResumeDOCX = this.props.data.atsresumedocx;
     }
 
     return (
@@ -26,9 +27,13 @@ class About extends Component {
               </div>
               <div className="columns download">
                 <p>
-                  <a href={resumeDownload} className="button">
+                  <a href={atsResumePDF} className="button">
                     <i className="fa fa-download" />
-                    Download Resume
+                    PDF Resume
+                  </a>
+                  <a href={atsResumeDOCX} className="button">
+                    <i className="fa fa-download" />
+                    DOCX Resume
                   </a>
                 </p>
               </div>
