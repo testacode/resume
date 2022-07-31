@@ -22,6 +22,7 @@
 /* a. General Styles
 /* ------------------------------------------------------------------ */
 
+html { scroll-behavior: smooth; }
 body { background: #0f0f0f; }
 
 /* ------------------------------------------------------------------ */
@@ -52,7 +53,7 @@ header .banner {
    vertical-align: middle;
    margin: 0 auto;
    width: 85%;
-   padding-bottom: 30px;s
+   padding-bottom: 30px;
    text-align: center;
 }
 
@@ -206,6 +207,9 @@ ul#nav li.current a { color: #F06000; }
    color: #7A7A7A;
 }
 #about .profile-pic {
+   background: url(../images/avatar.png) no-repeat top center;
+   background-size: cover !important;
+	-webkit-background-size: cover !important;
    position: relative;
    width: 120px;
    height: 120px;
@@ -646,11 +650,6 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 #testimonials {
-   background: #1F1F1F url(../images/testimonials-bg.jpg) no-repeat center center;
-   background-size: cover !important;
-	-webkit-background-size: cover !important;
-   background-attachment: fixed;
-
    position: relative;
    min-height: 200px;
    width: 100%;

@@ -1,6 +1,5 @@
 module.exports = {
   extends: ['react-app'],
-  parser: 'babel-eslint',
   rules: {
     'operator-linebreak': ['error', 'before']
   },

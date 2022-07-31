@@ -1,20 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Contact extends Component {
-  render() {
-    if (this.props.data) {
-      // var name = this.props.data.name;
-      // var street = this.props.data.address.street;
-      // var city = this.props.data.address.city;
-      // var state = this.props.data.address.state;
-      // var zip = this.props.data.address.zip;
-      // var phone = this.props.data.phone;
-      // var email = this.props.data.email;
-      var message = this.props.data.contactmessage;
-    }
+const Contact = ({ data }) => {
+  if (!data) return null;
 
-    // Fix with http://www.emailjs.com/docs/tutorial/overview/
-    return (
+  const { contactmessage }  = data;
+
+  return (
       <section id="contact">
         <div className="row section-head">
           <div className="two columns header-col">
@@ -24,7 +15,7 @@ class Contact extends Component {
           </div>
 
           <div className="ten columns">
-            <p className="lead">{message}</p>
+            <p className="lead">{contactmessage}</p>
           </div>
         </div>
 
@@ -107,7 +98,6 @@ class Contact extends Component {
         </div>
       </section>
     );
-  }
-}
+};
 
 export default Contact;

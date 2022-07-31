@@ -1,24 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Footer extends Component {
-  render() {
-    if (this.props.data) {
-      var networks = this.props.data.social.map(function(network) {
-        return (
-          <li key={network.name}>
-            <a href={network.url}>
-              <i className={network.className} />
-            </a>
-          </li>
-        );
-      });
-    }
+const Footer = ({ data }) => {
+  if (!data) return null;
 
-    return (
+  const { social } = data;
+
+ return (
       <footer>
         <div className="row">
           <div className="twelve columns">
-            <ul className="social-links">{networks}</ul>
+            <ul className="social-links">
+              {!!social && social.map((network) => {
+                return (
+                  <li key={network.name}>
+                    <a href={network.url}>
+                      <i className={network.className} />
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
 
             <ul className="copyright">
               <li>&copy; Copyright 2017 Tim Baker</li>
@@ -38,7 +39,7 @@ class Footer extends Component {
         </div>
       </footer>
     );
-  }
-}
+
+};
 
 export default Footer;
