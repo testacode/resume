@@ -3,7 +3,9 @@
   "version": "4.0.0",
   "private": true,
   "description": "My Resume made with React and styled-components",
-  "keywords": ["resume"],
+  "keywords": [
+    "resume"
+  ],
   "homepage": "https://carlosmonti.gitlab.io/resume",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
