@@ -65,7 +65,7 @@
         "company": "Blockchain.com",
         "title": "Front End Web Developer",
         "years": "January 2022 - Present",
-        "technology": "ReactJS, Webpack, Redux, Redux-Saga, ESLint.",
+        "technology": "Typescript, ReactJS, Webpack, Redux, Redux-Saga",
         "description": "So far, started working on the non-custodial wallet."
       },
       {
@@ -73,10 +73,10 @@
         "title": "Front End Web Developer",
         "years": "August 2017 - January 2022",
         "technology": "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
-        "description": "Create a React “Single Page Application” Portal for managing clients sensible data right from scratch. The Portal enables the user to upload spreadsheet files that gets processed. Then returns a feedback which enables the client to have clear view of the processed results and also enables the user to see the data and the progress of the data processed. For this project I worked on the web interface, app design architecture and usability."
+        "description": "Created a React App from scratch with proper unit testing, worked transversally through several apps performing code reviews, repositories maintainment."
       },
       {
-        "company": "Deloitte",
+        "company": "Deloitte (Globant)",
         "title": "Senior Front End Web Developer",
         "years": "February 2016 - July 2017",
         "technology": "Angular (1.6), Lodash/Underscore, Karma/Jasmine",
@@ -84,7 +84,7 @@
         "contractor": "* Globant Contractor"
       },
       {
-        "company": "Thomas Cook",
+        "company": "Thomas Cook (Globant)",
         "title": "Senior Front End Web Developer",
         "years": "December 2015 - January 2016",
         "technology": "Angular (1.3), Lodash/Underscore, Karma/Jasmine",
@@ -92,7 +92,7 @@
         "contractor": "* Globant Contractor"
       },
       {
-        "company": "Walt Disney Parks and Resorts",
+        "company": "Walt Disney Parks and Resorts (Globant)",
         "title": "Senior Front End Web Developer",
         "years": "May 2011 - December 2015",
         "technology": "PHP, Zend Framework, PhpUnit, Vanilla Javascript, jQuery, jBehave, Angular (1.3), Less, Karma/Jasmine, Bower, Behat",
@@ -106,31 +106,11 @@
         "level": "60%"
       },
       {
-        "name": "Illustrator",
-        "level": "55%"
-      },
-      {
-        "name": "Photoshop",
-        "level": "60%"
-      },
-      {
         "name": "ReactJs",
         "level": "90%"
       },
       {
         "name": "Webpack",
-        "level": "90%"
-      },
-      {
-        "name": "Redux",
-        "level": "90%"
-      },
-      {
-        "name": "Redux Saga",
-        "level": "90%"
-      },
-      {
-        "name": "Styled Components",
         "level": "90%"
       },
       {
@@ -140,10 +120,6 @@
       {
         "name": "HTML5",
         "level": "100%"
-      },
-      {
-        "name": "Databases",
-        "level": "60%"
       },
       {
         "name": "Agile Methodology",
