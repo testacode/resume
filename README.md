@@ -2,6 +2,8 @@
 
 [Preview Resume](https://carlosmonti.gitlab.io/resume/)
 
+![sarahconnor](/uploads/e4c6576f10b74301746b623696bd5210/sarahconnor.jpg)
+
 ## Download
 
 You can download my resume in two ([ats compatible](https://en.wikipedia.org/wiki/Applicant_tracking_system)) formats
