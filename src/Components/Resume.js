@@ -56,7 +56,7 @@ const Resume = ({ data }) => {
         </div>
       </div>
 
-      <div className="row skill">
+      <div className="row skill" id="skills">
         <div className="three columns header-col">
           <h1>
             <span>Skills</span>
