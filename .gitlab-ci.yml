@@ -1,5 +1,5 @@
 # Using the node alpine image to build the React app
-image: node:alpine
+image: node:14
 
 variables:
   PUBLIC_URL: /resume
