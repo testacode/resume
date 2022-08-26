@@ -1,3 +1,17 @@
+import { CgTwitter } from 'react-icons/cg';
+import { AiOutlineTwitter } from 'react-icons/ai';
+import { BsLinkedin } from 'react-icons/bs';
+import { RiLinkedinFill } from 'react-icons/ri';
+import { ImInstagram } from 'react-icons/im';
+import { FaInstagramSquare } from 'react-icons/fa';
+import { FaGithubSquare } from 'react-icons/fa';
+import { ImGithub } from 'react-icons/im';
+import { RiGitlabFill } from 'react-icons/ri';
+import { IoLogoGitlab } from 'react-icons/io5';
+import { ImSkype } from 'react-icons/im';
+import { SiSkypeforbusiness } from 'react-icons/si';
+
+
 export const data = {
   "main": {
     "name": "Carlos Monti",
@@ -21,32 +35,32 @@ export const data = {
       {
         "name": "twitter",
         "url": "https://twitter.com/xmontc",
-        "className": "fa fa-twitter"
+        "icon": Math.random() < 0.5 ? <CgTwitter /> : <AiOutlineTwitter />
       },
       {
         "name": "linkedin",
         "url": "https://www.linkedin.com/in/carlosmonti/",
-        "className": "fa fa-linkedin"
+        "icon": Math.random() < 0.5 ? <BsLinkedin /> : <RiLinkedinFill />
       },
       {
         "name": "instagram",
         "url": "https://www.instagram.com/carlosmonti/",
-        "className": "fa fa-instagram"
+        "icon": Math.random() < 0.5 ? <ImInstagram /> : <FaInstagramSquare />
       },
       {
         "name": "github",
         "url": "https://github.com/testacode",
-        "className": "fa fa-github"
+        "icon": Math.random() < 0.5 ? <FaGithubSquare /> : <ImGithub />
       },
       {
         "name": "gitlab",
         "url": "https://gitlab.com/carlosmonti",
-        "className": "fa fa-gitlab"
+        "icon": Math.random() < 0.5 ? <RiGitlabFill /> : <IoLogoGitlab />
       },
       {
         "name": "skype",
         "url": "skype:carlos.monti83?call",
-        "className": "fa fa-skype"
+        "icon": Math.random() < 0.5 ? <ImSkype /> : <SiSkypeforbusiness />
       }
     ]
   },
