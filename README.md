@@ -8,8 +8,8 @@
 
 You can download my resume in two ([ats compatible](https://en.wikipedia.org/wiki/Applicant_tracking_system)) formats
 
-* [PDF](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.pdf)
-* [DOCX](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.docx)
+* [PDF](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.pdf)
+* [DOCX](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.docx)
 
 ### Credits
 

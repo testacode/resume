@@ -29,8 +29,8 @@ export const data = {
       "zip": "1605"
     },
     "website": "http://carlosmonti.gitlab.io/resume",
-    "atsresumepdf": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.pdf",
-    "atsresumedocx": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-ats-cv.docx",
+    "atsresumepdf": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.pdf",
+    "atsresumedocx": "https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.docx",
     "social": [
       {
         "name": "twitter",
