@@ -1,4 +1,4 @@
-{
+export const data = {
   "main": {
     "name": "Carlos Monti",
     "occupation": "Front End Developer",
@@ -37,6 +37,11 @@
         "name": "github",
         "url": "https://github.com/testacode",
         "className": "fa fa-github"
+      },
+      {
+        "name": "gitlab",
+        "url": "https://gitlab.com/carlosmonti",
+        "className": "fa fa-gitlab"
       },
       {
         "name": "skype",
@@ -147,4 +152,4 @@
       }
     ]
   }
-}
+};
