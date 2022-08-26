@@ -2,7 +2,7 @@ import React from "react";
 
 const Resume = ({ data }) => {
   if (!data) return null;
-  const { skillmessage, education, work, skills } = data;
+  const { education, work, skills } = data;
 
   return (
     <section id="resume">
@@ -18,7 +18,7 @@ const Resume = ({ data }) => {
             <div className="twelve columns">
               {education.map((education) => {
                 return (
-                  <div key={education.school}>
+                  <div key={education.school} style={{ marginBottom: '20px'}}>
                     <h3>{education.school}</h3>
                     <p className="info">
                       {education.degree} <span>&bull;</span>
@@ -43,7 +43,7 @@ const Resume = ({ data }) => {
         <div className="nine columns main-col">
           {work.map((work) => {
             return (
-              <div key={work.company}>
+              <div key={work.company} style={{ marginBottom: '20px'}}>
                 <h3>{work.company}</h3>
                 <p className="info">
                   {work.title}
@@ -64,7 +64,6 @@ const Resume = ({ data }) => {
         </div>
 
         <div className="nine columns main-col">
-          <p>{skillmessage}</p>
 
           <div className="bars">
             <ul className="skills">
