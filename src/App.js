@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import { data } from './resumeData';
 import About from './Components/About';
+import Footer from './Components/Footer';
+import Header from './Components/Header';
 import Resume from './Components/Resume';
-import data from './resumeData.json';
 
-class App extends Component {
-  state = {
-    resumeData: data
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <Header data={this.state.resumeData.main} />
-        <About data={this.state.resumeData.main} />
-        <Resume data={this.state.resumeData.resume} />
-        <Footer data={this.state.resumeData.main} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Header data={data.main} />
+      <About data={data.main} />
+      <Resume data={data.resume} />
+      <Footer data={data.main} />
+    </div>
+  );
+};
 
 export default App;
