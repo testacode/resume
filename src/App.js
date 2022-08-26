@@ -1,5 +1,5 @@
 import { data } from './resumeData';
-import About from './Components/About';
+import About from './Pages/About';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import Resume from './Components/Resume';
