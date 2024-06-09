@@ -1,16 +1,8 @@
-# My Resume
+# React + Vite
 
-[Preview Resume](https://carlosmonti.gitlab.io/resume/)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-![sarahconnor](/uploads/e4c6576f10b74301746b623696bd5210/sarahconnor.jpg)
+Currently, two official plugins are available:
 
-## Download
-
-You can download my resume in two ([ats compatible](https://en.wikipedia.org/wiki/Applicant_tracking_system)) formats
-
-* [PDF](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.pdf)
-* [DOCX](https://gitlab.com/carlosmonti/resume/raw/master/public/carlos-monti-cv.docx)
-
-### Credits
-
-[Tim Baker](https://github.com/tbakerx) and his [react resume template](https://github.com/tbakerx/react-resume-template)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
