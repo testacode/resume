@@ -11,11 +11,6 @@ import { IoLogoGitlab } from "react-icons/io5";
 import { ImSkype } from "react-icons/im";
 import { SiSkypeforbusiness } from "react-icons/si";
 
-const REPO_BRAND =
-  import.meta.env.VITE_REPO_BRAND === "github"
-    ? "github.com/testacode"
-    : "gitlab.com/carlosmonti";
-
 export const data = {
   main: {
     name: "Carlos Monti",
@@ -34,9 +29,9 @@ export const data = {
       state: "Argentina",
       zip: "1605",
     },
-    website: __APP_URL__,
-    atsresumepdf: `https://${REPO_BRAND}/resume/raw/master/public/carlos-monti-cv.pdf`,
-    atsresumedocx: `https://${REPO_BRAND}/resume/raw/master/public/carlos-monti-cv.docx`,
+    website: import.meta.npm_package_homepage,
+    atsresumepdf: `https://github.com/testacode/resume/raw/master/public/carlos-monti-cv.pdf`,
+    atsresumedocx: `https://github.com/testacode/resume/raw/master/public/carlos-monti-cv.docx`,
     social: [
       {
         name: "twitter",

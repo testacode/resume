@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:github": "REPO_BRAND=github vite build --base=/resume/",
+    "dev:github": "VITE_REPO_BRAND=github vite",
+    "build": "VITE_REPO_BRAND=github vite build",
+    "build:github": "VITE_REPO_BRAND=github vite build --base=/resume/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "VITE_REPO_BRAND=github vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
