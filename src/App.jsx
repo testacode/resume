@@ -1,8 +1,8 @@
-import { data } from './resumeData';
-import About from './Pages/About';
-import Footer from './Components/Footer';
-import Header from './Components/Header';
-import Resume from './Components/Resume';
+import { data } from "./resumeData";
+import About from "./Pages/About";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
+import Resume from "./Components/Resume";
 
 const App = () => {
   return (
