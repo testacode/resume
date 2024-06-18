@@ -3,8 +3,8 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
@@ -18,5 +18,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "operator-linebreak": ["error", "before"],
+    "react/prop-types": "warn",
   },
 };
