@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ( { data }) => {
+const Header = ({ data }) => {
   if (!data) return null;
 
   const { name, occupation, description, city, social } = data;
@@ -29,11 +29,6 @@ const Header = ( { data }) => {
           <li>
             <a className="smoothscroll" href="#resume">
               Resume
-            </a>
-          </li>
-          <li>
-            <a className="smoothscroll" href="#skills">
-              Skills
             </a>
           </li>
         </ul>
