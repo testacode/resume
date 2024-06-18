@@ -18,7 +18,7 @@ const Resume = ({ data }) => {
             <div className="twelve columns">
               {education.map((education) => {
                 return (
-                  <div key={education.school} style={{ marginBottom: '20px'}}>
+                  <div key={education.school} style={{ marginBottom: "20px" }}>
                     <h3>{education.school}</h3>
                     <p className="info">
                       {education.degree} <span>&bull;</span>
@@ -43,7 +43,7 @@ const Resume = ({ data }) => {
         <div className="nine columns main-col">
           {work.map((work) => {
             return (
-              <div key={work.company} style={{ marginBottom: '20px'}}>
+              <div key={work.company} style={{ marginBottom: "20px" }}>
                 <h3>{work.company}</h3>
                 <p className="info">
                   {work.title}
@@ -53,32 +53,6 @@ const Resume = ({ data }) => {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      <div className="row skill" id="skills">
-        <div className="three columns header-col">
-          <h1>
-            <span>Skills</span>
-          </h1>
-        </div>
-
-        <div className="nine columns main-col">
-
-          <div className="bars">
-            <ul className="skills">
-              {skills.map((skills) => {
-                const className = "bar-expand " + skills.name.toLowerCase();
-
-                return (
-                  <li key={skills.name}>
-                    <span style={{ width: skills.level }} className={className} />
-                    <em>{skills.name}</em>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
         </div>
       </div>
     </section>
