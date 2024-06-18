@@ -18,5 +18,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "operator-linebreak": ["error", "before"],
+    "react/prop-types": "warn",
   },
 };
