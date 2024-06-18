@@ -10,12 +10,14 @@
     "build": "vite build",
     "build:github": "vite build --base=/resume/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "nuke": "rm -rf dist && rm -rf node_modules"
   },
   "dependencies": {
+    "posthog-js": "^1.139.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^5.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
