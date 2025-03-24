@@ -1,6 +1,12 @@
-import React from "react";
+import { useEffect } from "react";
 
 const Header = ({ data }) => {
+  useEffect(() => {
+    // Preload the header background image
+    const img = new Image();
+    img.src = "/images/header-background.jpg";
+  }, []);
+
   if (!data) return null;
 
   const { name, occupation, description, city, social } = data;
@@ -41,9 +47,9 @@ const Header = ({ data }) => {
 
       <div className="row banner">
         <div className="banner-text">
-          <h1 className="responsive-headline">I'm {name}.</h1>
+          <h1 className="responsive-headline">I&apos;m {name}.</h1>
           <h3>
-            I'm a {city} based <span>{occupation}</span>. {description}.
+            I&apos;m a {city} based <span>{occupation}</span>. {description}.
           </h3>
           <hr />
           <ul className="social">

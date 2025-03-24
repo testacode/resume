@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import compression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -12,10 +13,32 @@ export default defineConfig(({ mode }) => ({
       ext: ".gz",
       threshold: 10240, // Only compress files bigger than 10kb
     }),
+    compression({
+      algorithm: "brotliCompress",
+      ext: ".br",
+      threshold: 10240,
+    }),
     visualizer({
       open: false, // Set to true to automatically open the bundle report
       gzipSize: true,
       brotliSize: true,
+    }),
+    ViteImageOptimizer({
+      png: {
+        quality: 80,
+        progressive: true,
+      },
+      jpg: {
+        quality: 80,
+        progressive: true,
+      },
+      jpeg: {
+        quality: 80,
+        progressive: true,
+      },
+      gif: {
+        interlaced: true,
+      },
     }),
   ],
   build: {
@@ -45,6 +68,11 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("src/pages/")) {
             return "pages";
           }
+        },
+        // Optimize asset handling
+        assets: {
+          // Inline small images as base64
+          inlineLimit: 8192, // 8kb
         },
       },
     },
