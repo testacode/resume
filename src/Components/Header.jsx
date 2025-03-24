@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = ( { data }) => {
+const Header = ({ data }) => {
   if (!data) return null;
 
   const { name, occupation, description, city, social } = data;
@@ -48,6 +48,7 @@ const Header = ( { data }) => {
           <hr />
           <ul className="social">
             {social.map((network) => {
+              if (!network.enabled) return null;
               return (
                 <li key={network.name}>
                   <a href={network.url}>

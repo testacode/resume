@@ -34,31 +34,37 @@ export const data = {
     atsresumedocx: `https://github.com/testacode/resume/raw/master/public/carlos-monti-cv.docx`,
     social: [
       {
+        enabled: false,
         name: "twitter",
         url: "https://twitter.com/xmontc",
         icon: Math.random() < 0.5 ? <CgTwitter /> : <AiOutlineTwitter />,
       },
       {
+        enabled: true,
         name: "linkedin",
         url: "https://www.linkedin.com/in/carlosmonti/",
         icon: Math.random() < 0.5 ? <BsLinkedin /> : <RiLinkedinFill />,
       },
       {
+        enabled: true,
         name: "instagram",
         url: "https://www.instagram.com/carlosmonti/",
         icon: Math.random() < 0.5 ? <ImInstagram /> : <FaInstagramSquare />,
       },
       {
+        enabled: true,
         name: "github",
         url: "https://github.com/testacode",
         icon: Math.random() < 0.5 ? <FaGithubSquare /> : <ImGithub />,
       },
       {
+        enabled: true,
         name: "gitlab",
         url: "https://gitlab.com/carlosmonti",
         icon: Math.random() < 0.5 ? <RiGitlabFill /> : <IoLogoGitlab />,
       },
       {
+        enabled: false,
         name: "skype",
         url: "skype:carlos.monti83?call",
         icon: Math.random() < 0.5 ? <ImSkype /> : <SiSkypeforbusiness />,
@@ -83,15 +89,23 @@ export const data = {
     ],
     work: [
       {
+        company: "Despegar.com",
+        title: "Senior II Front End Web Developer",
+        years: "July 2023 - Present",
+        technology: "Typescript, ReactJS, NextJs",
+        description:
+          "Worked on After Sales department (Flights, Hotels, etc) until December of 2024. Then recluted to a smaller team to an experimental development area.",
+      },
+      {
         company: "Blockchain.com",
-        title: "Front End Web Developer",
-        years: "January 2022 - Present",
+        title: "Senior II Front End Web Developer",
+        years: "January 2022 - July 2022",
         technology: "Typescript, ReactJS, Webpack, Redux, Redux-Saga",
-        description: "So far, started working on the non-custodial wallet.",
+        description: "Started working on the non-custodial wallet.",
       },
       {
         company: "Elementum",
-        title: "Front End Web Developer",
+        title: "Senior II Front End Web Developer",
         years: "August 2017 - January 2022",
         technology:
           "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
