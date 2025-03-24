@@ -9,9 +9,9 @@ const Resume = ({ data }) => {
     <section id="resume">
       <div className="row education">
         <div className="three columns header-col">
-          <h1>
+          <h2>
             <span>Education</span>
-          </h1>
+          </h2>
         </div>
 
         <div className="nine columns main-col">
@@ -24,7 +24,7 @@ const Resume = ({ data }) => {
                     {edu.degree} <span>&bull;</span>
                     <em className="date">{edu.graduated}</em>
                   </p>
-                  <p>{edu.description}</p>
+                  {edu.description && <p>{edu.description}</p>}
                 </div>
               ))}
             </div>
@@ -34,9 +34,9 @@ const Resume = ({ data }) => {
 
       <div className="row work">
         <div className="three columns header-col">
-          <h1>
+          <h2>
             <span>Work</span>
-          </h1>
+          </h2>
         </div>
 
         <div className="nine columns main-col">
@@ -47,7 +47,15 @@ const Resume = ({ data }) => {
                 {job.title}
                 <span>&bull;</span> <em className="date">{job.years}</em>
               </p>
+              {job.technology && (
+                <p className="tech-stack">
+                  <strong>Technologies:</strong> {job.technology}
+                </p>
+              )}
               <p>{job.description}</p>
+              {job.contractor && (
+                <p className="contractor-note">{job.contractor}</p>
+              )}
             </div>
           ))}
         </div>
@@ -55,19 +63,24 @@ const Resume = ({ data }) => {
 
       <div className="row skill">
         <div className="three columns header-col">
-          <h1>
+          <h2>
             <span>Skills</span>
-          </h1>
+          </h2>
         </div>
 
         <div className="nine columns main-col">
           <div className="bars">
-            <ul className="skills">
+            <ul className="skills" aria-label="Skills proficiency">
               {skills?.map((skill) => (
                 <li key={skill.name.toLowerCase()}>
                   <span
                     style={{ width: skill.level }}
                     className={`bar-expand ${skill.name.toLowerCase()}`}
+                    role="progressbar"
+                    aria-valuenow={parseInt(skill.level)}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-label={`${skill.name} proficiency: ${skill.level}`}
                   ></span>
                   <em>{skill.name}</em>
                 </li>
@@ -87,7 +100,7 @@ Resume.propTypes = {
         school: PropTypes.string.isRequired,
         degree: PropTypes.string.isRequired,
         graduated: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string, // Made optional
       })
     ),
     work: PropTypes.arrayOf(
@@ -95,7 +108,9 @@ Resume.propTypes = {
         company: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         years: PropTypes.string.isRequired,
+        technology: PropTypes.string,
         description: PropTypes.string.isRequired,
+        contractor: PropTypes.string,
       })
     ),
     skills: PropTypes.arrayOf(

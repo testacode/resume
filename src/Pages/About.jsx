@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const About = ({ data }) => {
   if (!data) return null;
 
-  const { name, bio, phone, email, resumedownload } = data;
+  const { name, bio, phone, email, atsresumepdf } = data;
 
   return (
     <section id="about">
@@ -39,8 +39,15 @@ const About = ({ data }) => {
             </div>
             <div className="columns download">
               <p>
-                <a href={resumedownload} className="button">
-                  <i className="fa fa-download"></i>Download Resume
+                <a
+                  href={atsresumepdf}
+                  className="button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download my resume in PDF format"
+                >
+                  <i className="fa fa-download" aria-hidden="true"></i>
+                  Download Resume
                 </a>
               </p>
             </div>
@@ -57,7 +64,7 @@ About.propTypes = {
     bio: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    resumedownload: PropTypes.string.isRequired,
+    atsresumepdf: PropTypes.string.isRequired,
   }),
 };
 
