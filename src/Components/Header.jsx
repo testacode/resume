@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
 
 const Header = ({ data }) => {
   const handleScroll = useCallback((e, target) => {
@@ -109,6 +110,24 @@ const Header = ({ data }) => {
       </p>
     </header>
   );
+};
+
+Header.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    occupation: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    address: PropTypes.shape({
+      city: PropTypes.string.isRequired,
+    }).isRequired,
+    social: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        className: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 };
 
 export default Header;

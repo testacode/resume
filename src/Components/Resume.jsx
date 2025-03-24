@@ -1,7 +1,8 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const Resume = ({ data }) => {
   if (!data) return null;
+
   const { education, work, skills } = data;
 
   return (
@@ -16,18 +17,16 @@ const Resume = ({ data }) => {
         <div className="nine columns main-col">
           <div className="row item">
             <div className="twelve columns">
-              {education.map((education) => {
-                return (
-                  <div key={education.school} style={{ marginBottom: '20px'}}>
-                    <h3>{education.school}</h3>
-                    <p className="info">
-                      {education.degree} <span>&bull;</span>
-                      <em className="date">{education.graduated}</em>
-                    </p>
-                    <p>{education.description}</p>
-                  </div>
-                );
-              })}
+              {education?.map((edu) => (
+                <div key={edu.school}>
+                  <h3>{edu.school}</h3>
+                  <p className="info">
+                    {edu.degree} <span>&bull;</span>
+                    <em className="date">{edu.graduated}</em>
+                  </p>
+                  <p>{edu.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -41,22 +40,20 @@ const Resume = ({ data }) => {
         </div>
 
         <div className="nine columns main-col">
-          {work.map((work) => {
-            return (
-              <div key={work.company} style={{ marginBottom: '20px'}}>
-                <h3>{work.company}</h3>
-                <p className="info">
-                  {work.title}
-                  <span>&bull;</span> <em className="date">{work.years}</em>
-                </p>
-                <p>{work.description}</p>
-              </div>
-            );
-          })}
+          {work?.map((job) => (
+            <div key={job.company}>
+              <h3>{job.company}</h3>
+              <p className="info">
+                {job.title}
+                <span>&bull;</span> <em className="date">{job.years}</em>
+              </p>
+              <p>{job.description}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="row skill" id="skills">
+      <div className="row skill">
         <div className="three columns header-col">
           <h1>
             <span>Skills</span>
@@ -64,25 +61,50 @@ const Resume = ({ data }) => {
         </div>
 
         <div className="nine columns main-col">
-
           <div className="bars">
             <ul className="skills">
-              {skills.map((skills) => {
-                const className = "bar-expand " + skills.name.toLowerCase();
-
-                return (
-                  <li key={skills.name}>
-                    <span style={{ width: skills.level }} className={className} />
-                    <em>{skills.name}</em>
-                  </li>
-                );
-              })}
+              {skills?.map((skill) => (
+                <li key={skill.name.toLowerCase()}>
+                  <span
+                    style={{ width: skill.level }}
+                    className={`bar-expand ${skill.name.toLowerCase()}`}
+                  ></span>
+                  <em>{skill.name}</em>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
     </section>
   );
+};
+
+Resume.propTypes = {
+  data: PropTypes.shape({
+    education: PropTypes.arrayOf(
+      PropTypes.shape({
+        school: PropTypes.string.isRequired,
+        degree: PropTypes.string.isRequired,
+        graduated: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ),
+    work: PropTypes.arrayOf(
+      PropTypes.shape({
+        company: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        years: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ),
+    skills: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        level: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 };
 
 export default Resume;

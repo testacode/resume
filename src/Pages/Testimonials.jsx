@@ -1,9 +1,7 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const Testimonials = ({ data }) => {
   if (!data) return null;
-
-  const { testimonials } = data;
 
   return (
     <section id="testimonials">
@@ -17,22 +15,31 @@ const Testimonials = ({ data }) => {
 
           <div className="ten columns flex-container">
             <ul className="slides">
-              {testimonials.map((testimonials) => {
-                return (
-                  <li key={testimonials.user}>
-                    <blockquote>
-                      <p>{testimonials.text}</p>
-                      <cite>{testimonials.user}</cite>
-                    </blockquote>
-                  </li>
-                );
-              })}
+              {data.testimonials?.map((testimonial) => (
+                <li key={testimonial.user}>
+                  <blockquote>
+                    <p>{testimonial.text}</p>
+                    <cite>{testimonial.user}</cite>
+                  </blockquote>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
     </section>
   );
+};
+
+Testimonials.propTypes = {
+  data: PropTypes.shape({
+    testimonials: PropTypes.arrayOf(
+      PropTypes.shape({
+        user: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 };
 
 export default Testimonials;

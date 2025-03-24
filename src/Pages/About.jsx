@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 const About = ({ data }) => {
   if (!data) return null;
@@ -30,6 +30,8 @@ const About = ({ data }) => {
             <div className="columns contact-details">
               <h2>Contact Details</h2>
               <p className="address">
+                <span>{name}</span>
+                <br />
                 <span>{phone}</span>
                 <br />
                 <span>{email}</span>
@@ -38,8 +40,7 @@ const About = ({ data }) => {
             <div className="columns download">
               <p>
                 <a href={resumedownload} className="button">
-                  <i className="fa fa-download" />
-                  Download Resume
+                  <i className="fa fa-download"></i>Download Resume
                 </a>
               </p>
             </div>
@@ -48,6 +49,16 @@ const About = ({ data }) => {
       </div>
     </section>
   );
+};
+
+About.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    resumedownload: PropTypes.string.isRequired,
+  }),
 };
 
 export default About;
