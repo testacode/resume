@@ -9,7 +9,6 @@ import { ImGithub } from "react-icons/im";
 import { RiGitlabFill } from "react-icons/ri";
 import { IoLogoGitlab } from "react-icons/io5";
 import { ImSkype } from "react-icons/im";
-import { SiSkypeforbusiness } from "react-icons/si";
 
 export const data = {
   main: {
@@ -34,34 +33,40 @@ export const data = {
     atsresumedocx: `https://github.com/testacode/resume/raw/master/public/carlos-monti-cv.docx`,
     social: [
       {
+        enabled: false,
         name: "twitter",
         url: "https://twitter.com/xmontc",
         icon: Math.random() < 0.5 ? <CgTwitter /> : <AiOutlineTwitter />,
       },
       {
+        enabled: true,
         name: "linkedin",
         url: "https://www.linkedin.com/in/carlosmonti/",
         icon: Math.random() < 0.5 ? <BsLinkedin /> : <RiLinkedinFill />,
       },
       {
+        enabled: true,
         name: "instagram",
         url: "https://www.instagram.com/carlosmonti/",
         icon: Math.random() < 0.5 ? <ImInstagram /> : <FaInstagramSquare />,
       },
       {
+        enabled: true,
         name: "github",
         url: "https://github.com/testacode",
         icon: Math.random() < 0.5 ? <FaGithubSquare /> : <ImGithub />,
       },
       {
+        enabled: true,
         name: "gitlab",
         url: "https://gitlab.com/carlosmonti",
         icon: Math.random() < 0.5 ? <RiGitlabFill /> : <IoLogoGitlab />,
       },
       {
+        enabled: false,
         name: "skype",
         url: "skype:carlos.monti83?call",
-        icon: Math.random() < 0.5 ? <ImSkype /> : <SiSkypeforbusiness />,
+        icon: <ImSkype />,
       },
     ],
   },
@@ -83,15 +88,23 @@ export const data = {
     ],
     work: [
       {
+        company: "Despegar.com",
+        title: "Senior II Front End Web Developer",
+        years: "July 2023 - Present",
+        technology: "Typescript, ReactJS, NextJs",
+        description:
+          "Worked on After Sales department (Flights, Hotels, etc) until December of 2024. Then recluted to a smaller team to an experimental development area.",
+      },
+      {
         company: "Blockchain.com",
-        title: "Front End Web Developer",
-        years: "January 2022 - Present",
+        title: "Senior II Front End Web Developer",
+        years: "January 2022 - July 2022",
         technology: "Typescript, ReactJS, Webpack, Redux, Redux-Saga",
-        description: "So far, started working on the non-custodial wallet.",
+        description: "Started working on the non-custodial wallet.",
       },
       {
         company: "Elementum",
-        title: "Front End Web Developer",
+        title: "Senior II Front End Web Developer",
         years: "August 2017 - January 2022",
         technology:
           "ReactJS, Webpack, Redux, Redux-Saga, Lodash, Jest/Enzyme, ESLint for readable code.",
@@ -104,7 +117,7 @@ export const data = {
         years: "February 2016 - July 2017",
         technology: "Angular (1.6), Lodash/Underscore, Karma/Jasmine",
         description:
-          "Development for a punctual project called “Rmss” (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.",
+          'Development for a punctual project called "Rmss" (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.',
         contractor: "* Globant Contractor",
       },
       {
@@ -169,7 +182,7 @@ export const data = {
         user: "S. Kecili",
       },
       {
-        text: "I've had the pleasure of sharing a team with Carlos during the two years I’ve worked for Disney in Globant. Charlie is an asset for any team, both in spirit and deed. He has amazing energy and charm, and is able to lift any team's morale just by being there, and being Charlie. He also happens to be a naturally gifted front end developer, with a great eye for style, and an encyclopedic knowledge of CSS and HTML. He's been the team's point of reference for both technologies for as long as I've worked with him. Working with Carlos will be one of the things I miss the most about the Disney project.",
+        text: "I've had the pleasure of sharing a team with Carlos during the two years I've worked for Disney in Globant. Charlie is an asset for any team, both in spirit and deed. He has amazing energy and charm, and is able to lift any team's morale just by being there, and being Charlie. He also happens to be a naturally gifted front end developer, with a great eye for style, and an encyclopedic knowledge of CSS and HTML. He's been the team's point of reference for both technologies for as long as I've worked with him. Working with Carlos will be one of the things I miss the most about the Disney project.",
         user: "J. Lorenzana",
       },
     ],

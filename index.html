@@ -2,29 +2,160 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/default.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="/css/media-queries.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carlos Monti: Resume</title>
+    <meta
+      name="description"
+      content="Carlos Monti - Senior Front End Developer with 10+ years of experience in ReactJS, TypeScript, and modern web development. Specialized in creating robust, well-finished products."
+    />
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Carlos Monti" />
+    <meta
+      name="keywords"
+      content="Front End Developer, React Developer, TypeScript, Web Development, Software Engineer, Buenos Aires"
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://testacode.github.io/resume" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="profile" />
+    <meta
+      property="og:title"
+      content="Carlos Monti - Senior Front End Developer"
+    />
+    <meta
+      property="og:description"
+      content="Senior Front End Developer with expertise in ReactJS, TypeScript, and modern web development. Creating robust, well-finished products."
+    />
+    <meta property="og:image" content="/avatar.png" />
+    <meta property="og:url" content="https://testacode.github.io/resume" />
+    <meta property="og:site_name" content="Carlos Monti's Portfolio" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Carlos Monti - Senior Front End Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Senior Front End Developer with expertise in ReactJS, TypeScript, and modern web development. Creating robust, well-finished products."
+    />
+    <meta name="twitter:image" content="/avatar.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/images/header-background.jpg" as="image" />
+    <link rel="preload" href="/css/default.css" as="style" />
+    <link rel="preload" href="/css/layout.css" as="style" />
+    <link rel="preload" href="/css/media-queries.css" as="style" />
+
+    <!-- Critical CSS -->
+    <link
+      rel="stylesheet"
+      href="/css/default.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/layout.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/media-queries.css"
+      media="print"
+      onload="this.media='all'"
+    />
+
+    <!-- Fallback for no-JS -->
+    <noscript>
+      <link rel="stylesheet" href="/css/default.css" />
+      <link rel="stylesheet" href="/css/layout.css" />
+      <link rel="stylesheet" href="/css/media-queries.css" />
+    </noscript>
+
+    <title>Carlos Monti - Senior Front End Developer | Resume</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Carlos Monti",
+        "jobTitle": "Senior Front End Developer",
+        "description": "I am passionate about learning while creating robust well-finished products",
+        "image": "/avatar.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressRegion": "Argentina",
+          "postalCode": "1605",
+          "streetAddress": "Vicente López"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/carlosmonti/",
+          "https://www.instagram.com/carlosmonti/",
+          "https://github.com/testacode",
+          "https://gitlab.com/carlosmonti"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Despegar.com"
+        },
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Escuela Multimedial Da Vinci",
+            "degree": "Desarrollo Multimedia"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Escuelas de las Americas Nº 5",
+            "degree": "Economics Science Bachelor"
+          }
+        ],
+        "knowsAbout": [
+          "ReactJS",
+          "TypeScript",
+          "NextJS",
+          "Redux",
+          "Webpack",
+          "CSS",
+          "HTML5",
+          "Unit Testing",
+          "Agile Methodology"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Load jQuery from CDN with local fallback -->
+    <script
+      defer
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
     <script>
       window.jQuery ||
-        document.write('<script src="js/jquery-3.4.1.min.js"><\/script>');
+        document.write('<script defer src="js/jquery-3.4.1.min.js"><\/script>');
     </script>
+
+    <!-- Defer non-critical scripts -->
     <script
+      defer
       type="text/javascript"
       src="/js/jquery-migrate-1.4.1.min.js"
     ></script>
-    <script src="/js/jquery.flexslider.js"></script>
-    <script src="/js/magnific-popup.js"></script>
-    <script src="/js/jquery.fittext.js"></script>
-    <script src="/js/waypoints.js"></script>
-    <script src="/js/init.js"></script>
+    <script defer src="/js/jquery.flexslider.js"></script>
+    <script defer src="/js/magnific-popup.js"></script>
+    <script defer src="/js/jquery.fittext.js"></script>
+    <script defer src="/js/waypoints.js"></script>
+    <script defer src="/js/init.js"></script>
   </body>
 </html>
