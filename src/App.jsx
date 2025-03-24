@@ -5,10 +5,13 @@ import Header from "./Components/Header";
 import Resume from "./Components/Resume";
 import posthog from "posthog-js";
 
-posthog.init("phc_iYfBlgEMYTi4ytOSWKz5he0PxrS20tIbM8V0ilvAiS0", {
-  api_host: "https://us.i.posthog.com",
-  person_profiles: "always", // or 'always' to create profiles for anonymous users as well
-});
+// Only initialize PostHog in production
+if (import.meta.env.PROD) {
+  posthog.init("phc_iYfBlgEMYTi4ytOSWKz5he0PxrS20tIbM8V0ilvAiS0", {
+    api_host: "https://us.i.posthog.com",
+    person_profiles: "always",
+  });
+}
 
 const App = () => {
   return (
