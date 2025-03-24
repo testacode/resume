@@ -41,11 +41,21 @@ const Header = ({ data }) => {
 
   return (
     <header id="home">
-      <nav id="nav-wrap">
-        <a className="mobile-btn" href="#nav-wrap" title="Show navigation">
+      <nav id="nav-wrap" role="navigation" aria-label="Main navigation">
+        <a
+          className="mobile-btn"
+          href="#nav-wrap"
+          title="Show navigation"
+          aria-label="Show navigation menu"
+        >
           Show navigation
         </a>
-        <a className="mobile-btn" href="#home" title="Hide navigation">
+        <a
+          className="mobile-btn"
+          href="#home"
+          title="Hide navigation"
+          aria-label="Hide navigation menu"
+        >
           Hide navigation
         </a>
 
@@ -55,6 +65,7 @@ const Header = ({ data }) => {
               className="smoothscroll"
               href="#home"
               onClick={(e) => handleScroll(e, "#home")}
+              aria-label="Go to home section"
             >
               Home
             </a>
@@ -64,6 +75,7 @@ const Header = ({ data }) => {
               className="smoothscroll"
               href="#about"
               onClick={(e) => handleScroll(e, "#about")}
+              aria-label="Go to about section"
             >
               About
             </a>
@@ -73,6 +85,7 @@ const Header = ({ data }) => {
               className="smoothscroll"
               href="#resume"
               onClick={(e) => handleScroll(e, "#resume")}
+              aria-label="Go to resume section"
             >
               Resume
             </a>
@@ -83,18 +96,25 @@ const Header = ({ data }) => {
       <div className="row banner">
         <div className="banner-text">
           <h1 className="responsive-headline">{name}</h1>
-          <h3>
+          <h2>
             I&apos;m a {city} based <span>{occupation}</span>. {description}.
-          </h3>
+          </h2>
           <hr />
-          <ul className="social">
-            {social?.map((network) => (
-              <li key={network.name}>
-                <a href={network.url}>
-                  <i className={network.className}></i>
-                </a>
-              </li>
-            ))}
+          <ul className="social" aria-label="Social media links">
+            {social
+              ?.filter((network) => network.enabled)
+              .map((network) => (
+                <li key={network.name}>
+                  <a
+                    href={network.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit my ${network.name} profile`}
+                  >
+                    {network.icon}
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
@@ -104,8 +124,9 @@ const Header = ({ data }) => {
           className="smoothscroll"
           href="#about"
           onClick={(e) => handleScroll(e, "#about")}
+          aria-label="Scroll down to about section"
         >
-          <i className="icon-down-circle"></i>
+          <i className="icon-down-circle" aria-hidden="true"></i>
         </a>
       </p>
     </header>
@@ -124,7 +145,8 @@ Header.propTypes = {
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
-        className: PropTypes.string.isRequired,
+        icon: PropTypes.node.isRequired,
+        enabled: PropTypes.bool.isRequired,
       })
     ),
   }),
