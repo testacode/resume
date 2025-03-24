@@ -9,7 +9,6 @@ import { ImGithub } from "react-icons/im";
 import { RiGitlabFill } from "react-icons/ri";
 import { IoLogoGitlab } from "react-icons/io5";
 import { ImSkype } from "react-icons/im";
-import { SiSkypeforbusiness } from "react-icons/si";
 
 export const data = {
   main: {
@@ -67,7 +66,7 @@ export const data = {
         enabled: false,
         name: "skype",
         url: "skype:carlos.monti83?call",
-        icon: Math.random() < 0.5 ? <ImSkype /> : <SiSkypeforbusiness />,
+        icon: <ImSkype />,
       },
     ],
   },
@@ -118,7 +117,7 @@ export const data = {
         years: "February 2016 - July 2017",
         technology: "Angular (1.6), Lodash/Underscore, Karma/Jasmine",
         description:
-          "Development for a punctual project called “Rmss” (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.",
+          'Development for a punctual project called "Rmss" (Resource Management Staff Setup). Tool for managing resources, adding skills for resources, etc.',
         contractor: "* Globant Contractor",
       },
       {
@@ -183,7 +182,7 @@ export const data = {
         user: "S. Kecili",
       },
       {
-        text: "I've had the pleasure of sharing a team with Carlos during the two years I’ve worked for Disney in Globant. Charlie is an asset for any team, both in spirit and deed. He has amazing energy and charm, and is able to lift any team's morale just by being there, and being Charlie. He also happens to be a naturally gifted front end developer, with a great eye for style, and an encyclopedic knowledge of CSS and HTML. He's been the team's point of reference for both technologies for as long as I've worked with him. Working with Carlos will be one of the things I miss the most about the Disney project.",
+        text: "I've had the pleasure of sharing a team with Carlos during the two years I've worked for Disney in Globant. Charlie is an asset for any team, both in spirit and deed. He has amazing energy and charm, and is able to lift any team's morale just by being there, and being Charlie. He also happens to be a naturally gifted front end developer, with a great eye for style, and an encyclopedic knowledge of CSS and HTML. He's been the team's point of reference for both technologies for as long as I've worked with him. Working with Carlos will be one of the things I miss the most about the Disney project.",
         user: "J. Lorenzana",
       },
     ],
