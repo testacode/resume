@@ -2,29 +2,71 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <link rel="stylesheet" href="/css/default.css" />
-    <link rel="stylesheet" href="/css/layout.css" />
-    <link rel="stylesheet" href="/css/media-queries.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Carlos Monti's Resume - Full Stack Developer with expertise in web development and software engineering"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/css/default.css" as="style" />
+    <link rel="preload" href="/css/layout.css" as="style" />
+    <link rel="preload" href="/css/media-queries.css" as="style" />
+
+    <!-- Critical CSS -->
+    <link
+      rel="stylesheet"
+      href="/css/default.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/layout.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="/css/media-queries.css"
+      media="print"
+      onload="this.media='all'"
+    />
+
+    <!-- Fallback for no-JS -->
+    <noscript>
+      <link rel="stylesheet" href="/css/default.css" />
+      <link rel="stylesheet" href="/css/layout.css" />
+      <link rel="stylesheet" href="/css/media-queries.css" />
+    </noscript>
+
     <title>Carlos Monti: Resume</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Load jQuery from CDN with local fallback -->
+    <script
+      defer
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
     <script>
       window.jQuery ||
-        document.write('<script src="js/jquery-3.4.1.min.js"><\/script>');
+        document.write('<script defer src="js/jquery-3.4.1.min.js"><\/script>');
     </script>
+
+    <!-- Defer non-critical scripts -->
     <script
+      defer
       type="text/javascript"
       src="/js/jquery-migrate-1.4.1.min.js"
     ></script>
-    <script src="/js/jquery.flexslider.js"></script>
-    <script src="/js/magnific-popup.js"></script>
-    <script src="/js/jquery.fittext.js"></script>
-    <script src="/js/waypoints.js"></script>
-    <script src="/js/init.js"></script>
+    <script defer src="/js/jquery.flexslider.js"></script>
+    <script defer src="/js/magnific-popup.js"></script>
+    <script defer src="/js/jquery.fittext.js"></script>
+    <script defer src="/js/waypoints.js"></script>
+    <script defer src="/js/init.js"></script>
   </body>
 </html>
