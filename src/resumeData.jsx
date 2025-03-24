@@ -13,7 +13,7 @@ import { ImSkype } from "react-icons/im";
 export const data = {
   main: {
     name: "Carlos Monti",
-    occupation: "Front End Developer",
+    occupation: "Senior Front End Developer",
     description:
       "I am passionate about learning while creating robust well-finished products",
     image: "avatar.png",
