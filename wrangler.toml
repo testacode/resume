@@ -3,9 +3,8 @@ main = ".open-next/worker.js"
 compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 
-# Custom domains (requires domain to be on Cloudflare)
+# Custom domains - only www, apex redirects via Cloudflare Redirect Rules
 routes = [
-  { pattern = "xmontc.xyz/*", zone_name = "xmontc.xyz" },
   { pattern = "www.xmontc.xyz/*", zone_name = "xmontc.xyz" }
 ]
 
