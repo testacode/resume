@@ -13,7 +13,7 @@ type Props = {
 
 export function About({ data }: Props) {
   const prefersReducedMotion = useReducedMotion();
-  const { name, bio, address, resumePdfUrl } = data;
+  const { name, bio, address, resumePdfUrl, resumeDocxUrl } = data;
 
   const MotionSection = prefersReducedMotion ? 'section' : motion.section;
   const MotionDiv = prefersReducedMotion ? 'div' : motion.div;
@@ -52,16 +52,28 @@ export function About({ data }: Props) {
               </p>
             </div>
 
-            <a
-              href={resumePdfUrl}
-              className={styles.downloadButton}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Download my resume in PDF format"
-            >
-              <FiDownload size={18} />
-              Download Resume
-            </a>
+            <div className={styles.downloadButtons}>
+              <a
+                href={resumePdfUrl}
+                className={styles.downloadButton}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download my resume in PDF format"
+              >
+                <FiDownload size={18} />
+                PDF
+              </a>
+              <a
+                href={resumeDocxUrl}
+                className={styles.downloadButton}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Download my resume in Word format"
+              >
+                <FiDownload size={18} />
+                DOCX
+              </a>
+            </div>
           </MotionDiv>
         </div>
       </div>
