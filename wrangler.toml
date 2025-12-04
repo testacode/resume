@@ -3,6 +3,12 @@ main = ".open-next/worker.js"
 compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 
+# Custom domains (requires domain to be on Cloudflare)
+routes = [
+  { pattern = "xmontc.xyz/*", zone_name = "xmontc.xyz" },
+  { pattern = "www.xmontc.xyz/*", zone_name = "xmontc.xyz" }
+]
+
 [assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
