@@ -4,8 +4,8 @@ export const resumeData: ResumeData = {
   personal: {
     name: 'Carlos Monti',
     title: 'Senior Front End Developer',
-    tagline: 'Passionate about learning while creating robust, well-finished products',
-    bio: "I'm a father of Alma, and for 10+ years a web software developer. Currently working with TypeScript, React, and Next.js in a service-oriented architecture.",
+    tagline: 'Building polished web experiences with a passion for clean code and continuous learning',
+    bio: 'Frontend developer with 10+ years of experience crafting web applications. Currently focused on TypeScript, React, and Next.js, building scalable solutions for large-scale products.',
     address: {
       city: 'Buenos Aires',
       country: 'Argentina',
@@ -48,7 +48,7 @@ export const resumeData: ResumeData = {
       endDate: null,
       technologies: ['TypeScript', 'React', 'Next.js'],
       description:
-        'Worked on After Sales department (Flights, Hotels, etc) until December 2024. Then recruited to a smaller team in an experimental development area.',
+        'Built and maintained post-booking experiences for flights, hotels, and travel packages. Currently working on SOFIA, an AI chatbot project in the E2E (End-to-End) experience team.',
     },
     {
       id: 'blockchain-2022',
@@ -57,7 +57,8 @@ export const resumeData: ResumeData = {
       startDate: '2022-01',
       endDate: '2022-07',
       technologies: ['TypeScript', 'React', 'Webpack', 'Redux', 'Redux-Saga'],
-      description: 'Started working on the non-custodial wallet.',
+      description:
+        'Developed features for the non-custodial crypto wallet, implementing staking and rewards functionality with React, Redux, and TypeScript.',
     },
     {
       id: 'elementum-2017',
@@ -67,7 +68,7 @@ export const resumeData: ResumeData = {
       endDate: '2022-01',
       technologies: ['React', 'Webpack', 'Redux', 'Redux-Saga', 'Jest', 'Enzyme', 'ESLint'],
       description:
-        'Created a React App from scratch with proper unit testing, worked transversally through several apps performing code reviews and repository maintenance.',
+        'Built a React application from scratch with comprehensive testing. Led cross-team code reviews and established repository standards across multiple projects.',
     },
     {
       id: 'deloitte-2016',
@@ -77,7 +78,7 @@ export const resumeData: ResumeData = {
       endDate: '2017-07',
       technologies: ['Angular 1.6', 'Lodash', 'Karma', 'Jasmine'],
       description:
-        'Development for a project called "RMSS" (Resource Management Staff Setup). Tool for managing resources and skills.',
+        'Developed RMSS (Resource Management Staff Setup), an internal tool for tracking team resources and skill allocation across the organization.',
       isContractor: true,
       contractorCompany: 'Globant',
     },
@@ -89,7 +90,7 @@ export const resumeData: ResumeData = {
       endDate: '2016-01',
       technologies: ['Angular 1.3', 'Lodash', 'Karma', 'Jasmine'],
       description:
-        'Development for the global page of Thomas Cook. Lets users book flights, hotels, etc. across Europe.',
+        "Contributed to Thomas Cook's global booking platform, enabling users to book flights, hotels, and vacation packages across Europe.",
       isContractor: true,
       contractorCompany: 'Globant',
     },
@@ -101,7 +102,7 @@ export const resumeData: ResumeData = {
       endDate: '2015-12',
       technologies: ['PHP', 'Zend Framework', 'JavaScript', 'jQuery', 'Angular 1.3', 'Less', 'Behat'],
       description:
-        'Development of the new Disney Personal Experience Portal - My Disney Experience (2.0).',
+        "Built features for My Disney Experience 2.0, Disney's guest-facing portal for park reservations, dining, and itinerary management.",
       isContractor: true,
       contractorCompany: 'Globant',
     },
