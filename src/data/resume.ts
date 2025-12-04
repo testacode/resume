@@ -12,6 +12,7 @@ export const resumeData: ResumeData = {
     },
     email: '',
     resumePdfUrl: '/carlos-monti-cv.pdf',
+    resumeDocxUrl: '/carlos-monti-cv-2025.docx',
     social: [
       {
         name: 'LinkedIn',
