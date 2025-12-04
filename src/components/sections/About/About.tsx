@@ -52,27 +52,30 @@ export function About({ data }: Props) {
               </p>
             </div>
 
-            <div className={styles.downloadButtons}>
-              <a
-                href={resumePdfUrl}
-                className={styles.downloadButton}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Download my resume in PDF format"
-              >
-                <FiDownload size={18} />
-                PDF
-              </a>
-              <a
-                href={resumeDocxUrl}
-                className={styles.downloadButton}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Download my resume in Word format"
-              >
-                <FiDownload size={18} />
-                DOCX
-              </a>
+            <div className={styles.downloadSection}>
+              <h3>Resume</h3>
+              <div className={styles.downloadButtons}>
+                <a
+                  href={resumePdfUrl}
+                  className={styles.downloadButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download my resume in PDF format"
+                >
+                  <FiDownload size={16} />
+                  PDF
+                </a>
+                <a
+                  href={resumeDocxUrl}
+                  className={styles.downloadButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download my resume in Word format"
+                >
+                  <FiDownload size={16} />
+                  DOCX
+                </a>
+              </div>
             </div>
           </MotionDiv>
         </div>
