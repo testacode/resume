@@ -1,21 +1,22 @@
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { Hero } from '@/components/sections/Hero';
+import { About } from '@/components/sections/About';
+import { Experience } from '@/components/sections/Experience';
 import { resumeData } from '@/data/resume';
-import styles from './page.module.css';
 
 export default function Home() {
-  const { personal } = resumeData;
+  const { personal, experience } = resumeData;
 
   return (
-    <main id="main-content" className={styles.main}>
-      <div className={styles.header}>
-        <ThemeToggle />
-      </div>
-      <div className={styles.content}>
-        <h1>{personal.name}</h1>
-        <p className={styles.title}>{personal.title}</p>
-        <p className={styles.tagline}>{personal.tagline}</p>
-        <p className={styles.status}>Portfolio v2 - Setup Complete</p>
-      </div>
-    </main>
+    <>
+      <Header />
+      <main id="main-content">
+        <Hero data={personal} />
+        <About data={personal} />
+        <Experience data={experience} />
+      </main>
+      <Footer social={personal.social} name={personal.name} />
+    </>
   );
 }
