@@ -1,0 +1,89 @@
+.about {
+  padding: var(--space-24) var(--space-6);
+  background-color: var(--color-background-alt);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 1.75rem;
+  margin-bottom: var(--space-12);
+}
+
+.heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+  max-width: 300px;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-accent);
+}
+
+.content {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.bio p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.info h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+.info p {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  width: fit-content;
+}
+
+.downloadButton:hover {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+}
+
+@media (min-width: 768px) {
+  .content {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+}
