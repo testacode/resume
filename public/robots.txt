@@ -14,4 +14,4 @@ Allow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://carlosmonti.dev/sitemap.xml
+Sitemap: https://carlosmonti.com/sitemap.xml

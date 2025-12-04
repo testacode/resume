@@ -23,12 +23,12 @@ export const metadata: Metadata = {
   keywords: ['Frontend Developer', 'React', 'TypeScript', 'Next.js', 'Buenos Aires'],
   authors: [{ name: 'Carlos Monti' }],
   alternates: {
-    canonical: 'https://carlosmonti.dev',
+    canonical: 'https://carlosmonti.com',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://carlosmonti.dev',
+    url: 'https://carlosmonti.com',
     siteName: 'Carlos Monti Portfolio',
     title: 'Carlos Monti | Senior Front End Developer',
     description:
@@ -51,7 +51,7 @@ const jsonLd = {
   '@type': 'Person',
   name: 'Carlos Monti',
   jobTitle: 'Senior Front End Developer',
-  url: 'https://carlosmonti.dev',
+  url: 'https://carlosmonti.com',
   email: '[email removed]',
   address: {
     '@type': 'PostalAddress',
