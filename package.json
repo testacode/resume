@@ -12,8 +12,8 @@
     "deploy:cloudflare": "opennextjs-cloudflare build && wrangler deploy",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest",
-    "test:run": "vitest run",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
