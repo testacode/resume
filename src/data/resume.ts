@@ -128,7 +128,7 @@ export const resumeData: ResumeData = {
       name: 'Blockout',
       description:
         '3D Tetris clone built with Three.js. Features 19 levels, visual and sound effects, and high score tracking.',
-      url: 'https://testacode.github.io/blockout/',
+      url: 'https://blockout.carlosmonti.com/',
       githubUrl: 'https://github.com/testacode/blockout',
       technologies: ['Three.js', 'TypeScript'],
       status: 'live',
