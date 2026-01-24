@@ -67,14 +67,16 @@ export function Projects({ data }: Props) {
                     Demo
                   </a>
                 )}
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  GitHub
-                </a>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    GitHub
+                  </a>
+                )}
               </div>
             </MotionDiv>
           ))}
