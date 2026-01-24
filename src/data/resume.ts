@@ -176,7 +176,7 @@ export const resumeData: ResumeData = {
       name: 'Favicon Generator',
       description:
         'Web app to create favicons from images or text. Supports crop, zoom, background removal, and multi-format export.',
-      url: 'https://favicon-generator.carlosmonti.com',
+      url: 'https://favicon.carlosmonti.com/',
       technologies: ['Next.js', 'Mantine', 'TypeScript'],
       status: 'live',
     },
