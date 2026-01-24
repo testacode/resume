@@ -122,4 +122,52 @@ export const resumeData: ResumeData = {
       graduationDate: 'March 2002',
     },
   ],
+  projects: [
+    {
+      id: 'blockout',
+      name: 'Blockout',
+      description:
+        '3D Tetris clone built with Three.js. Features 19 levels, visual and sound effects, and high score tracking.',
+      url: 'https://testacode.github.io/blockout/',
+      githubUrl: 'https://github.com/testacode/blockout',
+      technologies: ['Three.js', 'TypeScript'],
+      status: 'live',
+    },
+    {
+      id: 'header-editor-pro-free',
+      name: 'Header Editor Pro Free',
+      description:
+        'Chrome/Firefox extension to modify HTTP headers. Useful for developers and QA engineers.',
+      url: 'https://testacode.github.io/header-editor-pro-free/',
+      githubUrl: 'https://github.com/testacode/header-editor-pro-free',
+      technologies: ['JavaScript', 'Chrome API'],
+      status: 'live',
+    },
+    {
+      id: 'sound-buttons',
+      name: 'Sound Buttons',
+      description: 'Web soundboard with customizable sound buttons.',
+      url: 'https://sound-buttons-sigma.vercel.app',
+      githubUrl: 'https://github.com/testacode/sound-buttons',
+      technologies: ['Next.js', 'TypeScript'],
+      status: 'live',
+    },
+    {
+      id: 'llm-toolkit',
+      name: 'LLM Toolkit',
+      description:
+        'Claude Code plugin with skills, commands, and agents to boost developer productivity.',
+      githubUrl: 'https://github.com/testacode/llm-toolkit',
+      technologies: ['Claude Code', 'Markdown'],
+      status: 'live',
+    },
+    {
+      id: 'cocos-capital-client',
+      name: 'Cocos Capital Client',
+      description: 'Unofficial Python client for the Cocos Capital API.',
+      githubUrl: 'https://github.com/testacode/cocos-capital-client',
+      technologies: ['Python'],
+      status: 'coming-soon',
+    },
+  ],
 };

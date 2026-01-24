@@ -29,6 +29,16 @@ export type Education = {
   description?: string;
 };
 
+export type Project = {
+  id: string;
+  name: string;
+  description: string;
+  url?: string;
+  githubUrl: string;
+  technologies: string[];
+  status: 'live' | 'coming-soon';
+};
+
 export type PersonalInfo = {
   name: string;
   title: string;
@@ -45,4 +55,5 @@ export type ResumeData = {
   personal: PersonalInfo;
   experience: WorkExperience[];
   education: Education[];
+  projects: Project[];
 };
