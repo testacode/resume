@@ -3,10 +3,11 @@ import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Experience } from '@/components/sections/Experience';
+import { Projects } from '@/components/sections/Projects';
 import { resumeData } from '@/data/resume';
 
 export default function Home() {
-  const { personal, experience } = resumeData;
+  const { personal, experience, projects } = resumeData;
 
   return (
     <>
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero data={personal} />
         <About data={personal} />
         <Experience data={experience} />
+        <Projects data={projects} />
       </main>
       <Footer social={personal.social} name={personal.name} />
     </>
