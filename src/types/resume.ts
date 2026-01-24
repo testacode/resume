@@ -34,7 +34,7 @@ export type Project = {
   name: string;
   description: string;
   url?: string;
-  githubUrl: string;
+  githubUrl?: string;
   technologies: string[];
   status: 'live' | 'coming-soon';
 };

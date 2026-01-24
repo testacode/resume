@@ -169,5 +169,41 @@ export const resumeData: ResumeData = {
       technologies: ['Python'],
       status: 'coming-soon',
     },
+    {
+      id: 'favicon-generator',
+      name: 'Favicon Generator',
+      description:
+        'Web app to create favicons from images or text. Supports crop, zoom, background removal, and multi-format export.',
+      url: 'https://favicon-generator.carlosmonti.com',
+      technologies: ['Next.js', 'Mantine', 'TypeScript'],
+      status: 'live',
+    },
+    {
+      id: 'meli-trends',
+      name: 'MeLi Trends',
+      description:
+        'Real-time dashboard showing top 50 trending products on MercadoLibre across 7 LATAM countries.',
+      url: 'https://meli-trends.carlosmonti.com',
+      technologies: ['Next.js', 'Mantine', 'TypeScript'],
+      status: 'live',
+    },
+    {
+      id: 'eyesaver',
+      name: 'EyeSaver',
+      description:
+        'Browser screensaver with SomaFM ambient music and MilkDrop-inspired WebGL visualizations.',
+      url: 'https://eyesaver.vercel.app',
+      technologies: ['Next.js', 'Three.js', 'Mantine'],
+      status: 'live',
+    },
+    {
+      id: 'gastos',
+      name: 'Gastos',
+      description:
+        'Personal expense tracker with multi-currency support, investment monitoring, and financial analytics.',
+      url: 'https://gastos-xmontc.vercel.app',
+      technologies: ['Next.js', 'Tailwind CSS', 'Three.js'],
+      status: 'live',
+    },
   ],
 };
