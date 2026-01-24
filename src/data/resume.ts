@@ -157,6 +157,7 @@ export const resumeData: ResumeData = {
       name: 'LLM Toolkit',
       description:
         'Claude Code plugin with skills, commands, and agents to boost developer productivity.',
+      url: 'https://testacode.github.io/llm-toolkit/',
       githubUrl: 'https://github.com/testacode/llm-toolkit',
       technologies: ['Claude Code', 'Markdown'],
       status: 'live',
