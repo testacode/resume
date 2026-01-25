@@ -204,7 +204,7 @@ export const resumeData: ResumeData = {
       name: 'Gastos',
       description:
         'Personal expense tracker with multi-currency support, investment monitoring, and financial analytics.',
-      url: 'https://gastos-xmontc.vercel.app',
+      url: 'https://gastos.carlosmonti.com',
       technologies: ['Next.js', 'Tailwind CSS', 'Three.js'],
       status: 'live',
     },
