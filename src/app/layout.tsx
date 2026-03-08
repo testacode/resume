@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { resumeData } from '@/data/resume';
 import './globals.css';
 
 const inter = localFont({
@@ -46,22 +47,23 @@ export const metadata: Metadata = {
   },
 };
 
+const { personal } = resumeData;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Carlos Monti',
-  jobTitle: 'Senior Front End Developer',
+  name: personal.name,
+  jobTitle: personal.title,
   url: 'https://carlosmonti.com',
-  email: 'indiosolarimobil+cv@gmail.com',
+  email: personal.email,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Buenos Aires',
-    addressCountry: 'Argentina',
+    addressLocality: personal.address.city,
+    addressCountry: personal.address.country,
   },
-  sameAs: [
-    'https://linkedin.com/in/carlosmonti',
-    'https://github.com/testacode',
-  ],
+  sameAs: personal.social
+    .filter((s) => s.enabled)
+    .map((s) => s.url),
 };
 
 export default function RootLayout({
