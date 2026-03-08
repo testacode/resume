@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 import styles from './Header.module.css';
 
 const navItems = [
@@ -16,6 +17,9 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(mobileMenuRef, isMenuOpen);
 
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
@@ -99,7 +103,7 @@ export function Header() {
       {isMenuOpen && (
         <>
           <div className={styles.overlay} onClick={closeMenu} aria-hidden="true" />
-          <div className={styles.mobileMenu} role="dialog" aria-label="Navigation menu">
+          <div ref={mobileMenuRef} className={styles.mobileMenu} role="dialog" aria-label="Navigation menu">
             <ul className={styles.mobileNavList}>
               {navItems.map((item) => (
                 <li key={item.href}>
