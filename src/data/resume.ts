@@ -10,7 +10,7 @@ export const resumeData: ResumeData = {
       city: 'Buenos Aires',
       country: 'Argentina',
     },
-    email: '',
+    email: '[email removed]',
     resumePdfUrl: '/carlos-monti-cv.pdf',
     resumeDocxUrl: '/carlos-monti-cv.docx',
     social: [

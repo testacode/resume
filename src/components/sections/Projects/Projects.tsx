@@ -63,6 +63,7 @@ export function Projects({ data }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.link}
+                    aria-label={`View ${project.name} demo`}
                   >
                     Demo
                   </a>
@@ -73,6 +74,7 @@ export function Projects({ data }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.link}
+                    aria-label={`View ${project.name} on GitHub`}
                   >
                     GitHub
                   </a>

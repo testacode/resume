@@ -62,7 +62,7 @@ export function About({ data }: Props) {
                   rel="noopener noreferrer"
                   aria-label="Download my resume in PDF format"
                 >
-                  <FiDownload size={16} />
+                  <FiDownload size={16} aria-hidden="true" />
                   PDF
                 </a>
                 <a
@@ -72,7 +72,7 @@ export function About({ data }: Props) {
                   rel="noopener noreferrer"
                   aria-label="Download my resume in Word format"
                 >
-                  <FiDownload size={16} />
+                  <FiDownload size={16} aria-hidden="true" />
                   DOCX
                 </a>
               </div>
