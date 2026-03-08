@@ -20,7 +20,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background-color: var(--color-border);
+  background: linear-gradient(to right, var(--color-border), transparent);
   max-width: 300px;
 }
 
@@ -85,15 +85,15 @@
   min-width: 100px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-accent-warm);
   background-color: transparent;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-accent-warm);
   border-radius: var(--radius-md);
   transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .downloadButton:hover {
-  background-color: var(--color-accent);
+  background-color: var(--color-accent-warm);
   color: var(--color-background);
   transform: translateY(-2px);
 }

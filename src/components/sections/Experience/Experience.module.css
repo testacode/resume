@@ -19,7 +19,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background-color: var(--color-border);
+  background: linear-gradient(to right, var(--color-border), transparent);
   max-width: 300px;
 }
 
@@ -49,7 +49,7 @@
   top: 6px;
   width: 10px;
   height: 10px;
-  background-color: var(--color-accent);
+  background: radial-gradient(circle at 35% 35%, var(--color-accent-hover), var(--color-accent));
   border-radius: var(--radius-full);
 }
 
@@ -98,7 +98,7 @@
   font-size: 0.75rem;
   padding: var(--space-1) var(--space-3);
   background-color: var(--color-background-alt);
-  color: var(--color-accent);
+  color: var(--color-accent-soft);
   border-radius: var(--radius-sm);
 }
 
