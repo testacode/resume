@@ -40,12 +40,3 @@ export const staggerContainer: Variants = {
     },
   },
 };
-
-export const scaleOnHover = {
-  scale: 1.02,
-  transition: { duration: 0.2 },
-};
-
-export const tapScale = {
-  scale: 0.98,
-};
