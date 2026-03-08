@@ -10,10 +10,11 @@ type Props = {
   data: WorkExperience[];
 };
 
-function formatDate(dateStr: string | null): string {
+export function formatDate(dateStr: string | null): string {
   if (!dateStr) return 'Present';
   const [year, month] = dateStr.split('-');
-  const date = new Date(parseInt(year), parseInt(month) - 1);
+  const date = new Date(parseInt(year, 10), parseInt(month, 10) - 1);
+  if (isNaN(date.getTime())) return dateStr;
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
