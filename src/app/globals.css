@@ -11,8 +11,8 @@
   --color-accent-hover: oklch(0.50 0.1 175);
   --color-accent-warm: oklch(0.65 0.17 75);
   --color-accent-soft: oklch(0.58 0.06 175);
-  --color-accent-subtle: oklch(0.75 0.04 175);
   --color-border: oklch(0.915 0.008 175);
+  --color-background-blur: oklch(0.995 0.002 175 / 0.85);
   --color-overlay: oklch(0.17 0.01 175 / 0.5);
 
   /* Typography (font stacks set on body where geist vars are available) */
@@ -36,7 +36,6 @@
   --space-16: 4rem;
   --space-24: 6rem;
   --space-32: 8rem;
-  --space-40: 10rem;
 
   /* Layout */
   --max-width: 1100px;
@@ -47,7 +46,6 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 150ms var(--ease-out-quart);
   --transition-base: 300ms var(--ease-out-quart);
-  --transition-slow: 500ms var(--ease-out-quart);
 
   /* Misc */
   --shadow-sm: 0 1px 2px oklch(0.17 0.01 175 / 0.06);
@@ -68,8 +66,8 @@
   --color-accent-hover: oklch(0.85 0.12 175);
   --color-accent-warm: oklch(0.80 0.15 85);
   --color-accent-soft: oklch(0.78 0.07 175);
-  --color-accent-subtle: oklch(0.50 0.05 175);
   --color-border: oklch(0.30 0.012 175);
+  --color-background-blur: oklch(0.14 0.012 175 / 0.85);
   --color-overlay: oklch(0.10 0.01 175 / 0.6);
 }
 
@@ -83,7 +81,6 @@
 html { scroll-behavior: smooth; }
 
 body {
-  --font-display: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: var(--font-geist-mono), 'Fira Code', 'Consolas', monospace;
   font-family: var(--font-sans);

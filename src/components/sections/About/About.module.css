@@ -15,7 +15,7 @@
 .number {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 300;
   color: var(--color-accent);
   margin-bottom: var(--space-2);
@@ -102,11 +102,13 @@
   z-index: -1;
 }
 
-.downloadButton:hover {
+.downloadButton:hover,
+.downloadButton:focus-visible {
   color: var(--color-background);
 }
 
-.downloadButton:hover::before {
+.downloadButton:hover::before,
+.downloadButton:focus-visible::before {
   transform: scaleX(1);
 }
 
