@@ -1,5 +1,5 @@
 .about {
-  padding: var(--space-24) var(--space-6);
+  padding: var(--space-32) var(--space-6);
   background-color: var(--color-background-alt);
 }
 
@@ -8,27 +8,23 @@
   margin: 0 auto;
 }
 
-.heading {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: 1.75rem;
+.headingGroup {
   margin-bottom: var(--space-12);
 }
 
-.heading::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, var(--color-border), transparent);
-  max-width: 300px;
+.number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
 }
 
-.number {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--color-accent);
+.heading {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--color-text-display);
 }
 
 .content {
@@ -37,8 +33,8 @@
 }
 
 .bio p {
-  font-size: 1.125rem;
-  line-height: 1.8;
+  font-size: var(--text-lg);
+  line-height: 1.9;
   max-width: 600px;
 }
 
@@ -49,25 +45,25 @@
 }
 
 .info h3 {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-bottom: var(--space-2);
 }
 
 .info p {
-  font-size: 1rem;
+  font-size: var(--text-base);
   color: var(--color-text-secondary);
 }
 
 .downloadSection h3 {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-bottom: var(--space-3);
 }
 
@@ -77,25 +73,41 @@
 }
 
 .downloadButton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-6);
   min-width: 100px;
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-accent-warm);
   background-color: transparent;
   border: 2px solid var(--color-accent-warm);
-  border-radius: var(--radius-md);
-  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  border-radius: 0;
+  overflow: hidden;
+  transition: color var(--transition-fast);
+  z-index: 0;
+}
+
+.downloadButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent-warm);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--transition-base);
+  z-index: -1;
 }
 
 .downloadButton:hover {
-  background-color: var(--color-accent-warm);
   color: var(--color-background);
-  transform: translateY(-2px);
+}
+
+.downloadButton:hover::before {
+  transform: scaleX(1);
 }
 
 @media (min-width: 768px) {

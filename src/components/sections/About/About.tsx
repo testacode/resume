@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import { FiDownload } from 'react-icons/fi';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { fadeInUp, fadeInLeft, staggerContainer } from '@/lib/animations';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import type { PersonalInfo } from '@/types/resume';
 import styles from './About.module.css';
@@ -15,8 +15,8 @@ export function About({ data }: Props) {
   const prefersReducedMotion = useReducedMotion();
   const { name, bio, address, resumePdfUrl, resumeDocxUrl } = data;
 
-  const MotionSection = prefersReducedMotion ? 'section' : motion.section;
-  const MotionDiv = prefersReducedMotion ? 'div' : motion.div;
+  const MS = prefersReducedMotion ? 'section' : motion.section;
+  const M = prefersReducedMotion ? 'div' : motion.div;
 
   const sectionProps = prefersReducedMotion
     ? {}
@@ -28,22 +28,22 @@ export function About({ data }: Props) {
       };
 
   const itemProps = prefersReducedMotion ? {} : { variants: fadeInUp };
+  const headingProps = prefersReducedMotion ? {} : { variants: fadeInLeft };
 
   return (
-    <MotionSection id="about" className={styles.about} {...sectionProps}>
+    <MS id="about" className={styles.about} {...sectionProps}>
       <div className={styles.container}>
-        <MotionDiv {...itemProps}>
-          <h2 className={styles.heading}>
-            <span className={styles.number}>01.</span> About Me
-          </h2>
-        </MotionDiv>
+        <M {...headingProps} className={styles.headingGroup}>
+          <span className={styles.number}>01</span>
+          <h2 className={styles.heading}>About Me</h2>
+        </M>
 
         <div className={styles.content}>
-          <MotionDiv {...itemProps} className={styles.bio}>
+          <M {...itemProps} className={styles.bio}>
             <p>{bio}</p>
-          </MotionDiv>
+          </M>
 
-          <MotionDiv {...itemProps} className={styles.details}>
+          <M {...itemProps} className={styles.details}>
             <div className={styles.info}>
               <h3>Contact</h3>
               <p>{name}</p>
@@ -77,9 +77,9 @@ export function About({ data }: Props) {
                 </a>
               </div>
             </div>
-          </MotionDiv>
+          </M>
         </div>
       </div>
-    </MotionSection>
+    </MS>
   );
 }

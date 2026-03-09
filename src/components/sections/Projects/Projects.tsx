@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { scaleIn, fadeInLeft, staggerContainer } from '@/lib/animations';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import type { Project } from '@/types/resume';
 import styles from './Projects.module.css';
@@ -13,8 +13,8 @@ type Props = {
 export function Projects({ data }: Props) {
   const prefersReducedMotion = useReducedMotion();
 
-  const MotionSection = prefersReducedMotion ? 'section' : motion.section;
-  const MotionDiv = prefersReducedMotion ? 'div' : motion.div;
+  const MS = prefersReducedMotion ? 'section' : motion.section;
+  const M = prefersReducedMotion ? 'div' : motion.div;
 
   const sectionProps = prefersReducedMotion
     ? {}
@@ -25,20 +25,20 @@ export function Projects({ data }: Props) {
         variants: staggerContainer,
       };
 
-  const itemProps = prefersReducedMotion ? {} : { variants: fadeInUp };
+  const itemProps = prefersReducedMotion ? {} : { variants: scaleIn };
+  const headingProps = prefersReducedMotion ? {} : { variants: fadeInLeft };
 
   return (
-    <MotionSection id="projects" className={styles.projects} {...sectionProps}>
+    <MS id="projects" className={styles.projects} {...sectionProps}>
       <div className={styles.container}>
-        <MotionDiv {...itemProps}>
-          <h2 className={styles.heading}>
-            <span className={styles.number}>03.</span> Projects
-          </h2>
-        </MotionDiv>
+        <M {...headingProps} className={styles.headingGroup}>
+          <span className={styles.number}>03</span>
+          <h2 className={styles.heading}>Projects</h2>
+        </M>
 
         <div className={styles.grid}>
           {data.map((project) => (
-            <MotionDiv key={project.id} {...itemProps} className={styles.card}>
+            <M key={project.id} {...itemProps} className={styles.card}>
               <div className={styles.cardHeader}>
                 <h3 className={styles.projectName}>{project.name}</h3>
                 {project.status === 'coming-soon' && (
@@ -80,10 +80,10 @@ export function Projects({ data }: Props) {
                   </a>
                 )}
               </div>
-            </MotionDiv>
+            </M>
           ))}
         </div>
       </div>
-    </MotionSection>
+    </MS>
   );
 }

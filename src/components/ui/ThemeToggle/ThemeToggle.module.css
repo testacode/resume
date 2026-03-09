@@ -10,12 +10,13 @@
   background-color: transparent;
   color: var(--color-text-primary);
   cursor: pointer;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
 .toggle:hover {
   background-color: var(--color-background-alt);
   color: var(--color-accent);
+  transform: rotate(15deg);
 }
 
 .placeholder {

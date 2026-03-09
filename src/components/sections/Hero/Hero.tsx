@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import { FiArrowDown } from 'react-icons/fi';
 import { SocialLinks } from '@/components/ui/SocialLinks';
-import { fadeInUp, staggerContainer } from '@/lib/animations';
+import { heroName, heroItem } from '@/lib/animations';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import type { PersonalInfo } from '@/types/resume';
 import styles from './Hero.module.css';
@@ -16,49 +16,49 @@ export function Hero({ data }: Props) {
   const prefersReducedMotion = useReducedMotion();
   const { name, title, tagline, address, social } = data;
 
-  const MotionDiv = prefersReducedMotion ? 'div' : motion.div;
-  const motionProps = prefersReducedMotion
-    ? {}
-    : {
-        initial: 'hidden',
-        animate: 'visible',
-        variants: staggerContainer,
-      };
-
-  const itemProps = prefersReducedMotion ? {} : { variants: fadeInUp };
+  const M = prefersReducedMotion ? 'div' : motion.div;
+  const noMotion = prefersReducedMotion;
 
   return (
     <section id="home" className={styles.hero}>
-      <MotionDiv className={styles.content} {...motionProps}>
-        <MotionDiv {...itemProps}>
+      <div className={styles.content}>
+        <M {...(noMotion ? {} : { initial: 'hidden', animate: 'visible', variants: heroItem(0.1) })}>
           <p className={styles.greeting}>Hello, I&apos;m</p>
-        </MotionDiv>
+        </M>
 
-        <MotionDiv {...itemProps}>
+        <M {...(noMotion ? {} : { initial: 'hidden', animate: 'visible', variants: heroName })}>
           <h1 className={styles.name}>{name}</h1>
-        </MotionDiv>
+        </M>
 
-        <MotionDiv {...itemProps}>
+        <M {...(noMotion ? {} : { initial: 'hidden', animate: 'visible', variants: heroItem(0.5) })}>
           <h2 className={styles.title}>{title}</h2>
-        </MotionDiv>
+        </M>
 
-        <MotionDiv {...itemProps}>
+        <M {...(noMotion ? {} : { initial: 'hidden', animate: 'visible', variants: heroItem(0.7) })}>
           <p className={styles.tagline}>{tagline}</p>
-        </MotionDiv>
+        </M>
 
-        <MotionDiv {...itemProps}>
-          <p className={styles.location}>
-            Based in {address.city}, {address.country}
-          </p>
-        </MotionDiv>
+        <M
+          className={styles.accentLine}
+          {...(noMotion ? {} : {
+            initial: { scaleX: 0, opacity: 0 },
+            animate: { scaleX: 1, opacity: 1 },
+            transition: { duration: 0.6, delay: 0.9, ease: [0.25, 1, 0.5, 1] },
+          })}
+        />
 
-        <MotionDiv {...itemProps} className={styles.social}>
-          <SocialLinks links={social} size="lg" />
-        </MotionDiv>
-      </MotionDiv>
+        <M {...(noMotion ? {} : { initial: 'hidden', animate: 'visible', variants: heroItem(1.0) })}>
+          <div className={styles.bottom}>
+            <SocialLinks links={social} size="lg" />
+            <p className={styles.location}>
+              {address.city}, {address.country}
+            </p>
+          </div>
+        </M>
+      </div>
 
       <a href="#about" className={styles.scrollDown} aria-label="Scroll to about section">
-        <FiArrowDown size={24} />
+        <FiArrowDown size={20} />
       </a>
     </section>
   );

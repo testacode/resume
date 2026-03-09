@@ -6,12 +6,12 @@
   z-index: 50;
   height: var(--header-height);
   background-color: transparent;
-  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+  transition: background-color var(--transition-base), backdrop-filter var(--transition-base);
 }
 
 .header.scrolled {
-  background-color: var(--color-background);
-  box-shadow: var(--shadow-sm);
+  background-color: oklch(from var(--color-background) l c h / 0.85);
+  backdrop-filter: blur(12px);
 }
 
 .nav {
@@ -32,11 +32,11 @@
 }
 
 .navLink {
-  position: relative;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   color: var(--color-text-secondary);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), font-weight var(--transition-fast);
 }
 
 .navLink:hover {
@@ -45,22 +45,7 @@
 
 .navLink.active {
   color: var(--color-accent);
-}
-
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--color-accent);
-  transition: width var(--transition-fast);
-}
-
-.navLink.active::after,
-.navLink:hover::after {
-  width: 100%;
+  font-weight: 500;
 }
 
 .actions {
@@ -137,8 +122,8 @@
   .mobileNavLink {
     display: block;
     padding: var(--space-3) var(--space-4);
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: var(--text-base);
+    font-weight: 400;
     color: var(--color-text-secondary);
     border-radius: var(--radius-md);
     transition: background-color var(--transition-fast), color var(--transition-fast);

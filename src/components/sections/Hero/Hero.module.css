@@ -1,7 +1,6 @@
 .hero {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding: var(--header-height) var(--space-6) var(--space-16);
@@ -13,44 +12,58 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
-  max-width: 700px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .greeting {
-  font-size: 1rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-accent);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 .name {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-size: var(--text-hero);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  color: var(--color-text-display);
 }
 
 .title {
-  font-size: clamp(1.25rem, 4vw, 1.75rem);
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: var(--text-hero-sub);
+  font-weight: 300;
   color: var(--color-text-secondary);
 }
 
 .tagline {
-  font-size: 1.125rem;
+  font-size: var(--text-lg);
   color: var(--color-text-secondary);
   max-width: 500px;
   text-wrap: balance;
 }
 
-.location {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
+.accentLine {
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform-origin: left center;
 }
 
-.social {
-  margin-top: var(--space-6);
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.location {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-text-muted);
 }
 
 .scrollDown {
@@ -61,26 +74,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
   color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  transition: color var(--transition-fast), border-color var(--transition-fast);
-  animation: float 3s ease-in-out infinite;
+  transition: color var(--transition-fast);
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .scrollDown:hover {
   color: var(--color-accent);
-  border-color: var(--color-accent);
 }
 
-@keyframes float {
-  0% {
-    transform: translateX(-50%) translateY(0);
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    text-align: left;
   }
-  50% {
-    transform: translateX(-50%) translateY(-6px);
+
+  .content {
+    align-items: flex-start;
+    margin: 0 auto 0 max(var(--space-8), calc((100vw - var(--max-width)) / 2 + var(--space-8)));
+  }
+
+  .accentLine {
+    transform-origin: left center;
+  }
+
+  .bottom {
+    flex-direction: row;
+    gap: var(--space-6);
   }
 }
 
