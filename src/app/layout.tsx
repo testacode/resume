@@ -1,21 +1,10 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { resumeData } from '@/data/resume';
 import './globals.css';
-
-const inter = localFont({
-  src: './fonts/InterVariable.woff2',
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const jetbrainsMono = localFont({
-  src: './fonts/JetBrainsMono-Variable.woff2',
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'Carlos Monti | Senior Front End Developer',
@@ -73,7 +62,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
         <Script
           id="json-ld"
           type="application/ld+json"
