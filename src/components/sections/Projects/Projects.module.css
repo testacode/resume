@@ -15,7 +15,7 @@
 .number {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   font-weight: 300;
   color: var(--color-accent);
   margin-bottom: var(--space-2);
@@ -82,7 +82,7 @@
 
 .badge {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: var(--text-xs);
   padding: var(--space-1) var(--space-2);
   background-color: var(--color-background-alt);
   color: var(--color-text-muted);
@@ -92,7 +92,7 @@
 }
 
 .description {
-  font-size: 0.9375rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-4);
