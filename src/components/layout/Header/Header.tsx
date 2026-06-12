@@ -51,11 +51,18 @@ export function Header() {
       if (e.key === 'Escape') closeMenu();
     };
 
+    const desktopQuery = window.matchMedia('(min-width: 641px)');
+    const handleDesktop = (e: MediaQueryListEvent) => {
+      if (e.matches) closeMenu();
+    };
+
     document.addEventListener('keydown', handleEscape);
+    desktopQuery.addEventListener('change', handleDesktop);
     document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
+      desktopQuery.removeEventListener('change', handleDesktop);
       document.body.style.overflow = '';
     };
   }, [isMenuOpen, closeMenu]);
@@ -94,7 +101,7 @@ export function Header() {
       {isMenuOpen && (
         <>
           <div className={styles.overlay} onClick={closeMenu} aria-hidden="true" />
-          <div ref={mobileMenuRef} className={styles.mobileMenu} role="dialog" aria-label="Navigation menu">
+          <div ref={mobileMenuRef} className={styles.mobileMenu} role="dialog" aria-modal="true" aria-label="Navigation menu">
             <ul className={styles.mobileNavList}>
               {navItems.map((item) => (
                 <li key={item.href}>
