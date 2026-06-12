@@ -6,7 +6,7 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import styles from './ThemeToggle.module.css';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export function ThemeToggle() {
     return <div className={styles.placeholder} aria-hidden="true" />;
   }
 
-  const isDark = theme === 'dark';
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <button
