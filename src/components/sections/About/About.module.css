@@ -24,6 +24,7 @@
 .heading {
   font-size: var(--text-3xl);
   font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--color-text-display);
 }
 
@@ -73,44 +74,15 @@
 }
 
 .downloadButton {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
-  min-width: 100px;
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-accent-warm);
-  background-color: transparent;
-  border: 2px solid var(--color-accent-warm);
-  border-radius: 0;
-  overflow: hidden;
-  transition: color var(--transition-fast);
-  z-index: 0;
+  color: var(--color-accent);
 }
 
-.downloadButton::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-accent-warm);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--transition-base);
-  z-index: -1;
-}
-
-.downloadButton:hover,
-.downloadButton:focus-visible {
-  color: var(--color-background);
-}
-
-.downloadButton:hover::before,
-.downloadButton:focus-visible::before {
-  transform: scaleX(1);
-}
+.downloadButton:hover { color: var(--color-accent-hover); }
 
 @media (min-width: 768px) {
   .content {

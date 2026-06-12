@@ -35,31 +35,21 @@ export function Experience({ data }: Props) {
 
         <div className={styles.timeline}>
           {data.map((job) => (
-            <motion.div key={job.id} variants={fadeInUp} className={styles.job}>
-              <div className={styles.dot} />
+            <motion.article key={job.id} variants={fadeInUp} className={styles.job}>
+              <p className={styles.dates}>
+                {formatDate(job.startDate)} — {formatDate(job.endDate)}
+              </p>
               <div className={styles.jobContent}>
-                <div className={styles.jobHeader}>
-                  <h3 className={styles.jobTitle}>{job.title}</h3>
-                  <p className={styles.company}>@ {job.company}</p>
-                  <p className={styles.dates}>
-                    {formatDate(job.startDate)} — {formatDate(job.endDate)}
-                  </p>
-                  {job.isContractor && job.contractorCompany && (
-                    <p className={styles.contractor}>via {job.contractorCompany}</p>
-                  )}
-                </div>
-
+                <h3 className={styles.jobTitle}>
+                  {job.title} <span className={styles.company}>· {job.company}</span>
+                </h3>
+                {job.isContractor && job.contractorCompany && (
+                  <p className={styles.contractor}>via {job.contractorCompany}</p>
+                )}
                 <p className={styles.description}>{job.description}</p>
-
-                <div className={styles.technologies}>
-                  {job.technologies.map((tech) => (
-                    <span key={tech} className={styles.tech}>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                <p className={styles.tech}>{job.technologies.join(' · ')}</p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

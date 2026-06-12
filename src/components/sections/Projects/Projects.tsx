@@ -25,51 +25,34 @@ export function Projects({ data }: Props) {
           <h2 className={styles.heading}>Projects</h2>
         </motion.div>
 
-        <div className={styles.grid}>
+        <div className={styles.list}>
           {data.map((project) => (
-            <motion.div key={project.id} variants={scaleIn} className={styles.card}>
-              <div className={styles.cardHeader}>
-                <h3 className={styles.projectName}>{project.name}</h3>
-                {project.status === 'coming-soon' && (
-                  <span className={styles.badge}>Coming Soon</span>
-                )}
+            <motion.article key={project.id} variants={scaleIn} className={styles.row}>
+              <div className={styles.main}>
+                <h3 className={styles.projectName}>
+                  {project.name}
+                  {project.status === 'coming-soon' && (
+                    <span className={styles.soon}>coming soon</span>
+                  )}
+                </h3>
+                <p className={styles.description}>{project.description}</p>
+                <div className={styles.links}>
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" className={styles.link}
+                       aria-label={`View ${project.name} demo`}>
+                      Demo <span aria-hidden="true">→</span>
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.link}
+                       aria-label={`View ${project.name} on GitHub`}>
+                      GitHub <span aria-hidden="true">→</span>
+                    </a>
+                  )}
+                </div>
               </div>
-
-              <p className={styles.description}>{project.description}</p>
-
-              <div className={styles.technologies}>
-                {project.technologies.map((tech) => (
-                  <span key={tech} className={styles.tech}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className={styles.links}>
-                {project.url && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
-                    aria-label={`View ${project.name} demo`}
-                  >
-                    Demo
-                  </a>
-                )}
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
-                    aria-label={`View ${project.name} on GitHub`}
-                  >
-                    GitHub
-                  </a>
-                )}
-              </div>
-            </motion.div>
+              <p className={styles.tech}>{project.technologies.join(' · ')}</p>
+            </motion.article>
           ))}
         </div>
       </div>

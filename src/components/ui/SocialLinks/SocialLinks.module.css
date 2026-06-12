@@ -14,11 +14,10 @@
   height: 40px;
   color: var(--color-text-secondary);
   border-radius: var(--radius-full);
-  transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .link:hover {
   color: var(--color-accent);
   background-color: var(--color-background-alt);
-  transform: rotate(-5deg) scale(1.15);
 }
