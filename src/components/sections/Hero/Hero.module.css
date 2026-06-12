@@ -19,12 +19,13 @@
 }
 
 .greeting {
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-accent);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--color-text-muted);
 }
+
+.prompt { color: var(--color-accent); }
 
 .name {
   font-family: var(--font-display);

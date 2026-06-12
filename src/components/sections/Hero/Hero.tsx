@@ -18,7 +18,9 @@ export function Hero({ data }: Props) {
     <section id="home" className={styles.hero}>
       <div className={styles.content}>
         <motion.div initial="hidden" animate="visible" variants={heroItem(0.1)}>
-          <p className={styles.greeting}>Hello, I&apos;m</p>
+          <p className={styles.greeting}>
+            <span className={styles.prompt}>carlos@portfolio:~$</span> whoami
+          </p>
         </motion.div>
 
         <motion.div initial="hidden" animate="visible" variants={heroName}>

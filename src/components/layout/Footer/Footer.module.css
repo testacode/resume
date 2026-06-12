@@ -14,9 +14,21 @@
 }
 
 .copyright {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
   font-size: var(--text-xs);
   font-weight: 300;
   color: var(--color-text-muted);
+}
+
+.build {
+  font-family: var(--font-mono);
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .copyright { flex-direction: row; gap: var(--space-3); align-items: baseline; }
 }
 
 @media (min-width: 768px) {

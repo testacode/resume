@@ -49,6 +49,22 @@
   color: var(--color-text-display);
 }
 
+.statusDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  margin-right: var(--space-3);
+  vertical-align: middle;
+}
+
+.live { background-color: var(--color-accent); }
+
+.comingSoon {
+  background-color: transparent;
+  border: 1px solid var(--color-text-muted);
+}
+
 .soon {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -73,6 +89,15 @@
 }
 
 .link:hover { color: var(--color-accent-hover); }
+
+.link span {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+}
+
+.link:hover span {
+  transform: translateX(4px);
+}
 
 .tech {
   font-family: var(--font-mono);

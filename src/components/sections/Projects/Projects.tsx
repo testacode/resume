@@ -30,6 +30,10 @@ export function Projects({ data }: Props) {
             <motion.article key={project.id} variants={scaleIn} className={styles.row}>
               <div className={styles.main}>
                 <h3 className={styles.projectName}>
+                  <span
+                    className={`${styles.statusDot} ${project.status === 'live' ? styles.live : styles.comingSoon}`}
+                    aria-hidden="true"
+                  />
                   {project.name}
                   {project.status === 'coming-soon' && (
                     <span className={styles.soon}>coming soon</span>
