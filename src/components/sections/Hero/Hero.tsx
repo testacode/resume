@@ -20,6 +20,7 @@ export function Hero({ data }: Props) {
         <motion.div initial="hidden" animate="visible" variants={heroItem(0.1)}>
           <p className={styles.greeting}>
             <span className={styles.prompt}>charly@portfolio:~$</span> whoami
+            <span className={styles.caret} aria-hidden="true" />
           </p>
         </motion.div>
 
