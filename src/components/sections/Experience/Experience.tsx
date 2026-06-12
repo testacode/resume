@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { fadeInUp, fadeInLeft, staggerContainer } from '@/lib/animations';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
 import type { WorkExperience } from '@/types/resume';
 import styles from './Experience.module.css';
 
@@ -19,34 +18,24 @@ export function formatDate(dateStr: string | null): string {
 }
 
 export function Experience({ data }: Props) {
-  const prefersReducedMotion = useReducedMotion();
-
-  const MS = prefersReducedMotion ? 'section' : motion.section;
-  const M = prefersReducedMotion ? 'div' : motion.div;
-
-  const sectionProps = prefersReducedMotion
-    ? {}
-    : {
-        initial: 'hidden',
-        whileInView: 'visible',
-        viewport: { once: true, margin: '-100px' },
-        variants: staggerContainer,
-      };
-
-  const itemProps = prefersReducedMotion ? {} : { variants: fadeInUp };
-  const headingProps = prefersReducedMotion ? {} : { variants: fadeInLeft };
-
   return (
-    <MS id="experience" className={styles.experience} {...sectionProps}>
+    <motion.section
+      id="experience"
+      className={styles.experience}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-100px' }}
+      variants={staggerContainer}
+    >
       <div className={styles.container}>
-        <M {...headingProps} className={styles.headingGroup}>
+        <motion.div variants={fadeInLeft} className={styles.headingGroup}>
           <span className={styles.number}>02</span>
           <h2 className={styles.heading}>Experience</h2>
-        </M>
+        </motion.div>
 
         <div className={styles.timeline}>
           {data.map((job) => (
-            <M key={job.id} {...itemProps} className={styles.job}>
+            <motion.div key={job.id} variants={fadeInUp} className={styles.job}>
               <div className={styles.dot} />
               <div className={styles.jobContent}>
                 <div className={styles.jobHeader}>
@@ -70,10 +59,10 @@ export function Experience({ data }: Props) {
                   ))}
                 </div>
               </div>
-            </M>
+            </motion.div>
           ))}
         </div>
       </div>
-    </MS>
+    </motion.section>
   );
 }
