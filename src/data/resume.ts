@@ -35,7 +35,7 @@ export const resumeData: ResumeData = {
         name: 'Instagram',
         url: 'https://www.instagram.com/carlosmonti/',
         icon: 'instagram',
-        enabled: true,
+        enabled: false,
       },
     ],
   },
