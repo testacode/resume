@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import { FiDownload } from 'react-icons/fi';
+import { FaLinkedinIn } from 'react-icons/fa';
 import { fadeInUp, fadeInLeft, staggerContainer } from '@/lib/animations';
 import type { PersonalInfo } from '@/types/resume';
 import styles from './About.module.css';
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export function About({ data }: Props) {
-  const { name, bio, address, resumePdfUrl, resumeDocxUrl } = data;
+  const { name, bio, address, social, resumePdfUrl, resumeDocxUrl } = data;
+  const linkedin = social.find((s) => s.icon === 'linkedin' && s.enabled);
 
   return (
     <motion.section
@@ -40,6 +42,18 @@ export function About({ data }: Props) {
               <p>
                 {address.city}, {address.country}
               </p>
+              {linkedin && (
+                <a
+                  href={linkedin.url}
+                  className={styles.contactButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Get in touch with me on LinkedIn"
+                >
+                  <FaLinkedinIn size={14} aria-hidden="true" />
+                  Get in touch <span aria-hidden="true">→</span>
+                </a>
+              )}
             </div>
 
             <div className={styles.downloadSection}>

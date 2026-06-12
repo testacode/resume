@@ -84,6 +84,18 @@
 
 .downloadButton:hover { color: var(--color-accent-hover); }
 
+.contactButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  margin-top: var(--space-3);
+}
+
+.contactButton:hover { color: var(--color-accent-hover); }
+
 @media (min-width: 768px) {
   .content {
     grid-template-columns: 2fr 1fr;
