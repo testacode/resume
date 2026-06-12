@@ -86,7 +86,6 @@ export function Header() {
         </ul>
 
         <div className={styles.actions}>
-          <ThemeToggle />
           <button
             type="button"
             className={styles.menuButton}
@@ -96,6 +95,7 @@ export function Header() {
           >
             {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
+          <ThemeToggle />
         </div>
       </nav>
 

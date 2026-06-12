@@ -83,6 +83,11 @@
 }
 
 @media (max-width: 640px) {
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .navList {
     display: none;
   }
