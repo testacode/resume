@@ -60,15 +60,6 @@ export function Header() {
     };
   }, [isMenuOpen, closeMenu]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    closeMenu();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <nav className={styles.nav}>
@@ -78,7 +69,7 @@ export function Header() {
               <a
                 href={item.href}
                 className={`${styles.navLink} ${activeSection === item.href.slice(1) ? styles.active : ''}`}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={closeMenu}
               >
                 {item.label}
               </a>
@@ -110,7 +101,7 @@ export function Header() {
                   <a
                     href={item.href}
                     className={`${styles.mobileNavLink} ${activeSection === item.href.slice(1) ? styles.active : ''}`}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={closeMenu}
                   >
                     {item.label}
                   </a>
