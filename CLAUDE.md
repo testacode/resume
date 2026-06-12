@@ -66,14 +66,16 @@ Recruiters, hiring managers, and engineering leads evaluating Carlos as a fronte
 Evoke **confidence and competence**: "This candidate knows what they're doing, is serious, and is reliable."
 
 ### Aesthetic Direction
-- **Color**: Teal accent (`#0d9488` light / `#2dd4bf` dark) on neutral slate palette
-- **Typography**: Inter (body) + JetBrains Mono (code/technical elements)
-- **Motion**: Subtle fade-in and stagger. Always respect `prefers-reduced-motion`
-- **Details**: Numbered section headings with decorative line, timeline with accent dots, mono-font tech tags
+- **Color**: Teal accent in OKLCH on teal-tinted neutral palette — light `oklch(0.58 0.1 175)`, dark `oklch(0.80 0.14 175)`. Accent is **rationed**: section-number kickers, links, the hero accent line + prompt `$`, and project status dots only.
+- **Typography** (via `next/font/google`): **Bricolage Grotesque** for display/headings/name, **Instrument Sans** for body, **IBM Plex Mono** for technical signals (kickers, dates, tech tags, links, the hero terminal prompt, version footer)
+- **Motion**: Subtle fade-in and stagger via the Motion library, centralized through a single `<MotionConfig reducedMotion="user">` — preserves opacity fades, suppresses positional movement for reduced-motion users
+- **Layout**: Editorial, no cards — Projects is a divided list, Experience a date-column grid
+- **Developer signals**: hero terminal prompt (`charly@portfolio:~$ whoami` + blinking caret), project status dots, version-string footer
 
 ### Design Principles
 1. **Content first** — Design serves the content, never competes with it
 2. **Quiet confidence** — Professional polish without excess
-3. **Developer identity** — Mono font accents, numbered sections signal "I build things"
+3. **Developer identity** — Mono signals (terminal prompt, status dots, version string), numbered section kickers
 4. **Consistent tokens** — All values from CSS custom properties, no magic numbers
-5. **Accessible by default** — WCAG AA, focus-visible, skip-to-content, reduced motion
+5. **Accent rationing** — Teal appears only where listed in Aesthetic Direction; adding it elsewhere breaks the restraint
+6. **Accessible by default** — WCAG AA, focus-visible, skip-to-content, reduced motion
