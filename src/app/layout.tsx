@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import Script from 'next/script';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { resumeData } from '@/data/resume';
 import './globals.css';
@@ -45,7 +44,6 @@ const jsonLd = {
   name: personal.name,
   jobTitle: personal.title,
   url: 'https://carlosmonti.com',
-  email: personal.email,
   address: {
     '@type': 'PostalAddress',
     addressLocality: personal.address.city,
@@ -64,13 +62,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <Script
-          id="json-ld"
+        <script
           type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(jsonLd)}
-        </Script>
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider>
           <a href="#main-content" className="skip-to-content">
             Skip to content

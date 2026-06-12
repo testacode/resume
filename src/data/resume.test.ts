@@ -6,7 +6,6 @@ describe('resumeData', () => {
     it('has required personal information', () => {
       expect(resumeData.personal.name).toBeDefined();
       expect(resumeData.personal.title).toBeDefined();
-      expect(resumeData.personal.email).toBeDefined();
       expect(resumeData.personal.address).toBeDefined();
       expect(resumeData.personal.address.city).toBeDefined();
     });

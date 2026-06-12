@@ -45,7 +45,6 @@ export type PersonalInfo = {
   tagline: string;
   bio: string;
   address: Address;
-  email: string;
   resumePdfUrl: string;
   resumeDocxUrl: string;
   social: SocialLink[];
