@@ -15,14 +15,14 @@
   --color-background-blur: oklch(0.995 0.002 175 / 0.85);
   --color-overlay: oklch(0.17 0.01 175 / 0.5);
 
-  /* Typography (font stacks set on body where geist vars are available) */
+  /* Typography (font stacks set on body where next/font vars are available) */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
   --text-3xl: 2rem;
-  --text-hero: clamp(2.5rem, 8vw, 4.5rem);
+  --text-hero: clamp(3rem, 9vw, 5.5rem);
   --text-hero-sub: clamp(1.25rem, 3vw, 1.75rem);
 
   /* Spacing (4px base) */
@@ -81,8 +81,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: var(--font-geist-mono), 'Fira Code', 'Consolas', monospace;
+  --font-sans: var(--font-instrument), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-plex-mono), 'Fira Code', 'Consolas', monospace;
+  --font-display: var(--font-bricolage), var(--font-sans);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -96,6 +97,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.3;
   color: var(--color-text-primary);
