@@ -31,12 +31,6 @@ export const resumeData: ResumeData = {
         icon: 'gitlab',
         enabled: true,
       },
-      {
-        name: 'Instagram',
-        url: 'https://www.instagram.com/carlosmonti/',
-        icon: 'instagram',
-        enabled: false,
-      },
     ],
   },
   experience: [

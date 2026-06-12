@@ -1,6 +1,6 @@
 'use client';
 
-import { FaLinkedinIn, FaGithub, FaGitlab, FaInstagram } from 'react-icons/fa';
+import { FaLinkedinIn, FaGithub, FaGitlab } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import type { SocialLink } from '@/types/resume';
 import styles from './SocialLinks.module.css';
@@ -11,7 +11,6 @@ const iconMap: Record<IconName, React.ComponentType<{ size?: number }>> = {
   linkedin: FaLinkedinIn,
   github: FaGithub,
   gitlab: FaGitlab,
-  instagram: FaInstagram,
   email: HiOutlineMail,
 };
 

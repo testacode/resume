@@ -1,7 +1,7 @@
 export type SocialLink = {
   name: string;
   url: string;
-  icon: 'linkedin' | 'github' | 'gitlab' | 'instagram' | 'email';
+  icon: 'linkedin' | 'github' | 'gitlab' | 'email';
   enabled: boolean;
 };
 
