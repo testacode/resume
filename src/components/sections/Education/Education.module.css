@@ -1,0 +1,75 @@
+.education {
+  padding: var(--space-32) var(--space-6);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.headingGroup {
+  margin-bottom: var(--space-12);
+}
+
+.number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.heading {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--color-text-display);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2) var(--space-8);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .entry { grid-template-columns: 180px 1fr; }
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.entryContent { min-width: 0; }
+
+.school {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--color-text-display);
+}
+
+.degree {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.description {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-3);
+}
