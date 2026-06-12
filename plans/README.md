@@ -22,6 +22,7 @@ update your row when done.
 | 011 | Developer seasoning (prompt, status dots, version footer, link hover) | P3 | M | 010 | DONE (`2fbd3cd`) |
 | 012 | Hero prompt username carlos→charly | P3 | S | 011 | DONE (`1f2c32a`) |
 | 013 | Theme-toggle fix + caret + remove Instagram + mobile header layout | P2 | M | 011, 012 | DONE (`986a327`,`7d3df22`,`f9c3167`,`d18b882`) |
+| 014 | Align CLAUDE.md design context + fully remove Instagram | P3 | S | 010, 013 | DONE (`22fe344`,`99ed220`) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -69,31 +70,22 @@ executor subagents work DIRECTLY on `master` (no worktrees, no branches),
 one conventional commit per plan, never push — the advisor reviews each diff
 and maintains this index.
 
-ALL PLANS DONE (001–013; 007 superseded into 010). 16 local commits
-`a0ea919..d18b882`, nothing pushed. Backlog empty.
+ALL PLANS DONE (001–014; 007 superseded into 010). Repo `testacode/resume` is
+PRIVATE. Through commit `99ed220`; commits `a0ea919..6341ecf` are pushed to
+`origin/master`, and 014's two commits (`22fe344`,`99ed220`) plus this index
+update push next. `plans/` is versioned (committed in `6341ecf`). Backlog empty.
 - 012 = hero prompt username carlos→charly (h1 stays "Carlos Monti").
 - 013 = 4 touches: theme-toggle `resolvedTheme` fix (first-click bug, verified
-  live in browser), blinking hero caret, Instagram disabled (`enabled:false`),
-  mobile header split (hamburger left / theme right via DOM reorder).
-  NOTE: Instagram's URL still travels in the serialized RSC data prop (not
-  rendered as a link, absent from JSON-LD sameAs). If the owner wants it gone
-  from the bundle entirely (email-style, plan 005), delete the array entry in
-  `resume.ts` — deferred; the URL is public, unlike the email.
+  live in browser), blinking hero caret, Instagram disabled, mobile header
+  split (hamburger left / theme right via DOM reorder).
+- 014 = CLAUDE.md Design Context aligned to the editorial system; Instagram
+  fully removed (data entry + `IconName` union member + iconMap + import;
+  `grep -rci instagram src/` → 0).
 
-Remaining decisions (not plan work):
-1. **Push / deploy** — push to `master` triggers CI + Cloudflare deploy.
-   The 11 commits are local-only; review with `npm run dev` first.
-2. `plans/` is still UNTRACKED — consider committing it (`docs: add advisor
-   plans`) so the planning record travels with the repo.
-3. **`CLAUDE.md` "Design Context" is stale** — still names Inter/JetBrains and
-   teal `#0d9488`; the live system is Bricolage/Instrument/IBM Plex Mono with
-   the OKLCH teal from `globals.css`. A `claude-md-writer` pass or manual edit
-   would realign it. Optional `docs/DESIGN.md` could record the Pair C type
-   system and accent-rationing rules.
-4. Future direction ideas not yet planned (from earlier audits): Intersection
-   Observer scroll-spy (rejected as not worth it), CSS-only animation to drop
-   client JS (deferred spike), contact form via CF Worker + Resend (owner
-   chose the LinkedIn CTA instead). See "considered and rejected" below.
+No open pendings. Future direction ideas not yet planned (from earlier audits):
+IntersectionObserver scroll-spy (rejected as not worth it), CSS-only animation
+to drop client JS (deferred spike), contact form via CF Worker + Resend (owner
+chose the LinkedIn CTA instead). See "considered and rejected" below.
 
 ## Findings considered and rejected
 
