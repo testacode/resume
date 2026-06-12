@@ -7,6 +7,7 @@ import { resumeData } from '@/data/resume';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://carlosmonti.com'),
   title: 'Carlos Monti | Senior Front End Developer',
   description:
     'Senior Front End Developer with 10+ years of experience building web applications with React, TypeScript, and Next.js.',
