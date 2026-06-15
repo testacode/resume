@@ -21,22 +21,23 @@ const mono = IBM_Plex_Mono({
   display: 'swap',
 });
 import { resumeData } from '@/data/resume';
+import { SITE_URL } from '@/config/site';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://carlosmonti.com'),
+  metadataBase: new URL(SITE_URL),
   title: 'Carlos Monti | Senior Front End Developer',
   description:
     'Senior Front End Developer with 10+ years of experience building web applications with React, TypeScript, and Next.js.',
   keywords: ['Frontend Developer', 'React', 'TypeScript', 'Next.js', 'Buenos Aires'],
   authors: [{ name: 'Carlos Monti' }],
   alternates: {
-    canonical: 'https://carlosmonti.com',
+    canonical: SITE_URL,
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://carlosmonti.com',
+    url: SITE_URL,
     siteName: 'Carlos Monti Portfolio',
     title: 'Carlos Monti | Senior Front End Developer',
     description:
@@ -61,7 +62,7 @@ const jsonLd = {
   '@type': 'Person',
   name: personal.name,
   jobTitle: personal.title,
-  url: 'https://carlosmonti.com',
+  url: SITE_URL,
   address: {
     '@type': 'PostalAddress',
     addressLocality: personal.address.city,
