@@ -36,14 +36,24 @@ export const resumeData: ResumeData = {
   },
   experience: [
     {
-      id: 'despegar-2023',
+      id: 'despegar-2026',
       company: 'Despegar.com',
-      title: 'Senior II Front End Web Developer',
-      startDate: '2023-07',
+      title: 'Senior Software Engineer III',
+      startDate: '2026-07',
       endDate: null,
       technologies: ['TypeScript', 'React', 'Next.js'],
       description:
-        'Built and maintained post-booking experiences for flights, hotels, and travel packages. Currently working on SOFIA, an AI chatbot project in the E2E (End-to-End) experience team.',
+        'Working on SOFIA, an AI chatbot project in the E2E (End-to-End) experience team.',
+    },
+    {
+      id: 'despegar-2023',
+      company: 'Despegar.com',
+      title: 'Senior Software Engineer II',
+      startDate: '2023-07',
+      endDate: '2026-06',
+      technologies: ['TypeScript', 'React', 'Next.js'],
+      description:
+        'Built and maintained post-booking experiences for flights, hotels, and travel packages.',
     },
     {
       id: 'blockchain-2022',
