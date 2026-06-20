@@ -1,53 +1,52 @@
-# Domain cutover: carlosmonti.com → xmontc.xyz
+# Domains: resume vs project subdomains
 
-Runbook for the migration day. The code is already prepared so the switch is
-essentially **one line plus infra**. Canonical host decided: **apex
-`xmontc.xyz`** (no `www`).
+The resume/apex and the project subdomains live on **separate domains**:
 
-## What's already centralized
+- **Resume / apex** (canonical host, metadata, sitemap, robots, CV download):
+  **`carlosmonti.com`** — stays put, not migrating.
+- **Project subdomains** (`blockout`, `sound-buttons`, `favicon`, `meli-trends`,
+  `gastos`): **`xmontc.xyz`** — migrated here.
 
-All site URLs derive from a single atom in `src/config/site.ts`:
+## Where each domain comes from
+
+Both domains live in `src/config/site.ts` as two separate atoms:
 
 ```ts
-export const BASE_DOMAIN = 'carlosmonti.com';
-export const SITE_URL = `https://${BASE_DOMAIN}`;
+export const SITE_DOMAIN = 'carlosmonti.com';
+export const SITE_URL = `https://${SITE_DOMAIN}`;
+
+export const PROJECTS_DOMAIN = 'xmontc.xyz';
 ```
 
-Consumers that update automatically when `BASE_DOMAIN` changes:
+Consumers:
 
-- `src/app/layout.tsx` — `metadataBase`, `canonical`, OpenGraph `url`, JSON-LD `url`
-- `src/app/sitemap.ts` — sitemap entry
-- `src/app/robots.ts` — `Sitemap:` line (migrated from the old static `public/robots.txt`)
-- `src/data/resume.ts` — the 5 project subdomains: `blockout`, `sound-buttons`,
-  `favicon`, `meli-trends`, `gastos` (each `https://<name>.${BASE_DOMAIN}`)
+- `SITE_URL` (carlosmonti.com) → `src/app/layout.tsx` (`metadataBase`, `canonical`,
+  OpenGraph `url`, JSON-LD `url`), `src/app/sitemap.ts`, `src/app/robots.ts`.
+- `PROJECTS_DOMAIN` (xmontc.xyz) → `src/data/resume.ts`, the 5 project subdomains
+  (each `https://<name>.${PROJECTS_DOMAIN}`).
+
+Static files that name a domain by hand (cannot import TS):
+
+- `public/llms.txt` — CV line points at `https://carlosmonti.com/carlos-monti-cv.pdf`
+  (resume → `carlosmonti.com`).
 
 External project links (`testacode.github.io/*`, `eyesaver.vercel.app`) are **not**
-tied to the domain and stay as-is.
+tied to either domain and stay as-is.
 
-## Cutover steps (in order)
+## Status
 
-1. **Code switch** — in `src/config/site.ts`, change `BASE_DOMAIN` to `'xmontc.xyz'`.
-   This moves the apex site **and** all 5 project subdomains at once.
-2. **Static file** — `public/llms.txt`, the CV line (`https://carlosmonti.com/carlos-monti-cv.pdf`)
-   → `https://xmontc.xyz/carlos-monti-cv.pdf`. Plain text, cannot import TS; edit by hand.
-3. **Worker route** — `wrangler.toml`: change the route from `www.xmontc.xyz/*` to
-   `xmontc.xyz/*` (apex is now canonical).
-4. **Redirect Rule (Cloudflare)** — invert the current rule so `www.xmontc.xyz` → `xmontc.xyz`
-   (today it's apex → www).
-5. **DNS / deployments** — confirm the apex and every project subdomain
-   (`blockout`, `sound-buttons`, `favicon`, `meli-trends`, `gastos`) resolve in the
-   `xmontc.xyz` zone and point at their deployments. **Do not flip the resume links
-   until each app is actually live on its new subdomain** — otherwise the portfolio
-   ships dead links.
+- Resume/apex on `carlosmonti.com`: live (200).
+- Project subdomains on `xmontc.xyz`: live (200) — `blockout`, `sound-buttons`,
+  `favicon`, `meli-trends`, `gastos` all resolve and serve.
 
-## Post-deploy verification
+> Note: `llm-toolkit` and `cocos-capital-client` were GitHub Pages projects on
+> private repos (no live web anywhere). They are listed as `coming-soon` with no
+> `url` in `src/data/resume.ts`.
 
-- `https://xmontc.xyz/robots.txt` → `Sitemap: https://xmontc.xyz/sitemap.xml`
-- `https://xmontc.xyz/sitemap.xml` → lists the new apex
-- `curl -I https://www.xmontc.xyz` → 301 to apex
-- View source: `og:url`, `<link rel="canonical">` and JSON-LD `url` all point to `xmontc.xyz`
-- Every project link in the Projects section opens without a 404
-- Google Search Console: add `xmontc.xyz` property, submit the sitemap, file a
-  Change of Address from `carlosmonti.com`
-- Keep a `carlosmonti.com → xmontc.xyz` redirect alive for a while to preserve SEO
-  and inbound links
+## If a project subdomain ever moves again
+
+1. Change `PROJECTS_DOMAIN` in `src/config/site.ts` — moves all 5 subdomains at once.
+2. **Do not flip until each app is actually live on the new subdomain**, otherwise
+   the portfolio ships dead links.
+3. DNS: confirm every project subdomain resolves in the new zone and points at its
+   deployment.

@@ -1,5 +1,5 @@
 import type { ResumeData } from '@/types/resume';
-import { BASE_DOMAIN } from '@/config/site';
+import { PROJECTS_DOMAIN } from '@/config/site';
 
 export const resumeData: ResumeData = {
   personal: {
@@ -122,8 +122,7 @@ export const resumeData: ResumeData = {
       name: 'Blockout',
       description:
         '3D Tetris clone built with Three.js. Features 19 levels, visual and sound effects, and high score tracking.',
-      url: `https://blockout.${BASE_DOMAIN}/`,
-      githubUrl: 'https://github.com/testacode/blockout',
+      url: `https://blockout.${PROJECTS_DOMAIN}/`,
       technologies: ['Three.js', 'TypeScript'],
       status: 'live',
     },
@@ -141,8 +140,7 @@ export const resumeData: ResumeData = {
       id: 'sound-buttons',
       name: 'Sound Buttons',
       description: 'Web soundboard with customizable sound buttons.',
-      url: `https://sound-buttons.${BASE_DOMAIN}/`,
-      githubUrl: 'https://github.com/testacode/sound-buttons',
+      url: `https://sound-buttons.${PROJECTS_DOMAIN}/`,
       technologies: ['Next.js', 'TypeScript'],
       status: 'live',
     },
@@ -151,27 +149,22 @@ export const resumeData: ResumeData = {
       name: 'LLM Toolkit',
       description:
         'Claude Code plugin with skills, commands, and agents to boost developer productivity.',
-      url: 'https://testacode.github.io/llm-toolkit/',
-      githubUrl: 'https://github.com/testacode/llm-toolkit',
       technologies: ['Claude Code', 'Markdown'],
-      status: 'live',
+      status: 'coming-soon',
     },
     {
       id: 'cocos-capital-client',
       name: 'Cocos Capital Client',
       description: 'Unofficial Python client for the Cocos Capital API.',
-      url: 'https://testacode.github.io/cocos-capital-client/',
-      githubUrl: 'https://github.com/testacode/cocos-capital-client',
       technologies: ['Python'],
-      status: 'live',
+      status: 'coming-soon',
     },
     {
       id: 'favicon-generator',
       name: 'Favicon Generator',
       description:
         'Web app to create favicons from images or text. Supports crop, zoom, background removal, and multi-format export.',
-      url: `https://favicon.${BASE_DOMAIN}/`,
-      githubUrl: 'https://github.com/testacode/favicon-generator',
+      url: `https://favicon.${PROJECTS_DOMAIN}/`,
       technologies: ['Next.js', 'Mantine', 'TypeScript'],
       status: 'live',
     },
@@ -180,7 +173,7 @@ export const resumeData: ResumeData = {
       name: 'MeLi Trends',
       description:
         'Real-time dashboard showing top 50 trending products on MercadoLibre across 7 LATAM countries.',
-      url: `https://meli-trends.${BASE_DOMAIN}`,
+      url: `https://meli-trends.${PROJECTS_DOMAIN}`,
       technologies: ['Next.js', 'Mantine', 'TypeScript'],
       status: 'live',
     },
@@ -198,7 +191,7 @@ export const resumeData: ResumeData = {
       name: 'Gastos',
       description:
         'Personal expense tracker with multi-currency support, investment monitoring, and financial analytics.',
-      url: `https://gastos.${BASE_DOMAIN}`,
+      url: `https://gastos.${PROJECTS_DOMAIN}`,
       technologies: ['Next.js', 'Tailwind CSS', 'Three.js'],
       status: 'live',
     },
