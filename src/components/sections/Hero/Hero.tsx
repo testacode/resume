@@ -1,7 +1,8 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { FiArrowDown } from 'react-icons/fi';
+import { FiArrowDown, FiCheck, FiCopy } from 'react-icons/fi';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 import { heroName, heroItem } from '@/lib/animations';
 import type { PersonalInfo } from '@/types/resume';
@@ -11,8 +12,21 @@ type Props = {
   data: PersonalInfo;
 };
 
+const CLI_COMMAND = 'npx xmontc';
+
 export function Hero({ data }: Props) {
   const { name, title, tagline, address, social } = data;
+  const [copied, setCopied] = useState(false);
+  const copyTimeoutRef = useRef<number | null>(null);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(CLI_COMMAND);
+    setCopied(true);
+    if (copyTimeoutRef.current !== null) {
+      window.clearTimeout(copyTimeoutRef.current);
+    }
+    copyTimeoutRef.current = window.setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section id="home" className={styles.hero}>
@@ -44,6 +58,26 @@ export function Hero({ data }: Props) {
         />
 
         <motion.div initial="hidden" animate="visible" variants={heroItem(1.0)}>
+          <div className={styles.cli}>
+            <button
+              type="button"
+              className={styles.cliButton}
+              onClick={handleCopy}
+              aria-label="Copy npx xmontc to clipboard"
+            >
+              <span className={styles.prompt}>charly@portfolio:~$</span> {CLI_COMMAND}
+              <span className={styles.cliIcon} aria-hidden="true">
+                {copied ? <FiCheck size={14} /> : <FiCopy size={14} />}
+              </span>
+            </button>
+            <span className={styles.visuallyHidden} role="status">
+              {copied ? 'copied to clipboard' : ''}
+            </span>
+            <p className={styles.cliHint}>try the terminal version</p>
+          </div>
+        </motion.div>
+
+        <motion.div initial="hidden" animate="visible" variants={heroItem(1.2)}>
           <div className={styles.bottom}>
             <SocialLinks links={social} size="lg" />
             <p className={styles.location}>

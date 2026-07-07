@@ -71,6 +71,53 @@
   transform-origin: left center;
 }
 
+.cli {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.cliButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.cliButton:hover {
+  color: var(--color-text-secondary);
+}
+
+.cliIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cliHint {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .bottom {
   display: flex;
   flex-direction: column;
@@ -118,6 +165,10 @@
 
   .accentLine {
     transform-origin: left center;
+  }
+
+  .cli {
+    align-items: flex-start;
   }
 
   .bottom {

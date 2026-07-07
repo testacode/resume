@@ -9,7 +9,7 @@ type Props = {
 
 export function Footer({ social, name }: Props) {
   const currentYear = new Date().getFullYear();
-  const buildInfo = 'v2.0.0 · next 16 · cloudflare workers';
+  const buildInfo = 'v2.0.0 · next 16 · cloudflare workers · npx xmontc';
 
   return (
     <footer className={styles.footer}>
