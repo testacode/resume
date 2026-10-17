@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { CursorHint } from './CursorHint';
 
 function mockPointer(fine: boolean) {
@@ -12,9 +12,12 @@ function mockPointer(fine: boolean) {
 describe('CursorHint', () => {
   beforeEach(() => mockPointer(true));
 
-  it('renders nothing when inactive', () => {
-    render(<CursorHint active={false} />);
-    expect(screen.queryByText('to listen')).not.toBeInTheDocument();
+  it('is present but never shown when inactive from the start', () => {
+    const { container } = render(<CursorHint active={false} />);
+    fireEvent.pointerMove(window, { clientX: 100, clientY: 50 });
+    const hint = container.firstElementChild as HTMLElement;
+    expect(hint.className).not.toMatch(/visible/);
+    expect(hint.firstElementChild?.className).toMatch(/leaving/);
   });
 
   it('renders the two lines, hidden from assistive tech, and becomes visible on pointer move', () => {
@@ -27,6 +30,14 @@ describe('CursorHint', () => {
 
     fireEvent.pointerMove(window, { clientX: 100, clientY: 50 });
     expect(hint.className).toMatch(/visible/);
+  });
+
+  it('floats away on deactivation', () => {
+    const { container, rerender } = render(<CursorHint active />);
+    const label = container.querySelector('[class*=label]') as HTMLElement;
+    expect(label.className).not.toMatch(/leaving/);
+    rerender(<CursorHint active={false} />);
+    expect(label.className).toMatch(/leaving/);
   });
 
   it('stays hidden on coarse pointers', () => {

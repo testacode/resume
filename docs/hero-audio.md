@@ -4,9 +4,9 @@ Ambient sea sound behind the hero scenes. On by default; the browser only lets i
 first click/tap/key on the page. The speaker icon next to `π` mutes it (remembered in `localStorage`
 as `hero:sound`), volume lives in the `π` panel (`hero:volume`).
 
-While the sound is on but still waiting for that first gesture, a two-line label ("♪ click / to listen",
-`CursorHint.tsx`) trails the pointer with a small lag; it fades on the first click or key regardless of
-whether the audio could start. Pointer devices only; no lag under reduced motion.
+Until the first click or key, a two-line label ("♪ click / to listen", `CursorHint.tsx`) trails the pointer
+with a small lag — whether or not autoplay was allowed; on that first gesture it floats up and fades out.
+Pointer devices only; no lag or float under reduced motion.
 
 ## Files
 

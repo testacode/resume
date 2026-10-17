@@ -117,20 +117,17 @@ describe('Hero — scene', () => {
     expect(audio.setDuck).toHaveBeenLastCalledWith(1);
   });
 
-  it('shows the cursor hint only while the sound waits for a gesture', async () => {
+  it('shows the cursor hint until the first gesture, then floats it away', async () => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       value: (q: string) => ({ matches: q.includes('pointer: fine'), addEventListener() {}, removeEventListener() {} }),
     });
-    audio.start.mockResolvedValueOnce(false);
     render(<Hero data={personal} />);
-    expect(await screen.findByText('to listen')).toBeInTheDocument();
+    const label = screen.getByText('to listen').parentElement as HTMLElement;
+    expect(label.className).not.toMatch(/leaving/);
 
-    // Goes away on the first gesture even if the audio still cannot start.
-    audio.start.mockResolvedValueOnce(false);
     fireEvent.pointerDown(document);
-    await act(async () => { await Promise.resolve(); });
-    expect(screen.queryByText('to listen')).not.toBeInTheDocument();
+    expect(label.className).toMatch(/leaving/);
   });
 
   it('starts with sound on and persists a mute', () => {

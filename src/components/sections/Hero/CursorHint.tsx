@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './CursorHint.module.css';
 
 type Props = {
-  /** Shown while the sea sound is waiting for the first click. */
+  /** Shown until the first click/key; on deactivation it floats up and fades out. */
   active: boolean;
   lines?: readonly [string, string];
 };
@@ -45,15 +45,16 @@ export function CursorHint({ active, lines = ['♪ click', 'to listen'] }: Props
     return () => {
       window.removeEventListener('pointermove', onMove);
       cancelAnimationFrame(raf);
-      setVisible(false);
     };
   }, [active]);
 
-  if (!active) return null;
+  // Stays in the DOM when inactive (invisible, no pointer events) so the exit transition can play.
   return (
     <div ref={ref} className={`${styles.hint} ${visible ? styles.visible : ''}`} aria-hidden="true">
-      <span>{lines[0]}</span>
-      <span>{lines[1]}</span>
+      <div className={`${styles.label} ${active ? '' : styles.leaving}`}>
+        <span>{lines[0]}</span>
+        <span>{lines[1]}</span>
+      </div>
     </div>
   );
 }

@@ -60,7 +60,7 @@ export function Hero({ data }: Props) {
   const [readyScene, setReadyScene] = useState<SceneId | null>(null);
   const audioRef = useRef<{ kind: SoundSource; audio: OceanAudio } | null>(null);
   const [volume, setVolume] = useState(loadVolume);
-  const [awaitingGesture, setAwaitingGesture] = useState(false);
+  const [gestured, setGestured] = useState(false);
 
   const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const scene = store ? SCENES[store.sceneId] : null;
@@ -107,27 +107,20 @@ export function Hero({ data }: Props) {
     const audio = audioEngine();
     audio.setVolume(volume);
     audio.setScene(scene.id);
-    // The hint shows if the first (automatic) attempt is blocked, and goes away on the first
-    // gesture regardless of whether the audio managed to start.
-    let gestured = false;
-    const tryStart = () => {
-      void audio.start().then((started) => {
-        if (started) stopListening();
-        if (!gestured) setAwaitingGesture(!started);
-      });
-    };
+    // The hint stays until the first gesture, whether or not autoplay was allowed; the gesture
+    // also (re)tries to start the audio.
+    const tryStart = () => { void audio.start(); };
     const onGesture = () => {
-      gestured = true;
-      setAwaitingGesture(false);
+      setGestured(true);
       tryStart();
+      GESTURES.forEach((type) => document.removeEventListener(type, onGesture));
     };
-    const stopListening = () => GESTURES.forEach((type) => document.removeEventListener(type, onGesture));
     GESTURES.forEach((type) => document.addEventListener(type, onGesture));
     tryStart();
     const onVisibility = () => { if (document.hidden) audio.stop(); else tryStart(); };
     document.addEventListener('visibilitychange', onVisibility);
     return () => {
-      stopListening();
+      GESTURES.forEach((type) => document.removeEventListener(type, onGesture));
       document.removeEventListener('visibilitychange', onVisibility);
     };
     // `volume` is pushed through changeVolume; re-running on each slider move would restart listeners.
@@ -244,7 +237,7 @@ export function Hero({ data }: Props) {
         <FiArrowDown size={20} />
       </a>
 
-      <CursorHint active={soundOn && awaitingGesture} />
+      <CursorHint active={soundOn && !gestured} />
 
       {store && scene && config && (
         <ScenePanel
