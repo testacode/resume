@@ -1,8 +1,9 @@
 // Captures one hero scene from a running page via Chrome DevTools Protocol (port 9222): forces the scene,
 // reloads, hides header/text/buttons, verifies, then screencasts PNG frames (~35-45 fps) + stamps.json.
-// usage: node scripts/capture-hero.mjs <tabIdPrefix> <horizon|shore> <outDir> <seconds>
+// usage: node scripts/capture-hero.mjs <tabIdPrefix> <horizon|shore> <outDir> <seconds> [configOverridesJSON]
 // Pair with scripts/make-hero-banner.sh. The tab must be one you own (see cdp-manager).
-const [,, prefix, scene, outDir, secs] = process.argv;
+import { writeFileSync, mkdirSync } from 'node:fs';
+const [,, prefix, scene, outDir, secs, overrides = ''] = process.argv;
 mkdirSync(outDir, { recursive: true });
 const list = await (await fetch('http://127.0.0.1:9222/json/list')).json();
 const tabs = list.filter((t) => t.id.startsWith(prefix));
@@ -25,7 +26,7 @@ ws.onmessage = (ev) => {
 };
 ws.onopen = async () => {
   await call('Page.enable'); await call('Runtime.enable');
-  await evaluate(`localStorage.setItem('hero:scene','${scene}'); localStorage.setItem('hero:sound','off'); 1`);
+  await evaluate(`localStorage.setItem('hero:scene','${scene}'); localStorage.setItem('hero:sound','off'); ${overrides ? `localStorage.setItem('hero:cfg:${scene}', ${JSON.stringify(overrides)});` : `localStorage.removeItem('hero:cfg:${scene}');`} 1`);
   await call('Page.reload'); await sleep(6000);
   const hideH1 = scene === 'horizon' ? ',#home h1' : '';
   const state = await evaluate(`(() => { const st=document.createElement('style'); st.textContent='header,#home p,#home h2${hideH1},#home a,#home button,#home [class*=rest],#home [class*=root]{visibility:hidden!important}'; document.head.appendChild(st); const h=document.querySelector('#home'); return h.dataset.scene + ' ready=' + h.dataset.ready + ' header=' + getComputedStyle(document.querySelector('header')).visibility; })()`);
