@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Builds a seamless, loudness-normalized sea loop for the hero from any recording.
-#   scripts/make-sea-loop.sh <source> <name> [start_s] [length_s] [target_lufs]
+#   scripts/make-sea-loop.sh <source> <name> [start_s] [length_s] [target_lufs] [lowpass_hz]
 # Output: public/audio/<name>.ogg (Opus) and public/audio/<name>.m4a (AAC, Safari).
 # The loop seam is a 3 s crossfade baked into the file, so `AudioBufferSourceNode.loop` is gapless.
 set -euo pipefail
-src=$1; name=$2; start=${3:-10}; len=${4:-50}; target=${5:--20}
+src=$1; name=$2; start=${3:-10}; len=${4:-50}; target=${5:--20}; lowpass=${6:-20000}
 xf=3
 out_dir="$(cd "$(dirname "$0")/.." && pwd)/public/audio"
 tmp=$(mktemp -d)
@@ -16,10 +16,10 @@ ffmpeg -hide_banner -loglevel error -y -i "$tmp/seg.wav" -filter_complex \
   "[0]atrim=0:$xf,asetpts=PTS-STARTPTS[head];[0]atrim=$xf:$len,asetpts=PTS-STARTPTS[mid];[0]atrim=$len:$((len + xf)),asetpts=PTS-STARTPTS[tail];[tail][head]acrossfade=d=$xf:c1=tri:c2=tri[xf];[xf][mid]concat=n=2:v=0:a=1[out]" \
   -map "[out]" "$tmp/loop.wav"
 
-measured=$(ffmpeg -hide_banner -nostats -i "$tmp/loop.wav" -af "highpass=f=150:poles=2,ebur128" -f null - 2>&1 | grep -E "^\s+I:" | tail -1 | awk '{print $2}')
+measured=$(ffmpeg -hide_banner -nostats -i "$tmp/loop.wav" -af "highpass=f=150:poles=2,lowpass=f=${lowpass},ebur128" -f null - 2>&1 | grep -E "^\s+I:" | tail -1 | awk '{print $2}')
 gain=$(python3 -c "print(round($target - ($measured), 2))")
-# High-pass first: sub-150 Hz rumble reads as "heavy" on speakers and adds nothing to surf.
-ffmpeg -hide_banner -loglevel error -y -i "$tmp/loop.wav" -af "highpass=f=150:poles=2,volume=${gain}dB,alimiter=limit=-3dB:attack=5:release=100:level=false" "$tmp/norm.wav"
+# High-pass: sub-150 Hz rumble reads as "heavy" and adds nothing to surf. Optional low-pass tames the hiss.
+ffmpeg -hide_banner -loglevel error -y -i "$tmp/loop.wav" -af "highpass=f=150:poles=2,lowpass=f=${lowpass},volume=${gain}dB,alimiter=limit=-3dB:attack=5:release=100:level=false" "$tmp/norm.wav"
 
 ffmpeg -hide_banner -loglevel error -y -i "$tmp/norm.wav" -c:a libopus -b:a 48k -vbr on "$out_dir/$name.ogg"
 ffmpeg -hide_banner -loglevel error -y -i "$tmp/norm.wav" -c:a aac_at -b:a 80k "$out_dir/$name.m4a"

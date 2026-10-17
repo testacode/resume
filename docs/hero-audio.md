@@ -6,8 +6,9 @@ as `hero:sound`), volume lives in the `π` panel (`hero:volume`).
 
 ## Files
 
-- `public/audio/horizon.ogg|m4a` — 50 s seamless loop, low-passed at runtime (distant sea).
-- `public/audio/shore.ogg|m4a` — 50 s seamless loop from another stretch of the same recording, full band.
+- `public/audio/horizon.ogg|m4a` — 50 s seamless loop from the calmest 53 s window of the recording (t=47.8 s, picked by short-term loudness, not by ear), −25 LUFS, low-passed again at runtime (distant sea).
+- `public/audio/shore.ogg|m4a` — same, from the next calmest window (t=161 s), −24 LUFS.
+- Both are high-passed at 150 Hz (rumble felt heavy) and low-passed at 6 kHz (hiss felt busy) when built.
 - Opus (`.ogg`) everywhere except Safari, which gets AAC (`.m4a`). Fetched lazily, only when sound starts.
 
 ## Source
