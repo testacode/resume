@@ -8,6 +8,7 @@ import { heroName, heroItem } from '@/lib/animations';
 import type { PersonalInfo } from '@/types/resume';
 import { ShaderCanvas } from './ShaderCanvas';
 import { ScenePanel } from './ScenePanel';
+import { CursorHint } from './CursorHint';
 import { createOceanAudio, type OceanAudio } from './scenes/oceanAudio';
 import { createSeaSynth } from './scenes/seaSynth';
 import type { SoundSource } from './scenes/storage';
@@ -59,6 +60,7 @@ export function Hero({ data }: Props) {
   const [readyScene, setReadyScene] = useState<SceneId | null>(null);
   const audioRef = useRef<{ kind: SoundSource; audio: OceanAudio } | null>(null);
   const [volume, setVolume] = useState(loadVolume);
+  const [awaitingGesture, setAwaitingGesture] = useState(false);
 
   const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const scene = store ? SCENES[store.sceneId] : null;
@@ -105,11 +107,22 @@ export function Hero({ data }: Props) {
     const audio = audioEngine();
     audio.setVolume(volume);
     audio.setScene(scene.id);
+    // The hint shows if the first (automatic) attempt is blocked, and goes away on the first
+    // gesture regardless of whether the audio managed to start.
+    let gestured = false;
     const tryStart = () => {
-      void audio.start().then((started) => { if (started) stopListening(); });
+      void audio.start().then((started) => {
+        if (started) stopListening();
+        if (!gestured) setAwaitingGesture(!started);
+      });
     };
-    const stopListening = () => GESTURES.forEach((type) => document.removeEventListener(type, tryStart));
-    GESTURES.forEach((type) => document.addEventListener(type, tryStart));
+    const onGesture = () => {
+      gestured = true;
+      setAwaitingGesture(false);
+      tryStart();
+    };
+    const stopListening = () => GESTURES.forEach((type) => document.removeEventListener(type, onGesture));
+    GESTURES.forEach((type) => document.addEventListener(type, onGesture));
     tryStart();
     const onVisibility = () => { if (document.hidden) audio.stop(); else tryStart(); };
     document.addEventListener('visibilitychange', onVisibility);
@@ -230,6 +243,8 @@ export function Hero({ data }: Props) {
       <a href="#about" className={styles.scrollDown} aria-label="Scroll to about section">
         <FiArrowDown size={20} />
       </a>
+
+      <CursorHint active={soundOn && awaitingGesture} />
 
       {store && scene && config && (
         <ScenePanel

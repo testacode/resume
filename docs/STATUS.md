@@ -15,6 +15,7 @@
 ## Hecho reciente
 
 - 2026-10-17 — Hero scenes en producción: Horizonte + Playa al azar, panel `π`, sonido de mar CC0 con fade por scroll (`docs/hero-audio.md`). Tagline sin empleador; email fuera de `llms.txt`; GitLab oculto.
+- 2026-10-17 — Hero: rótulo "♪ click / to listen" que sigue al puntero mientras el sonido espera el primer gesto.
 - 2026-10-17 — `xmontc` 0.2.1 publicado (tagline sin empleador, GitLab off) con el token de npm de 1Password (bypass 2FA).
 - 2026-10-17 — Hero: `?scene=horizon|shore` por URL; Lighthouse móvil 92/100/100/100 (CLS 0 tras fijar el layout desde el primer paint, TBT 180 ms con la máscara escaneando solo las filas del texto); switch Recording/Synth en el panel (resíntesis por envolvente, 3.4 KB).
 - 2026-10-17 — Banner del perfil de GitHub: GIF de las dos escenas sin UI ni nombre (`scripts/capture-hero.mjs` + `scripts/make-hero-banner.sh`), 2 MB.

@@ -117,6 +117,22 @@ describe('Hero — scene', () => {
     expect(audio.setDuck).toHaveBeenLastCalledWith(1);
   });
 
+  it('shows the cursor hint only while the sound waits for a gesture', async () => {
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      value: (q: string) => ({ matches: q.includes('pointer: fine'), addEventListener() {}, removeEventListener() {} }),
+    });
+    audio.start.mockResolvedValueOnce(false);
+    render(<Hero data={personal} />);
+    expect(await screen.findByText('to listen')).toBeInTheDocument();
+
+    // Goes away on the first gesture even if the audio still cannot start.
+    audio.start.mockResolvedValueOnce(false);
+    fireEvent.pointerDown(document);
+    await act(async () => { await Promise.resolve(); });
+    expect(screen.queryByText('to listen')).not.toBeInTheDocument();
+  });
+
   it('starts with sound on and persists a mute', () => {
     render(<Hero data={personal} />);
     const speaker = screen.getByRole('button', { name: 'Mute sea sound' });
