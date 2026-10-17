@@ -20,7 +20,7 @@ function setup() {
   return props;
 }
 
-const trigger = () => screen.getByRole('button', { name: 'Scene settings' });
+const trigger = () => screen.getByRole('button', { name: 'π scene settings' });
 
 describe('ScenePanel', () => {
   it('renders the π trigger closed', () => {

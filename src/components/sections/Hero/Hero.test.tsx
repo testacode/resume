@@ -80,7 +80,7 @@ describe('Hero — scene', () => {
     const hero = container.querySelector('section');
     expect(hero).toHaveAttribute('data-scene', 'shore');
     expect(document.documentElement.dataset.heroScene).toBe('shore');
-    expect(screen.getByRole('button', { name: 'Scene settings' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'π scene settings' })).toBeInTheDocument();
   });
 
   it('forces the scene from ?scene= for this load without persisting it', () => {
@@ -129,7 +129,7 @@ describe('Hero — scene', () => {
     const { container } = render(<Hero data={personal} />);
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
 
-    fireEvent.click(screen.getByRole('button', { name: 'Scene settings' }));
+    fireEvent.click(screen.getByRole('button', { name: 'π scene settings' }));
     fireEvent.click(screen.getByRole('button', { name: 'Shore' }));
 
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'shore');

@@ -40,6 +40,8 @@ export function buildTextMask(el: HTMLElement, host: HTMLElement, width: number,
 
   const text = textNode.textContent ?? '';
   const range = document.createRange();
+  let rowMin = height;
+  let rowMax = 0;
   for (const match of text.matchAll(/\S+/g)) {
     range.setStart(textNode, match.index);
     range.setEnd(textNode, match.index + match[0].length);
@@ -48,21 +50,27 @@ export function buildTextMask(el: HTMLElement, host: HTMLElement, width: number,
     const x = origin.left + (rect.left - elRect.left);
     const y = origin.top + (rect.top - elRect.top);
     ctx.fillText(match[0], x * scale, y * scale + ascent);
+    rowMin = Math.min(rowMin, Math.floor(y * scale) - 2);
+    rowMax = Math.max(rowMax, Math.ceil((y + rect.height) * scale) + 2);
   }
-
-  const data = ctx.getImageData(0, 0, width, height).data;
+  // Only the rows the text occupies are scanned: the glyph band, not the whole canvas (TBT).
+  const y0 = Math.max(0, rowMin);
+  const y1 = Math.min(height - 1, rowMax);
+  if (y1 <= y0) return null;
+  const data = ctx.getImageData(0, y0, width, y1 - y0 + 1).data;
+  const rows = y1 - y0 + 1;
   const profile = new Float32Array(width * 4);
   let blockTop = height;
   let blockBottom = 0;
   for (let x = 0; x < width; x++) {
     let top = -1;
     let bottom = -1;
-    for (let y = 0; y < height; y++) {
-      if (data[(y * width + x) * 4 + 3] > 100) { top = y; break; }
+    for (let r = 0; r < rows; r++) {
+      if (data[(r * width + x) * 4 + 3] > 100) { top = y0 + r; break; }
     }
     if (top >= 0) {
-      for (let y = height - 1; y >= top; y--) {
-        if (data[(y * width + x) * 4 + 3] > 100) { bottom = y; break; }
+      for (let r = rows - 1; r >= top - y0; r--) {
+        if (data[(r * width + x) * 4 + 3] > 100) { bottom = y0 + r; break; }
       }
       blockTop = Math.min(blockTop, top);
       blockBottom = Math.max(blockBottom, bottom);

@@ -159,7 +159,7 @@ export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset,
         type="button"
         className={styles.trigger}
         onClick={() => setOpen((v) => !v)}
-        aria-label="Scene settings"
+        aria-label="π scene settings"
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
       >

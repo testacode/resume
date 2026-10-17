@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   min-height: 100svh;
   padding: var(--header-height) var(--space-6) var(--space-16);
@@ -20,7 +20,6 @@
   --color-text-secondary: var(--hero-text-bottom);
   --color-text-muted: var(--hero-text-bottom);
   --color-background-alt: transparent;
-  justify-content: flex-start;
 }
 
 /* CSS fallbacks: shown until the first frame, or when WebGL2 is unavailable */
@@ -51,24 +50,17 @@
   pointer-events: none;
 }
 
+/* The name's bottom edge is pinned at 38svh — the horizon / shoreline — from the first paint,
+   so mounting the scene never shifts the text (CLS). */
 .content {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* With a scene, the name's bottom edge is pinned at 38svh: the horizon / shoreline. */
-.hero[data-scene] .content {
   display: grid;
   grid-template-rows: calc(38svh - var(--header-height)) auto;
   align-items: stretch;
-  gap: 0;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .top,
@@ -83,7 +75,7 @@
   justify-content: flex-end;
 }
 
-.hero[data-scene] .rest {
+.rest {
   padding-top: var(--space-6);
 }
 
@@ -241,7 +233,6 @@
   }
 
   .content {
-    align-items: flex-start;
     margin: 0 auto 0 max(var(--space-8), calc((100vw - var(--max-width)) / 2 + var(--space-8)));
   }
 
