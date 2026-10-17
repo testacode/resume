@@ -4,9 +4,9 @@ import { PROJECTS_DOMAIN } from '@/config/site';
 export const resumeData: ResumeData = {
   personal: {
     name: 'Carlos Monti',
-    title: 'Senior Front End Developer',
-    tagline: 'Building polished web experiences with a passion for clean code and continuous learning',
-    bio: 'Frontend developer with 10+ years of experience crafting web applications. Currently focused on TypeScript, React, and Next.js, building scalable solutions for large-scale products.',
+    title: 'Senior Software Engineer',
+    tagline: 'Building SOFIA, an AI travel assistant at Despegar — and agentic dev tooling on the side',
+    bio: "Senior Software Engineer with ~19 years shipping web products — Disney, Deloitte, Blockchain.com, Brubank, Despegar. Today I build SOFIA, the AI travel assistant at Despegar (a Prosus company), focusing on conversational UX and production LLM features. Outside work I build with AI every day: my own set of Claude Code skills and agents lets me ship full products solo — 3D educational labs, browser extensions, Home Assistant integrations, dashboards — deployed on Cloudflare and Vercel.",
     address: {
       city: 'Buenos Aires',
       country: 'Argentina',
@@ -43,7 +43,7 @@ export const resumeData: ResumeData = {
       endDate: null,
       technologies: ['TypeScript', 'React', 'Next.js'],
       description:
-        'Working on SOFIA, an AI chatbot project in the E2E (End-to-End) experience team.',
+        'Building SOFIA, the AI travel assistant at Despegar (part of Prosus since 2025), in the End-to-End experience team.',
     },
     {
       id: 'despegar-2023',
@@ -53,12 +53,22 @@ export const resumeData: ResumeData = {
       endDate: '2026-06',
       technologies: ['TypeScript', 'React', 'Next.js'],
       description:
-        'Built and maintained post-booking experiences for flights, hotels, and travel packages.',
+        'Built and maintained post-booking experiences for flights, hotels, and travel packages. Cut build times 40% through an Nx monorepo refactor.',
+    },
+    {
+      id: 'brubank-2022',
+      company: 'Brubank',
+      title: 'Senior Frontend Engineer',
+      startDate: '2022-08',
+      endDate: '2023-05',
+      technologies: ['React', 'Chakra UI', 'Preact', 'TypeScript'],
+      description:
+        'Led the Preact to React + Chakra migration, reducing bugs 30%. Built business onboarding flows that cut user activation time by 20%.',
     },
     {
       id: 'blockchain-2022',
       company: 'Blockchain.com',
-      title: 'Senior II Front End Web Developer',
+      title: 'Senior Frontend Engineer II',
       startDate: '2022-01',
       endDate: '2022-07',
       technologies: ['TypeScript', 'React', 'Webpack', 'Redux', 'Redux-Saga'],
@@ -68,7 +78,7 @@ export const resumeData: ResumeData = {
     {
       id: 'elementum-2017',
       company: 'Elementum',
-      title: 'Senior II Front End Web Developer',
+      title: 'Senior Frontend Engineer II',
       startDate: '2017-08',
       endDate: '2022-01',
       technologies: ['React', 'Webpack', 'Redux', 'Redux-Saga', 'Jest', 'Enzyme', 'ESLint'],
@@ -78,7 +88,7 @@ export const resumeData: ResumeData = {
     {
       id: 'deloitte-2016',
       company: 'Deloitte',
-      title: 'Senior Front End Web Developer',
+      title: 'Senior Frontend Engineer',
       startDate: '2016-02',
       endDate: '2017-07',
       technologies: ['Angular 1.6', 'Lodash', 'Karma', 'Jasmine'],
@@ -90,7 +100,7 @@ export const resumeData: ResumeData = {
     {
       id: 'thomascook-2015',
       company: 'Thomas Cook',
-      title: 'Senior Front End Web Developer',
+      title: 'Senior Frontend Engineer',
       startDate: '2015-12',
       endDate: '2016-01',
       technologies: ['Angular 1.3', 'Lodash', 'Karma', 'Jasmine'],
@@ -102,7 +112,7 @@ export const resumeData: ResumeData = {
     {
       id: 'disney-2011',
       company: 'Walt Disney Parks and Resorts',
-      title: 'Senior Front End Web Developer',
+      title: 'Senior Frontend Engineer',
       startDate: '2011-05',
       endDate: '2015-12',
       technologies: ['PHP', 'Zend Framework', 'JavaScript', 'jQuery', 'Angular 1.3', 'Less', 'Behat'],

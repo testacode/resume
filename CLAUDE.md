@@ -18,6 +18,7 @@ npm run test:watch       # Vitest (watch mode)
 
 ### Data Flow
 All resume content lives in `src/data/resume.ts` → typed by `src/types/resume.ts` → passed as props from `src/app/page.tsx` to section components.
+**IMPORTANT**: `resume.ts` is the single source of truth: page metadata, `/resume.json` and `/llms.txt` are derived from it, and `npx xmontc` syncs `/resume.json` before each publish. LinkedIn is updated by hand from the same copy.
 
 ### Component Structure
 ```

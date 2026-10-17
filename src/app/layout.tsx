@@ -24,13 +24,15 @@ import { resumeData } from '@/data/resume';
 import { SITE_URL } from '@/config/site';
 import './globals.css';
 
+const { personal } = resumeData;
+const pageTitle = `${personal.name} | ${personal.title}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Carlos Monti | Senior Front End Developer',
-  description:
-    'Senior Front End Developer with 10+ years of experience building web applications with React, TypeScript, and Next.js.',
-  keywords: ['Frontend Developer', 'React', 'TypeScript', 'Next.js', 'Buenos Aires'],
-  authors: [{ name: 'Carlos Monti' }],
+  title: pageTitle,
+  description: personal.tagline,
+  keywords: ['Software Engineer', 'AI', 'LLM', 'AI Agents', 'React', 'TypeScript', 'Next.js', 'Buenos Aires'],
+  authors: [{ name: personal.name }],
   alternates: {
     canonical: SITE_URL,
   },
@@ -39,23 +41,19 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: 'Carlos Monti Portfolio',
-    title: 'Carlos Monti | Senior Front End Developer',
-    description:
-      'Senior Front End Developer with 10+ years of experience building web applications with React, TypeScript, and Next.js.',
+    title: pageTitle,
+    description: personal.tagline,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Carlos Monti | Senior Front End Developer',
-    description:
-      'Senior Front End Developer with 10+ years of experience building web applications with React, TypeScript, and Next.js.',
+    title: pageTitle,
+    description: personal.tagline,
   },
   robots: {
     index: true,
     follow: true,
   },
 };
-
-const { personal } = resumeData;
 
 const jsonLd = {
   '@context': 'https://schema.org',
