@@ -4,15 +4,17 @@
 
 ## En curso
 
-- Publicar `xmontc` 0.2.0 en npm para que `npx xmontc` muestre el perfil consolidado (repo `xmontc`)
+- (nada)
 
 ## Backlog
 
+- Definir fecha de fin en Globant: el CV dice sep 2017, LinkedIn jun 2017
 - LinkedIn: agregar carlosmonti.com en Featured a mano (la automatización no guarda el link)
 - LinkedIn: actualizar el perfil secundario en español con titular, About y experiencia nuevos
 
 ## Hecho reciente
 
+- 2026-10-17 — `xmontc` 0.2.0 publicado en npm (perfil y proyectos desde `resume.json`)
 - 2026-10-17 — CV PDF/DOCX regenerados desde el Google Doc `carlos-monti-cv-2025` (editado en el lugar, 1 página)
 - 2026-10-17 — `xmontc`: `projects.ts` deriva de `resume.json`
 - 2026-10-17 — `resume.ts` como fuente única: metadata, `/resume.json` y `/llms.txt` derivados; `xmontc` sincroniza `resume.json` antes de publicar
