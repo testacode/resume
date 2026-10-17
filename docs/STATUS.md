@@ -9,9 +9,10 @@
 ## Backlog
 
 - LinkedIn: agregar carlosmonti.com en Featured a mano (la automatización no guarda el link)
-- LinkedIn: titular del perfil en español a mano (el modal Edit intro en español no guarda vía automatización; About en español ya actualizado)
 
 ## Hecho reciente
+
+- 2026-10-17 — LinkedIn en español: titular (a mano) y About actualizados
 
 - 2026-10-17 — `xmontc` 0.2.0 publicado en npm (perfil y proyectos desde `resume.json`)
 - 2026-10-17 — CV PDF/DOCX regenerados desde el Google Doc `carlos-monti-cv-2025` (editado en el lugar, 1 página)
