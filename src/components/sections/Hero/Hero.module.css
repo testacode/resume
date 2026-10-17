@@ -7,9 +7,53 @@
   min-height: 100svh;
   padding: var(--header-height) var(--space-6) var(--space-16);
   text-align: center;
+  overflow: hidden;
+  transition: background-color var(--transition-base);
+}
+
+/* Scene: the hero becomes its own screen, independent of the site theme. */
+.hero[data-scene] {
+  --color-accent: var(--hero-accent);
+  --color-accent-hover: var(--hero-accent);
+  --color-text-display: var(--hero-text-top);
+  --color-text-primary: var(--hero-text-bottom);
+  --color-text-secondary: var(--hero-text-bottom);
+  --color-text-muted: var(--hero-text-bottom);
+  --color-background-alt: transparent;
+  justify-content: flex-start;
+}
+
+/* CSS fallbacks: shown until the first frame, or when WebGL2 is unavailable */
+.hero[data-scene='horizon'] {
+  background: linear-gradient(to bottom, #10002a 0%, #3a0f4f 55%, #ff2d95 61.5%, #003c4e 62.5%, #001a2e 100%);
+}
+
+.hero[data-scene='shore'] {
+  background: linear-gradient(to bottom, #0b4f6c 0%, #5fc8c3 36%, #e6d3ae 38.5%, #e6d3ae 100%);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 400ms var(--ease-out-quart);
+}
+
+.hero[data-ready] .layer {
+  opacity: 1;
+}
+
+.veil {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-veil, none);
+  pointer-events: none;
 }
 
 .content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,11 +62,48 @@
   margin: 0 auto;
 }
 
+/* With a scene, the name's bottom edge is pinned at 38svh: the horizon / shoreline. */
+.hero[data-scene] .content {
+  display: grid;
+  grid-template-rows: calc(38svh - var(--header-height)) auto;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+}
+
+.top,
+.rest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.top {
+  justify-content: flex-end;
+}
+
+.hero[data-scene] .rest {
+  padding-top: var(--space-6);
+}
+
+.hero[data-scene='shore'][data-ready] .name {
+  color: transparent;
+}
+
 .greeting {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-weight: 400;
   color: var(--color-text-muted);
+}
+
+.hero[data-scene] .greeting {
+  color: var(--hero-text-top);
+}
+
+.hero[data-scene='shore'] .greeting {
+  text-shadow: 0 0 10px rgba(247, 251, 251, 0.9), 0 0 2px rgba(247, 251, 251, 0.9);
 }
 
 .prompt { color: var(--color-accent); }
@@ -49,6 +130,7 @@
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--color-text-display);
+  transition: color var(--transition-base);
 }
 
 .title {
@@ -161,6 +243,11 @@
   .content {
     align-items: flex-start;
     margin: 0 auto 0 max(var(--space-8), calc((100vw - var(--max-width)) / 2 + var(--space-8)));
+  }
+
+  .top,
+  .rest {
+    align-items: flex-start;
   }
 
   .accentLine {

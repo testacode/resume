@@ -47,6 +47,10 @@
   --transition-fast: 150ms var(--ease-out-quart);
   --transition-base: 300ms var(--ease-out-quart);
 
+  /* Hero scene: nav color + halo while the header floats over it */
+  --hero-nav-color: #f2fbfb;
+  --hero-nav-halo: rgba(0, 0, 0, 0.75);
+
   /* Misc */
   --shadow-sm: 0 1px 2px oklch(0.17 0.01 175 / 0.06);
   --radius-sm: 2px;

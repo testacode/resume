@@ -4,11 +4,13 @@
 
 ## En curso
 
-- (nada)
+- Hero scenes (rama `feat/hero-scenes`): Horizonte + Playa al azar por carga, panel `π`, sonido de mar (clip CC0 en loop, on por defecto tras el primer gesto, mute recordado) — `docs/hero-audio.md`. Aprobado por Carlos a oído y en pantalla. Falta: PR/merge a master (deploya solo) y Lighthouse sobre el deploy.
 
 ## Backlog
 
-- (vacío)
+- Hero scenes: compartir escena/config por URL (`?scene=…`)
+- Hero scenes: Lighthouse/perf en móviles reales (el shader de Playa corre a 95 % de resolución)
+- Hero audio: resíntesis guiada por la envolvente del clip real (ruido rosa + curva de 2–3 KB en vez de 258 KB), con switch Clip/Synth en el panel para comparar
 
 
 ## Hecho reciente

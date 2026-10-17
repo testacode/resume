@@ -1,0 +1,78 @@
+import { horizon } from './horizon';
+import { shore } from './shore';
+import { clearSceneConfig, loadSceneChoice, loadSceneConfig, loadSoundPref, saveSceneChoice, saveSceneConfig, saveSoundPref } from './storage';
+import type { SceneChoice, SceneConfig, SceneDef, SceneId } from './types';
+
+export const SCENES: Record<SceneId, SceneDef> = { horizon, shore };
+
+export type SceneState = {
+  choice: SceneChoice;
+  sceneId: SceneId;
+  configs: Record<SceneId, SceneConfig>;
+  sound: boolean;
+};
+
+// Tiny external store so the Hero can hydrate with no scene (server snapshot) and pick one
+// on the client without setting state inside an effect.
+let state: SceneState | null = null;
+const listeners = new Set<() => void>();
+
+const pickRandom = (): SceneId => (Math.random() < 0.5 ? 'horizon' : 'shore');
+
+function emit(): void {
+  listeners.forEach((fn) => fn());
+}
+
+export function subscribe(fn: () => void): () => void {
+  listeners.add(fn);
+  return () => { listeners.delete(fn); };
+}
+
+export function getSnapshot(): SceneState {
+  if (!state) {
+    const choice = loadSceneChoice();
+    state = {
+      choice,
+      sceneId: choice === 'random' ? pickRandom() : choice,
+      configs: { horizon: loadSceneConfig(horizon), shore: loadSceneConfig(shore) },
+      sound: loadSoundPref(),
+    };
+  }
+  return state;
+}
+
+export function getServerSnapshot(): SceneState | null {
+  return null;
+}
+
+export function setChoice(choice: SceneChoice): void {
+  const current = getSnapshot();
+  state = { ...current, choice, sceneId: choice === 'random' ? pickRandom() : choice };
+  saveSceneChoice(choice);
+  emit();
+}
+
+export function setConfig(id: SceneId, config: SceneConfig): void {
+  const current = getSnapshot();
+  state = { ...current, configs: { ...current.configs, [id]: config } };
+  saveSceneConfig(SCENES[id], config);
+  emit();
+}
+
+export function setSound(on: boolean): void {
+  state = { ...getSnapshot(), sound: on };
+  saveSoundPref(on);
+  emit();
+}
+
+export function resetConfig(id: SceneId): void {
+  const current = getSnapshot();
+  state = { ...current, configs: { ...current.configs, [id]: { ...SCENES[id].defaults } } };
+  clearSceneConfig(SCENES[id]);
+  emit();
+}
+
+/** Test-only: forget the cached state so the next snapshot re-reads storage. */
+export function resetStoreForTests(): void {
+  state = null;
+}

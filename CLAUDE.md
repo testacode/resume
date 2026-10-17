@@ -72,6 +72,7 @@ Evoke **confidence and competence**: "This candidate knows what they're doing, i
 - **Motion**: Subtle fade-in and stagger via the Motion library, centralized through a single `<MotionConfig reducedMotion="user">` — preserves opacity fades, suppresses positional movement for reduced-motion users
 - **Layout**: Editorial, no cards — Projects is a divided list, Experience a date-column grid
 - **Developer signals**: hero terminal prompt (`charly@portfolio:~$ whoami` + blinking caret), project status dots, version-string footer
+- **Hero scene**: a procedural WebGL2 shader behind the hero, picked at random per load — *Horizon* (ocean at eye level, name sitting on the horizon line, CRT/magenta) or *Shore* (top-down beach, the name is the coastline and waves break on the letters, dithered noon). The hero is its own screen: scene config (`src/components/sections/Hero/scenes/*.ts`) sets text/accent colors, independent of the site theme and of the teal accent rule. The `π` button (bottom right) opens a panel to pick the scene, presets and every shader parameter; choices persist in `localStorage`. The `<h1>` stays in the DOM (shore paints it transparent and rasterizes it into the shader mask). Reduced motion → single frame; no WebGL2 → CSS gradient fallback. Playgrounds that generated the defaults: `docs/playground/hero-ocean.html`, `hero-shore.html`.
 
 ### Design Principles
 1. **Content first** — Design serves the content, never competes with it
