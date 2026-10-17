@@ -8,9 +8,12 @@
 
 ## Backlog
 
-- LinkedIn: agregar carlosmonti.com en Featured a mano (la automatización no guarda el link)
+- (vacío)
+
 
 ## Hecho reciente
+
+- 2026-10-17 — LinkedIn Destacado: link a carlosmonti.com (la tarjeta puede mostrar el título viejo hasta refrescar en post-inspector)
 
 - 2026-10-17 — LinkedIn en español: titular (a mano) y About actualizados
 
