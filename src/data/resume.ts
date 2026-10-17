@@ -90,7 +90,7 @@ export const resumeData: ResumeData = {
       company: 'Deloitte',
       title: 'Senior Frontend Engineer',
       startDate: '2016-02',
-      endDate: '2017-07',
+      endDate: '2017-06',
       technologies: ['Angular 1.6', 'Lodash', 'Karma', 'Jasmine'],
       description:
         'Developed RMSS (Resource Management Staff Setup), an internal tool for tracking team resources and skill allocation across the organization.',

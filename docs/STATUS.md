@@ -8,7 +8,6 @@
 
 ## Backlog
 
-- Definir fecha de fin en Globant: el CV dice sep 2017, LinkedIn jun 2017
 - LinkedIn: agregar carlosmonti.com en Featured a mano (la automatización no guarda el link)
 - LinkedIn: actualizar el perfil secundario en español con titular, About y experiencia nuevos
 
