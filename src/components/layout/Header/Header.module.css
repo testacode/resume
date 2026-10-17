@@ -9,6 +9,26 @@
   transition: background-color var(--transition-base), backdrop-filter var(--transition-base);
 }
 
+/* Over the hero scene (dark at the top edge) the nav needs light text until it scrolls. */
+:global([data-hero-scene]) .header:not(.scrolled) {
+  --color-text-primary: var(--hero-nav-color);
+  --color-text-secondary: var(--hero-nav-color);
+  --color-background-alt: oklch(1 0 0 / 0.12);
+}
+
+:global([data-hero-scene]) .header:not(.scrolled) .navLink {
+  text-shadow: 0 1px 2px var(--hero-nav-halo), 0 0 8px var(--hero-nav-halo);
+}
+
+:global([data-hero-scene]) .header:not(.scrolled) .actions {
+  filter: drop-shadow(0 1px 2px var(--hero-nav-halo));
+}
+
+:global([data-hero-scene]) .header:not(.scrolled) .navLink.active {
+  color: var(--hero-nav-color);
+  font-weight: 500;
+}
+
 .header.scrolled {
   background-color: var(--color-background-blur);
   backdrop-filter: blur(12px);

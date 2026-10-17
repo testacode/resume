@@ -5,7 +5,7 @@ export const resumeData: ResumeData = {
   personal: {
     name: 'Carlos Monti',
     title: 'Senior Software Engineer',
-    tagline: 'Building SOFIA, an AI travel assistant at Despegar — and agentic dev tooling on the side',
+    tagline: 'Building AI-powered web products — conversational UX, production LLM features and agentic dev tooling',
     bio: "Senior Software Engineer with ~19 years shipping web products — Disney, Deloitte, Blockchain.com, Brubank, Despegar. Today I build SOFIA, the AI travel assistant at Despegar (a Prosus company), focusing on conversational UX and production LLM features. Outside work I build with AI every day: my own set of Claude Code skills and agents lets me ship full products solo — 3D educational labs, browser extensions, Home Assistant integrations, dashboards — deployed on Cloudflare and Vercel.",
     address: {
       city: 'Buenos Aires',
