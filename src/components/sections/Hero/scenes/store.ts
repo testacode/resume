@@ -19,6 +19,13 @@ const listeners = new Set<() => void>();
 
 const pickRandom = (): SceneId => (Math.random() < 0.5 ? 'horizon' : 'shore');
 
+/** `?scene=horizon|shore` forces a scene for this load only (shareable links); not persisted. */
+function sceneFromUrl(): SceneId | null {
+  if (typeof window === 'undefined') return null;
+  const value = new URLSearchParams(window.location.search).get('scene');
+  return value === 'horizon' || value === 'shore' ? value : null;
+}
+
 function emit(): void {
   listeners.forEach((fn) => fn());
 }
@@ -33,7 +40,7 @@ export function getSnapshot(): SceneState {
     const choice = loadSceneChoice();
     state = {
       choice,
-      sceneId: choice === 'random' ? pickRandom() : choice,
+      sceneId: sceneFromUrl() ?? (choice === 'random' ? pickRandom() : choice),
       configs: { horizon: loadSceneConfig(horizon), shore: loadSceneConfig(shore) },
       sound: loadSoundPref(),
     };

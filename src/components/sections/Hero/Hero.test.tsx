@@ -83,6 +83,15 @@ describe('Hero — scene', () => {
     expect(screen.getByRole('button', { name: 'Scene settings' })).toBeInTheDocument();
   });
 
+  it('forces the scene from ?scene= for this load without persisting it', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0.1);
+    window.history.replaceState({}, '', '/?scene=shore');
+    const { container } = render(<Hero data={personal} />);
+    expect(container.querySelector('section')).toHaveAttribute('data-scene', 'shore');
+    expect(localStorage.getItem('hero:scene')).toBeNull();
+    window.history.replaceState({}, '', '/');
+  });
+
   it('honours a stored scene choice over random', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.9);
     localStorage.setItem('hero:scene', 'horizon');
