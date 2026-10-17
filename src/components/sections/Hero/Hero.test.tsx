@@ -2,6 +2,9 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { Hero } from './Hero';
 import { resetStoreForTests } from './scenes/store';
+
+const audio = { start: vi.fn().mockResolvedValue(true), stop: vi.fn(), setVolume: vi.fn(), setDuck: vi.fn(), setScene: vi.fn(), dispose: vi.fn() };
+vi.mock('./scenes/oceanAudio', () => ({ createOceanAudio: () => audio }));
 import type { PersonalInfo } from '@/types/resume';
 
 const personal: PersonalInfo = {
@@ -86,6 +89,22 @@ describe('Hero — scene', () => {
     const { container } = render(<Hero data={personal} />);
 
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
+  });
+
+  it('fades the sound with scroll over the hero height', async () => {
+    const { container } = render(<Hero data={personal} />);
+    const hero = container.querySelector('section') as HTMLElement;
+    Object.defineProperty(hero, 'offsetHeight', { value: 800, configurable: true });
+
+    Object.defineProperty(window, 'scrollY', { value: 400, configurable: true });
+    fireEvent.scroll(window);
+    await act(async () => { await new Promise((r) => requestAnimationFrame(() => r(null))); });
+    expect(audio.setDuck).toHaveBeenLastCalledWith(0.5);
+
+    Object.defineProperty(window, 'scrollY', { value: 0, configurable: true });
+    fireEvent.scroll(window);
+    await act(async () => { await new Promise((r) => requestAnimationFrame(() => r(null))); });
+    expect(audio.setDuck).toHaveBeenLastCalledWith(1);
   });
 
   it('starts with sound on and persists a mute', () => {

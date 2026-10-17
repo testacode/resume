@@ -9,6 +9,8 @@ export type OceanAudio = {
   start: () => Promise<boolean>;
   stop: () => void;
   setVolume: (volume: number) => void;
+  /** 0–1 multiplier on top of the volume; the Hero drives it from scroll position. */
+  setDuck: (factor: number) => void;
   setScene: (scene: SceneId) => void;
   dispose: () => void;
 };
@@ -40,6 +42,7 @@ export function createOceanAudio(): OceanAudio {
   let voice: Voice | null = null;
   let scene: SceneId = 'horizon';
   let volume = 0.5;
+  let duck = 1;
   let running = false;
   const buffers = new Map<SceneId, Promise<AudioBuffer>>();
 
@@ -90,7 +93,7 @@ export function createOceanAudio(): OceanAudio {
       running = true;
       if (ctx.state === 'suspended') await ctx.resume().catch(() => undefined);
       if (ctx.state !== 'running') return false;
-      ramp(master.gain, volume, FADE_SECONDS);
+      ramp(master.gain, volume * duck, FADE_SECONDS);
       if (!voice) void play(scene);
       return true;
     },
@@ -100,7 +103,11 @@ export function createOceanAudio(): OceanAudio {
     },
     setVolume(next) {
       volume = next;
-      if (g && running) ramp(g.master.gain, volume, 0.1);
+      if (g && running) ramp(g.master.gain, volume * duck, 0.1);
+    },
+    setDuck(factor) {
+      duck = Math.min(1, Math.max(0, factor));
+      if (g && running) ramp(g.master.gain, volume * duck, 0.3);
     },
     setScene(next) {
       if (next === scene && voice) return;

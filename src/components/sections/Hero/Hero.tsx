@@ -53,6 +53,7 @@ export function Hero({ data }: Props) {
   const [copied, setCopied] = useState(false);
   const copyTimeoutRef = useRef<number | null>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
   const [readyScene, setReadyScene] = useState<SceneId | null>(null);
   const audioRef = useRef<OceanAudio | null>(null);
   const [volume, setVolume] = useState(loadVolume);
@@ -108,6 +109,24 @@ export function Hero({ data }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [soundOn, scene]);
 
+  // Fade with scroll: full volume at the top, silent once the hero has scrolled away.
+  useEffect(() => {
+    if (!soundOn) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const height = heroRef.current?.offsetHeight ?? 0;
+      audioRef.current?.setDuck(height > 0 ? 1 - window.scrollY / height : 1);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [soundOn]);
+
   useEffect(() => () => audioRef.current?.dispose(), []);
 
   const handleCopy = async () => {
@@ -121,6 +140,7 @@ export function Hero({ data }: Props) {
 
   return (
     <section
+      ref={heroRef}
       id="home"
       className={styles.hero}
       data-scene={scene?.id}
