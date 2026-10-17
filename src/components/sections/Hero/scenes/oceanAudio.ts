@@ -14,7 +14,7 @@ export type OceanAudio = {
 };
 
 const FADE_SECONDS = 0.6;
-const SCENE_TONE: Record<SceneId, number> = { shore: 20000, horizon: 1200 };
+const SCENE_TONE: Record<SceneId, number> = { shore: 20000, horizon: 2600 };
 const SCENE_GAIN: Record<SceneId, number> = { shore: 1, horizon: 0.8 };
 
 function clipUrl(scene: SceneId): string {
