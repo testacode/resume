@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Shore — playground (playa cenital)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=IBM+Plex+Mono:wght@400&family=Instrument+Sans:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --ui-bg:#111315; --ui-panel:#17191c; --ui-border:#2a2e33; --ui-text:#d7dadd; --ui-muted:#8a9099; --ui-accent:#6fd6c0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; background:var(--ui-bg); color:var(--ui-text); font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+  body { display:grid; grid-template-columns:320px 1fr; grid-template-rows:1fr auto; height:100vh; }
+  aside { grid-row:1/3; overflow-y:auto; border-right:1px solid var(--ui-border); background:var(--ui-panel); padding:14px 14px 40px; }
+  main { display:flex; align-items:center; justify-content:center; padding:20px; overflow:auto; }
+  footer { border-top:1px solid var(--ui-border); background:var(--ui-panel); padding:12px 16px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start; max-height:200px; }
+  footer pre { font:12px/1.5 ui-monospace,Menlo,monospace; white-space:pre-wrap; color:var(--ui-text); overflow:auto; max-height:170px; }
+  button.copy { background:var(--ui-accent); color:#06201b; border:0; border-radius:6px; padding:8px 14px; font-weight:600; cursor:pointer; }
+  h1.ui { font-size:14px; font-weight:600; margin-bottom:10px; letter-spacing:.02em; }
+  details { border-top:1px solid var(--ui-border); padding:8px 0; }
+  summary { cursor:pointer; font-weight:600; color:var(--ui-text); list-style:none; display:flex; justify-content:space-between; padding:4px 0; }
+  summary::after { content:"▾"; color:var(--ui-muted); }
+  details:not([open]) summary::after { content:"▸"; }
+  .row { display:grid; grid-template-columns:1fr 92px; align-items:center; gap:8px; margin:6px 0; }
+  .row label { color:var(--ui-muted); }
+  .row input[type=range] { width:100%; accent-color:var(--ui-accent); }
+  .row .val { font:11px ui-monospace,Menlo,monospace; color:var(--ui-muted); text-align:right; }
+  .row select, .row input[type=color], .row input[type=text] { width:100%; background:#0f1113; color:var(--ui-text); border:1px solid var(--ui-border); border-radius:4px; padding:3px 4px; height:26px; }
+  .row input[type=color] { padding:0 2px; }
+  .row.check { grid-template-columns:1fr auto; }
+  .row.wide { grid-template-columns:1fr; }
+  .range-wrap { display:grid; grid-template-columns:1fr 44px; gap:6px; align-items:center; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+  .chip { background:#0f1113; border:1px solid var(--ui-border); color:var(--ui-text); border-radius:999px; padding:4px 10px; cursor:pointer; font-size:12px; }
+  .chip:hover { border-color:var(--ui-accent); }
+  .chip.active { background:var(--ui-accent); color:#06201b; border-color:var(--ui-accent); }
+  .pal { display:flex; gap:4px; margin:4px 0; }
+  .pal input { width:100%; height:26px; background:#0f1113; border:1px solid var(--ui-border); border-radius:4px; padding:0 2px; }
+  .hint { color:var(--ui-muted); font-size:11px; margin:2px 0 6px; }
+
+  /* ---- hero mock ---- */
+  .stage { position:relative; width:min(100%, 1180px, calc((100vh - 250px) * 16 / 9)); aspect-ratio:16/9; background:#000; overflow:hidden; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.5); font-family:"Instrument Sans",-apple-system,sans-serif; font-size:clamp(10px, 1.4vw, 16px); }
+  .stage.mobile { width:390px; aspect-ratio:390/760; font-size:12px; }
+  .stage canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .stage canvas.pixel { image-rendering:pixelated; }
+  .txt { position:absolute; left:7%; right:7%; z-index:2; display:flex; flex-direction:column; gap:.6em; }
+  .txt.center { align-items:center; text-align:center; }
+  .txt .prompt { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.9em; opacity:.9; }
+  .txt .p { color:var(--accent); }
+  .caret { display:inline-block; width:.55em; height:1em; margin-left:2px; background:var(--accent); vertical-align:text-bottom; animation:blink 1.1s step-end infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .txt h2 { font-weight:400; font-size:1.5em; opacity:.9; }
+  .txt .tag { font-size:1.05em; opacity:.85; max-width:34em; text-wrap:balance; }
+  .txt .line { width:60px; height:2px; background:var(--accent); }
+  .txt .meta { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.85em; opacity:.8; }
+  .stage.hide-meta #lower { display:none; }
+</style>
+</head>
+<body>
+<aside>
+  <h1 class="ui">Hero Shore · playa cenital</h1>
+  <div class="hint">Vista desde arriba: agua arriba, el nombre es la costa, arena abajo. Las olas rompen en el nombre.</div>
+  <div class="chips" id="presets"></div>
+  <div id="controls"></div>
+</aside>
+<main>
+  <div class="stage" id="stage">
+    <canvas id="gl"></canvas>
+    <div class="txt" id="upper"><p class="prompt"><span class="p">charly@portfolio:~$</span> whoami<span class="caret" aria-hidden="true"></span></p></div>
+    <div class="txt" id="lower">
+      <h2>Senior Software Engineer</h2>
+      <p class="tag">Building AI-powered web products — conversational UX, production LLM features and agentic dev tooling</p>
+      <div class="line"></div>
+      <p class="meta"><span class="p">charly@portfolio:~$</span> npx xmontc</p>
+    </div>
+  </div>
+</main>
+<footer>
+  <pre id="prompt"></pre>
+  <button class="copy" id="copy">Copiar prompt</button>
+</footer>
+
+<script>
+// ---------- state ----------
+const DEFAULTS = {
+  // costa / nombre
+  name:'Carlos Monti', shoreMode:1, nameY:0.42, nameSize:5.5, align:'left', letterColor:'#2b2118', letterOpacity:1, gapDepth:1, wobbleAmp:0.012, wobbleFreq:1.2,
+  // agua
+  deep:'#0b4f6c', shallow:'#5fc8c3', depthRange:0.5, waveFreq:1.0, waveSpeed:0.5, crest:0.6, foamAmt:0.8, glints:0.4, caustics:0.5,
+  // rompiente
+  runup:0.1, swashRate:0.12, irreg:0.6, foamWidth:0.5, wetDark:0.6, wetMemory:1.0,
+  // arena
+  sand:'#e6d3ae', wetSand:'#b89a6a', foam:'#f7fbfb', grainSand:0.25, sandVar:0.3,
+  // estilo
+  style:0, cell:3, levels:4, bayerBits:3, keepColor:1, contrast:1.0, palN:4,
+  pal0:'#171f1e', pal1:'#2f5e56', pal2:'#7fdcc8', pal3:'#eef7f4', pal4:'#ffffff', renderScale:1,
+  // post
+  scan:0, grain:0, vignette:0.15, paused:0,
+  // texto
+  upperColor:'#f2fbfb', lowerColor:'#3a2d1e', accent:'#0b4f6c', showMeta:1, mobile:0,
+};
+const state = { ...DEFAULTS };
+
+const PRESETS = {
+  'Mediodía limpio': {},
+  'Atardecer': { deep:'#2a1f5e', shallow:'#d4777a', foam:'#ffe9d6', sand:'#d9b48f', wetSand:'#8d6a52', letterColor:'#2a1f3e', lowerColor:'#2a1f3e', upperColor:'#fff1e6', accent:'#ff8a5c', glints:0.8, vignette:0.35, grain:0.04 },
+  'Teal grabado (sitio)': { style:1, cell:3, bayerBits:3, levels:4, keepColor:0, palN:4, pal0:'#171f1e', pal1:'#2f5e56', pal2:'#7fdcc8', pal3:'#eef7f4', letterColor:'#171f1e', sand:'#8fd6c6', wetSand:'#4f9b8c', deep:'#0e2f2a', shallow:'#2c6b60', foam:'#f0faf7', upperColor:'#eef7f4', lowerColor:'#171f1e', accent:'#2f5e56', contrast:1.15 },
+  'Risograph': { style:3, cell:5, palN:2, pal0:'#0a3fa0', pal1:'#f2eee6', keepColor:0, contrast:1.25, letterColor:'#0a3fa0', letterOpacity:1, sand:'#f0e8d6', wetSand:'#b9b2a0', deep:'#1b2a55', shallow:'#5d7fc6', foam:'#ffffff', upperColor:'#0a3fa0', lowerColor:'#0a3fa0', accent:'#ff5fa2' },
+  'Game Boy': { style:1, cell:4, bayerBits:2, levels:4, keepColor:0, palN:4, pal0:'#0f380f', pal1:'#306230', pal2:'#8bac0f', pal3:'#9bbc0f', renderScale:0.5, contrast:1.3, letterColor:'#0f380f', sand:'#9bbc0f', wetSand:'#8bac0f', deep:'#0f380f', shallow:'#306230', foam:'#9bbc0f', upperColor:'#9bbc0f', lowerColor:'#0f380f', accent:'#306230', glints:0 },
+  '1-bit': { style:1, cell:2, bayerBits:3, levels:2, keepColor:0, palN:2, pal0:'#000000', pal1:'#ffffff', contrast:1.3, letterColor:'#000000', sand:'#ffffff', wetSand:'#9a9a9a', deep:'#101010', shallow:'#707070', foam:'#ffffff', upperColor:'#ffffff', lowerColor:'#000000', accent:'#000000', vignette:0 },
+  'Blueprint': { style:4, cell:3, palN:2, pal0:'#e4ecff', pal1:'#143b8f', keepColor:0, contrast:1.3, letterColor:'#e4ecff', sand:'#2a56b8', wetSand:'#1b3f90', deep:'#0a1f55', shallow:'#4b78d6', foam:'#ffffff', upperColor:'#e4ecff', lowerColor:'#e4ecff', accent:'#ffd84d', vignette:0 },
+  'ASCII': { style:5, cell:10, palN:2, pal0:'#060a06', pal1:'#67ff8a', keepColor:0, contrast:1.3, letterColor:'#ffffff', sand:'#2d3a2d', wetSand:'#1b241b', deep:'#050805', shallow:'#1f4f2a', foam:'#cfffd9', upperColor:'#e9ffee', lowerColor:'#e9ffee', accent:'#67ff8a' },
+};
+
+const CONTROLS = [
+  { group:'Costa y nombre', open:true, items:[
+    { k:'name', t:'text', label:'Texto' },
+    { k:'shoreMode', t:'select', label:'Costa', opts:[[1,'Contorno del nombre'],[0,'Línea recta sobre el nombre']] },
+    { k:'nameY', t:'range', label:'Nombre Y (top)', min:0.15, max:0.75, step:0.01 },
+    { k:'nameSize', t:'range', label:'Tamaño del nombre (em)', min:3, max:10, step:0.1 },
+    { k:'align', t:'select', label:'Alineación', opts:[['left','Izquierda'],['center','Centro']] },
+    { k:'letterColor', t:'color', label:'Color de letras' },
+    { k:'letterOpacity', t:'range', label:'Opacidad de letras', min:0, max:1, step:0.02 },
+    { k:'gapDepth', t:'range', label:'Agua entre letras (0 línea · 1 hasta la base)', min:0, max:1, step:0.02 },
+    { k:'wobbleAmp', t:'range', label:'Ondulación de la costa', min:0, max:0.05, step:0.001 },
+    { k:'wobbleFreq', t:'range', label:'Frecuencia de ondulación', min:0.2, max:4, step:0.1 },
+  ]},
+  { group:'Rompiente', open:true, items:[
+    { k:'runup', t:'range', label:'Alcance de la ola en la arena', min:0, max:0.3, step:0.005 },
+    { k:'swashRate', t:'range', label:'Frecuencia (olas/seg)', min:0.03, max:0.5, step:0.01 },
+    { k:'irreg', t:'range', label:'Irregularidad del frente', min:0, max:1.5, step:0.05 },
+    { k:'foamWidth', t:'range', label:'Grosor de espuma', min:0, max:1.5, step:0.05 },
+    { k:'wetDark', t:'range', label:'Arena mojada (oscurecer)', min:0, max:1, step:0.02 },
+    { k:'wetMemory', t:'range', label:'Memoria de humedad', min:0.3, max:3, step:0.1 },
+  ]},
+  { group:'Agua', items:[
+    { k:'deep', t:'color', label:'Agua profunda' },
+    { k:'shallow', t:'color', label:'Agua baja' },
+    { k:'foam', t:'color', label:'Espuma' },
+    { k:'depthRange', t:'range', label:'Transición de profundidad', min:0.1, max:1, step:0.02 },
+    { k:'waveFreq', t:'range', label:'Frecuencia de olas', min:0.2, max:3, step:0.05 },
+    { k:'waveSpeed', t:'range', label:'Velocidad de olas', min:0, max:2, step:0.02 },
+    { k:'crest', t:'range', label:'Crestas', min:0, max:1.5, step:0.05 },
+    { k:'foamAmt', t:'range', label:'Espuma al romper', min:0, max:1.5, step:0.05 },
+    { k:'caustics', t:'range', label:'Cáusticas', min:0, max:1.5, step:0.05 },
+    { k:'glints', t:'range', label:'Destellos', min:0, max:1.5, step:0.05 },
+  ]},
+  { group:'Arena', items:[
+    { k:'sand', t:'color', label:'Arena' },
+    { k:'wetSand', t:'color', label:'Arena mojada' },
+    { k:'grainSand', t:'range', label:'Grano', min:0, max:0.8, step:0.02 },
+    { k:'sandVar', t:'range', label:'Manchas', min:0, max:1, step:0.02 },
+  ]},
+  { group:'Estilo', items:[
+    { k:'style', t:'select', label:'Técnica', opts:[[0,'Limpio'],[1,'Dither Bayer'],[2,'Dither ruido'],[3,'Halftone'],[4,'Líneas (grabado)'],[5,'ASCII']] },
+    { k:'cell', t:'range', label:'Celda (px)', min:1, max:16, step:1 },
+    { k:'levels', t:'range', label:'Tonos', min:2, max:8, step:1 },
+    { k:'bayerBits', t:'select', label:'Matriz Bayer', opts:[[1,'2×2'],[2,'4×4'],[3,'8×8']] },
+    { k:'keepColor', t:'check', label:'Conservar color de escena' },
+    { k:'contrast', t:'range', label:'Contraste', min:0.5, max:2.5, step:0.05 },
+    { k:'palN', t:'range', label:'Colores de paleta (oscuro → claro)', min:2, max:5, step:1 },
+    { t:'palette' },
+    { k:'renderScale', t:'range', label:'Resolución de render', min:0.25, max:1, step:0.05 },
+  ]},
+  { group:'Post', items:[
+    { k:'scan', t:'range', label:'Scanlines', min:0, max:1, step:0.02 },
+    { k:'grain', t:'range', label:'Grano', min:0, max:0.3, step:0.01 },
+    { k:'vignette', t:'range', label:'Viñeta', min:0, max:1, step:0.02 },
+    { k:'paused', t:'check', label:'Frame estático (reduced motion)' },
+  ]},
+  { group:'Texto', items:[
+    { k:'upperColor', t:'color', label:'Texto sobre el agua (prompt)' },
+    { k:'lowerColor', t:'color', label:'Texto sobre la arena' },
+    { k:'accent', t:'color', label:'Accent' },
+    { k:'showMeta', t:'check', label:'Mostrar título, tagline y CLI' },
+    { k:'mobile', t:'check', label:'Preview mobile (390px)' },
+  ]},
+];
+
+const $ = (s) => document.querySelector(s);
+const inputs = {};
+const MASK_KEYS = new Set(['name','nameY','nameSize','align','renderScale','mobile']);
+
+function buildControls() {
+  const controlsEl = $('#controls');
+  for (const g of CONTROLS) {
+    const d = document.createElement('details'); if (g.open) d.open = true;
+    d.innerHTML = `<summary>${g.group}</summary>`;
+    for (const it of g.items) {
+      if (it.t === 'palette') {
+        const row = document.createElement('div'); row.className = 'pal';
+        for (let i = 0; i < 5; i++) {
+          const inp = document.createElement('input'); inp.type = 'color';
+          inp.addEventListener('input', () => { state['pal' + i] = inp.value; updateAll(); });
+          inputs['pal' + i] = inp; row.appendChild(inp);
+        }
+        d.appendChild(row); continue;
+      }
+      const row = document.createElement('div'); row.className = 'row' + (it.t === 'check' ? ' check' : '');
+      const lab = document.createElement('label'); lab.textContent = it.label; row.appendChild(lab);
+      let inp;
+      const commit = (v) => { state[it.k] = v; updateAll(MASK_KEYS.has(it.k)); };
+      if (it.t === 'range') {
+        const wrap = document.createElement('div'); wrap.className = 'range-wrap'; row.className = 'row wide';
+        inp = document.createElement('input'); inp.type = 'range'; inp.min = it.min; inp.max = it.max; inp.step = it.step;
+        const val = document.createElement('span'); val.className = 'val';
+        inp.addEventListener('input', () => { val.textContent = inp.value; commit(parseFloat(inp.value)); });
+        inp._val = val; wrap.append(inp, val); row.appendChild(wrap);
+      } else if (it.t === 'select') {
+        inp = document.createElement('select');
+        for (const [v, l] of it.opts) { const o = document.createElement('option'); o.value = v; o.textContent = l; inp.appendChild(o); }
+        inp.addEventListener('input', () => commit(isNaN(+inp.value) ? inp.value : +inp.value));
+        row.appendChild(inp);
+      } else if (it.t === 'color') {
+        inp = document.createElement('input'); inp.type = 'color';
+        inp.addEventListener('input', () => commit(inp.value));
+        row.appendChild(inp);
+      } else if (it.t === 'text') {
+        inp = document.createElement('input'); inp.type = 'text';
+        inp.addEventListener('input', () => commit(inp.value));
+        row.appendChild(inp);
+      } else if (it.t === 'check') {
+        inp = document.createElement('input'); inp.type = 'checkbox';
+        inp.addEventListener('input', () => commit(inp.checked ? 1 : 0));
+        row.appendChild(inp);
+      }
+      inputs[it.k] = inp; d.appendChild(row);
+    }
+    controlsEl.appendChild(d);
+  }
+  const chips = $('#presets');
+  for (const name of Object.keys(PRESETS)) {
+    const b = document.createElement('button'); b.className = 'chip'; b.textContent = name;
+    b.addEventListener('click', () => { Object.assign(state, DEFAULTS, PRESETS[name]); state.activePreset = name; updateAll(true); });
+    chips.appendChild(b);
+  }
+  state.activePreset = 'Mediodía limpio';
+}
+
+function syncInputs() {
+  for (const k in inputs) {
+    const inp = inputs[k]; if (!inp) continue;
+    if (inp.type === 'checkbox') inp.checked = !!state[k];
+    else { inp.value = state[k]; if (inp._val) inp._val.textContent = state[k]; }
+  }
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.textContent === state.activePreset));
+  for (let i = 0; i < 5; i++) inputs['pal' + i].style.display = i < state.palN ? '' : 'none';
+}
+
+// ---------- WebGL ----------
+const canvas = $('#gl');
+const gl = canvas.getContext('webgl2', { antialias:false, alpha:false });
+if (!gl) document.body.innerHTML = '<p style="padding:40px">Este navegador no tiene WebGL2.</p>';
+
+const VS = `#version 300 es
+in vec2 a; void main(){ gl_Position = vec4(a,0.,1.); }`;
+
+const FS = `#version 300 es
+precision highp float; precision highp int;
+out vec4 fragColor;
+uniform vec2 u_res; uniform float u_time;
+uniform sampler2D u_mask, u_profile;
+uniform int u_shoreMode; uniform float u_blockTop, u_blockBottom, u_gapDepth, u_wobbleAmp, u_wobbleFreq, u_letterOpacity;
+uniform vec3 u_deep, u_shallow, u_sand, u_wetSand, u_foam, u_letter;
+uniform float u_depthRange, u_waveFreq, u_waveSpeed, u_crest, u_foamAmt, u_glints, u_caustics;
+uniform float u_runup, u_swashRate, u_irreg, u_foamWidth, u_wetDark, u_wetMemory, u_grainSand, u_sandVar;
+uniform int u_style,u_levels,u_bayerBits,u_palN,u_keepColor;
+uniform float u_cell,u_contrast,u_scan,u_grain,u_vignette;
+uniform vec3 u_pal[5];
+
+float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
+float vnoise(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.-2.*f);
+  float a=hash(i),b=hash(i+vec2(1,0)),c=hash(i+vec2(0,1)),d=hash(i+vec2(1,1));
+  return mix(mix(a,b,f.x),mix(c,d,f.x),f.y); }
+float fbm(vec2 p){ float v=0.,a=.5; mat2 m=mat2(1.6,1.2,-1.2,1.6); for(int i=0;i<4;i++){ v+=a*vnoise(p); p=m*p; a*=.5; } return v; }
+
+// línea de costa en px (y hacia abajo) para la columna x
+float shoreAt(float x){
+  float w = (vnoise(vec2(x/u_res.x*u_wobbleFreq*6., 1.7))-.5)*2.*u_wobbleAmp*u_res.y;
+  if (u_shoreMode == 0) return u_blockTop*u_res.y + w;
+  vec3 pr = texture(u_profile, vec2(x/u_res.x, .5)).rgb; // r=top g=bottom b=hayTexto
+  float gap = mix(u_blockTop, u_blockBottom, u_gapDepth)*u_res.y;
+  float s = pr.b > .5 ? pr.r*u_res.y : gap;
+  return s + w*.35;
+}
+float shore(float x){ // suavizado horizontal (9 taps)
+  float px = u_res.x/1200.*2.5; float acc = 0., wsum = 0.;
+  for (int i=-4;i<=4;i++){ float w = 5.-abs(float(i)); acc += shoreAt(x+float(i)*px)*w; wsum += w; }
+  return acc/wsum;
+}
+
+vec3 scene(vec2 fc){
+  vec2 p = vec2(fc.x, u_res.y - fc.y);             // px, y hacia abajo
+  float t = u_time; float H = u_res.y;
+  float S = shore(p.x);
+  float dsh = S - p.y;                              // >0 agua, <0 arena
+
+  // arena
+  vec3 sand = u_sand * (1. + (hash(floor(p*0.7))-.5)*u_grainSand) * (1. + (fbm(p*0.01)-.5)*u_sandVar);
+
+  // rompiente (swash): fase por columna
+  float ph2 = t*u_swashRate + fbm(vec2(p.x*0.003, 2.3))*u_irreg*1.5;
+  float phase = fract(ph2);
+  float env = phase < .35 ? smoothstep(0.,1.,phase/.35) : 1.-smoothstep(0.,1.,(phase-.35)/.65);
+  float runpx = u_runup*H*(0.7+0.6*vnoise(vec2(p.x*0.01, floor(ph2)*7.1)));
+  float edge = S + runpx*env;
+  float wetLevel = phase < .35 ? env : mix(1., .1, pow((phase-.35)/.65, 1./u_wetMemory));
+  float wetEdge = S + runpx*wetLevel;
+  float wet = smoothstep(wetEdge+6., wetEdge-6., p.y)*step(S-1., p.y);
+  sand = mix(sand, u_wetSand, wet*u_wetDark);
+
+  // agua
+  float Sb = (u_shoreMode == 0 ? u_blockTop : mix(u_blockTop, u_blockBottom, u_gapDepth*.5))*H;
+  float depth = clamp((Sb - p.y)/(u_depthRange*H), 0., 1.);
+  vec3 water = mix(u_shallow, u_deep, pow(depth, .7));
+  water = mix(sand, water, .15+.85*smoothstep(0., .25, depth));
+  float ph = p.y*u_waveFreq*0.05 - t*u_waveSpeed*3. + fbm(vec2(p.x*0.004, p.y*0.002)+t*0.05)*2.;
+  float crest = smoothstep(.55, .95, sin(ph));
+  water += crest*u_crest*.25*(.4+.6*(1.-depth));
+  float breaking = 1.-smoothstep(0., .5, depth);
+  float ftex = fbm(p*0.03 + vec2(0., -t*0.6));
+  float foam = crest*breaking*smoothstep(.45, .7, ftex)*u_foamAmt;
+  water = mix(water, u_foam, clamp(foam,0.,1.));
+  water = mix(water, u_foam, clamp(u_foamAmt*.35*breaking*smoothstep(.6,.8,fbm(p*0.015+vec2(t*.1,0.))),0.,1.));
+  water += u_caustics*.15*pow(vnoise(p*0.05+t*.3)*vnoise(p*0.05-t*.2), 2.)*(1.-depth);
+  water += u_glints*.8*step(.995, hash(floor(p*.5)+floor(t*6.)))*depth;
+
+  vec3 col = mix(sand, water, smoothstep(-1.5, 1.5, dsh));
+
+  // letras
+  float m = texture(u_mask, fc/u_res).r;
+  col = mix(col, u_letter, m*u_letterOpacity);
+
+  // lengua de espuma sobre la arena/letras
+  float tongue = smoothstep(edge+2., edge-2., p.y)*step(S-1., p.y);
+  float ttex = smoothstep(.35, .75, fbm(p*0.04+vec2(0., t*.8)));
+  vec3 tongueCol = mix(u_wetSand, u_foam, ttex*.9);
+  col = mix(col, tongueCol, tongue*.85*(1.-m*u_letterOpacity));
+  col = mix(col, u_foam, tongue*ttex*.55*m*u_letterOpacity);
+  float edgeLine = smoothstep(u_foamWidth*10.+2., 0., abs(p.y-edge))*step(S-1., p.y)*step(.05, env);
+  col = mix(col, u_foam, edgeLine*.95);
+  return col;
+}
+
+float bayer(ivec2 p, int bits){ int v=0; for(int i=0;i<bits;i++){ int bx=(p.x>>i)&1, by=(p.y>>i)&1; v=(v<<2)|((bx^by)<<1)|by; } return (float(v)+0.5)/float(1<<(2*bits)); }
+vec3 ramp(float q){ float x=q*float(u_palN-1); int i=clamp(int(floor(x)),0,u_palN-2); return mix(u_pal[i], u_pal[i+1], x-float(i)); }
+float lumOf(vec3 c){ return clamp((dot(c, vec3(.299,.587,.114))-.5)*u_contrast+.5, 0., 1.); }
+float character(int n, vec2 p){ p=floor(p*vec2(-4.,4.)+2.5); if(clamp(p.x,0.,4.)==p.x && clamp(p.y,0.,4.)==p.y){ int a=int(p.x+5.*p.y); if(((n>>a)&1)==1) return 1.; } return 0.; }
+int glyph(float g){ int n=0; if(g>0.12)n=4096; if(g>0.22)n=65600; if(g>0.32)n=163153; if(g>0.42)n=15255086; if(g>0.52)n=13121101; if(g>0.62)n=15252014; if(g>0.72)n=13195790; if(g>0.82)n=11512810; return n; }
+const mat2 ROT = mat2(.7071,.7071,-.7071,.7071);
+
+void main(){
+  vec2 fc = gl_FragCoord.xy; float cell = max(u_cell, 1.);
+  vec3 c; vec3 outc;
+  if (u_style == 3) {
+    vec2 rr = ROT*(fc/cell); vec2 cen = floor(rr)+.5;
+    c = scene(transpose(ROT)*cen*cell);
+    float lum = lumOf(c); float d = length(rr-cen); float rad = sqrt(1.-lum)*0.72; float aa = 0.9/cell;
+    float ink = 1.-smoothstep(rad-aa, rad+aa, d);
+    outc = mix(u_pal[u_palN-1], u_keepColor==1 ? c*0.55 : u_pal[0], ink);
+  } else if (u_style == 5) {
+    vec2 cc = floor(fc/cell); c = scene((cc+.5)*cell);
+    float on = character(glyph(lumOf(c)), fract(fc/cell)*2.-1.);
+    outc = mix(u_pal[0], u_keepColor==1 ? c : u_pal[u_palN-1], on);
+  } else if (u_style == 4) {
+    c = scene(vec2(fc.x, (floor(fc.y/cell)+.5)*cell));
+    float lum = lumOf(c); float f = fract(fc.y/cell); float w = 1.-lum; float aa = 0.9/cell;
+    float ink = 1.-smoothstep(w-aa, w+aa, f);
+    outc = mix(u_pal[u_palN-1], u_keepColor==1 ? c*0.55 : u_pal[0], ink);
+  } else {
+    c = scene(fc);
+    vec3 cc = clamp((c-.5)*u_contrast+.5, 0., 1.); float lum = lumOf(c);
+    if (u_style == 0) outc = u_keepColor==1 ? cc : ramp(lum);
+    else {
+      ivec2 ci = ivec2(floor(fc/cell));
+      float thr = u_style==1 ? bayer(ci & ((1<<u_bayerBits)-1), u_bayerBits) : hash(vec2(ci));
+      float L = float(max(u_levels,2)-1);
+      outc = u_keepColor==1 ? floor(cc*L+thr)/L : ramp(floor(lum*L+thr)/L);
+    }
+  }
+  if (u_scan > 0.) outc *= 1. - u_scan*0.45*step(.5, fract(fc.y*0.5));
+  if (u_grain > 0.) outc += (hash(fc + fract(u_time)*113.)-.5)*u_grain;
+  if (u_vignette > 0.) { vec2 q = fc/u_res-.5; outc *= 1. - u_vignette*smoothstep(0.35, 1.1, length(q)*1.5); }
+  fragColor = vec4(clamp(outc,0.,1.), 1.);
+}`;
+
+function compile(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; }
+const prog = gl.createProgram();
+gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
+if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) console.error(gl.getProgramInfoLog(prog));
+gl.useProgram(prog);
+const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+const aLoc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(aLoc); gl.vertexAttribPointer(aLoc, 2, gl.FLOAT, false, 0, 0);
+const U = {}; { const n = gl.getProgramParameter(prog, gl.ACTIVE_UNIFORMS); for (let i = 0; i < n; i++) { const info = gl.getActiveUniform(prog, i); U[info.name.replace('[0]','')] = gl.getUniformLocation(prog, info.name); } }
+
+// texturas: máscara del nombre (R8) y perfil por columna (RGBA16F)
+const maskTex = gl.createTexture(), profTex = gl.createTexture();
+for (const [tex, unit] of [[maskTex,0],[profTex,1]]) {
+  gl.activeTexture(gl.TEXTURE0+unit); gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+}
+gl.uniform1i(U.u_mask, 0); gl.uniform1i(U.u_profile, 1);
+
+const mctx = document.createElement('canvas').getContext('2d', { willReadFrequently:true });
+let block = { top:0.4, bottom:0.5, nameBottomCss:0, nameTopCss:0 };
+let maskDirty = true;
+
+function buildMask(){
+  const W = canvas.width, H = canvas.height; if (!W || !H) return;
+  mctx.canvas.width = W; mctx.canvas.height = H;
+  const stageFont = parseFloat(getComputedStyle(stage).fontSize);
+  const px = state.nameSize * stageFont * dpr;
+  mctx.clearRect(0,0,W,H);
+  mctx.font = `700 ${px}px "Bricolage Grotesque", sans-serif`;
+  if ('letterSpacing' in mctx) mctx.letterSpacing = `${-0.03*px}px`;
+  mctx.textBaseline = 'alphabetic'; mctx.fillStyle = '#fff';
+  const m = mctx.measureText(state.name);
+  const asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent;
+  const x = state.align === 'center' ? (W - m.width)/2 : 0.07*W;
+  const baseline = state.nameY*H + asc;
+  mctx.fillText(state.name, x, baseline);
+  const img = mctx.getImageData(0,0,W,H).data;
+  const prof = new Float32Array(W*4);
+  for (let cx = 0; cx < W; cx++) {
+    let top = -1, bot = -1;
+    for (let y = 0; y < H; y++) if (img[(y*W+cx)*4+3] > 100) { top = y; break; }
+    if (top >= 0) for (let y = H-1; y >= top; y--) if (img[(y*W+cx)*4+3] > 100) { bot = y; break; }
+    prof[cx*4] = top >= 0 ? top/H : 0; prof[cx*4+1] = bot >= 0 ? bot/H : 0; prof[cx*4+2] = top >= 0 ? 1 : 0; prof[cx*4+3] = 1;
+  }
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, maskTex);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, mctx.canvas);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+  gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, profTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, W, 1, 0, gl.RGBA, gl.FLOAT, prof);
+  block = { top:(baseline-asc)/H, bottom:(baseline+desc)/H, nameTopCss:(baseline-asc)/dpr, nameBottomCss:(baseline+desc)/dpr };
+  maskDirty = false;
+  positionText();
+}
+
+const hex = (h) => [1,3,5].map(i => parseInt(h.slice(i, i+2), 16)/255);
+const FLOATS = ['gapDepth','wobbleAmp','wobbleFreq','letterOpacity','depthRange','waveFreq','waveSpeed','crest','foamAmt','glints','caustics','runup','swashRate','irreg','foamWidth','wetDark','wetMemory','grainSand','sandVar','contrast','scan','grain','vignette'];
+const INTS = ['shoreMode','style','levels','bayerBits','palN','keepColor'];
+const COLORS = { deep:'u_deep', shallow:'u_shallow', sand:'u_sand', wetSand:'u_wetSand', foam:'u_foam', letterColor:'u_letter' };
+
+let dpr = 1, lastT = 0, simT = 0;
+function resize(){
+  const r = canvas.getBoundingClientRect();
+  dpr = Math.min(window.devicePixelRatio || 1, 2) * state.renderScale;
+  const w = Math.max(1, Math.round(r.width*dpr)), h = Math.max(1, Math.round(r.height*dpr));
+  if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; maskDirty = true; }
+  canvas.classList.toggle('pixel', state.renderScale < 0.99);
+}
+function draw(now){
+  const dt = Math.min(0.1, (now - lastT)/1000); lastT = now;
+  if (!state.paused) simT += dt;
+  resize(); if (maskDirty) buildMask();
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  gl.uniform2f(U.u_res, canvas.width, canvas.height);
+  gl.uniform1f(U.u_time, simT);
+  gl.uniform1f(U.u_cell, state.cell * dpr);
+  gl.uniform1f(U.u_blockTop, block.top); gl.uniform1f(U.u_blockBottom, block.bottom);
+  for (const k of FLOATS) gl.uniform1f(U['u_'+k], state[k]);
+  for (const k of INTS) gl.uniform1i(U['u_'+k], state[k]|0);
+  for (const k in COLORS) gl.uniform3fv(U[COLORS[k]], hex(state[k]));
+  const pal = []; for (let i = 0; i < 5; i++) pal.push(...hex(state['pal'+i]));
+  gl.uniform3fv(U.u_pal, pal);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  requestAnimationFrame(draw);
+}
+
+// ---------- DOM ----------
+const stage = $('#stage'), upper = $('#upper'), lower = $('#lower');
+function positionText(){
+  const stageFont = parseFloat(getComputedStyle(stage).fontSize);
+  upper.style.bottom = `calc(100% - ${block.nameTopCss}px + ${0.9*stageFont}px)`; upper.style.top = 'auto';
+  lower.style.top = `${block.nameBottomCss + 1.4*stageFont}px`;
+}
+function renderPreview(){
+  stage.className = 'stage' + (state.mobile ? ' mobile' : '') + (state.showMeta ? '' : ' hide-meta');
+  stage.style.setProperty('--accent', state.accent);
+  upper.style.color = state.upperColor; lower.style.color = state.lowerColor;
+  upper.classList.toggle('center', state.align === 'center'); lower.classList.toggle('center', state.align === 'center');
+  positionText();
+}
+
+// ---------- prompt ----------
+const STYLE_NAMES = ['limpio (sin dither)','dither ordenado Bayer','dither de ruido','halftone (puntos en grilla a 45°)','líneas horizontales tipo grabado','ASCII'];
+function updatePrompt(){
+  const pal = Array.from({length:state.palN}, (_, i) => state['pal'+i]).join(', ');
+  const parts = [];
+  parts.push(`Implementar en el hero de carlosmonti.com una playa vista desde arriba (fragment shader WebGL2, sin librerías): agua desde el borde superior hasta el nombre, el nombre "${state.name}" como línea de costa (${state.shoreMode ? `siguiendo el contorno de las letras, con el agua entrando entre letras hasta ${(state.gapDepth*100).toFixed(0)}% de su altura` : 'línea recta sobre el borde superior del nombre'}) y arena debajo. El nombre se dibuja dentro del shader desde una máscara de texto (Bricolage Grotesque 700, ${state.nameSize}em, top al ${(state.nameY*100).toFixed(0)}%, alineado ${state.align === 'center' ? 'al centro' : 'a la izquierda'}, color ${state.letterColor}, opacidad ${state.letterOpacity}); el h1 real queda en el DOM para accesibilidad.`);
+  parts.push(`Costa: ondulación ${state.wobbleAmp} (frecuencia ${state.wobbleFreq}). Rompiente: las olas suben por la arena hasta ${(state.runup*100).toFixed(1)}% de la altura a ${state.swashRate} olas/seg, irregularidad ${state.irreg}, espuma ${state.foamWidth}, arena mojada ${state.wetDark} con memoria ${state.wetMemory}.`);
+  parts.push(`Agua ${state.deep} (profunda) → ${state.shallow} (baja), transición ${state.depthRange}, olas frecuencia ${state.waveFreq} y velocidad ${state.waveSpeed}, crestas ${state.crest}, espuma al romper ${state.foamAmt}, cáusticas ${state.caustics}, destellos ${state.glints}, espuma ${state.foam}. Arena ${state.sand} / mojada ${state.wetSand}, grano ${state.grainSand}, manchas ${state.sandVar}.`);
+  let st = `Estilo: ${STYLE_NAMES[state.style]}`;
+  if (state.style !== 0) st += `, celda ${state.cell}px`;
+  if (state.style === 1) st += `, matriz ${[,'2×2','4×4','8×8'][state.bayerBits]}`;
+  if (state.style === 1 || state.style === 2) st += `, ${state.levels} tonos`;
+  st += state.keepColor ? ', conservando el color de la escena' : `, mapeado a la paleta [${pal}] de oscuro a claro`;
+  st += `, contraste ${state.contrast}, render al ${(state.renderScale*100).toFixed(0)}%${state.renderScale < 0.99 ? ' (image-rendering: pixelated)' : ''}.`;
+  parts.push(st);
+  const post = []; if (state.scan) post.push(`scanlines ${state.scan}`); if (state.grain) post.push(`grano ${state.grain}`); if (state.vignette) post.push(`viñeta ${state.vignette}`);
+  if (post.length) parts.push(`Post: ${post.join(', ')}.`);
+  parts.push(`Texto: el prompt "whoami" arriba del nombre en ${state.upperColor}; título, tagline y CLI debajo sobre la arena en ${state.lowerColor}; accent ${state.accent}. Reduced motion → frame estático; sin WebGL2 → fallback CSS (agua arriba / arena abajo con la línea de costa); pausar fuera del viewport.`);
+  const { activePreset, ...clean } = state;
+  $('#prompt').textContent = parts.join(' ') + `\n\n/* preset base: ${activePreset} */\n` + JSON.stringify(clean);
+}
+
+function updateAll(rebuildMask){ if (rebuildMask) maskDirty = true; syncInputs(); renderPreview(); updatePrompt(); }
+
+$('#copy').addEventListener('click', async () => {
+  await navigator.clipboard.writeText($('#prompt').textContent);
+  const b = $('#copy'); b.textContent = '¡Copiado!'; setTimeout(() => b.textContent = 'Copiar prompt', 1200);
+});
+window.addEventListener('resize', () => { maskDirty = true; renderPreview(); });
+
+buildControls(); updateAll(true);
+document.fonts.load('700 40px "Bricolage Grotesque"').finally(() => { maskDirty = true; requestAnimationFrame(draw); });
+</script>
+</body>
+</html>

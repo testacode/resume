@@ -4,11 +4,12 @@
 
 ## En curso
 
-- (nada)
+- Hero scenes (rama `feat/hero-scenes`, pusheada): Horizonte + Playa al azar por carga, panel `π` con presets y parámetros, persistencia en localStorage. Verificado en Chrome (desktop + 390px) y aprobado por Carlos. Falta: PR/merge a master (deploya solo) y Lighthouse sobre el deploy.
 
 ## Backlog
 
-- (vacío)
+- Hero scenes: compartir escena/config por URL (`?scene=…`)
+- Hero scenes: Lighthouse/perf en móviles reales (el shader de Playa corre a 95 % de resolución)
 
 
 ## Hecho reciente
