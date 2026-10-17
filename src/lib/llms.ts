@@ -2,8 +2,6 @@ import { resumeData } from '@/data/resume';
 import { SITE_URL } from '@/config/site';
 import type { ResumeData } from '@/types/resume';
 
-const CONTACT_EMAIL = '[email removed]';
-
 const year = (date: string | null) => (date ? date.slice(0, 4) : 'Present');
 
 export function buildLlmsTxt(data: ResumeData = resumeData): string {
@@ -19,7 +17,6 @@ export function buildLlmsTxt(data: ResumeData = resumeData): string {
     personal.bio,
     '',
     '## Contact',
-    `- Email: ${CONTACT_EMAIL}`,
     ...social.map((s) => `- ${s.name}: ${s.url}`),
     '',
     '## Experience',
