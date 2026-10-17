@@ -9,7 +9,7 @@
 ## Backlog
 
 - LinkedIn: agregar carlosmonti.com en Featured a mano (la automatización no guarda el link)
-- LinkedIn: actualizar el perfil secundario en español con titular, About y experiencia nuevos
+- LinkedIn: titular del perfil en español a mano (el modal Edit intro en español no guarda vía automatización; About en español ya actualizado)
 
 ## Hecho reciente
 
