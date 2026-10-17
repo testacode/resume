@@ -8,14 +8,14 @@
 
 ## Backlog
 
-- Hero scenes: compartir escena/config por URL (`?scene=…`)
-- Hero scenes: Lighthouse/perf en móviles reales (el shader de Playa corre a 95 % de resolución)
-- Hero audio: resíntesis guiada por la envolvente del clip real (ruido rosa + curva de 2–3 KB en vez de 258 KB), con switch Clip/Synth en el panel para comparar
+- Hero: el botón de copiar `npx xmontc` tiene nombre accesible distinto del texto visible (aviso `label-content-name-mismatch` de Lighthouse; A11y sigue en 100)
+- Hero audio: si el modo Synth convence, hacerlo default y borrar los clips (−500 KB de assets)
 
 
 ## Hecho reciente
 
 - 2026-10-17 — Hero scenes en producción: Horizonte + Playa al azar, panel `π`, sonido de mar CC0 con fade por scroll (`docs/hero-audio.md`). Tagline sin empleador; email fuera de `llms.txt`; GitLab oculto.
+- 2026-10-17 — Hero: `?scene=horizon|shore` por URL; Lighthouse móvil 92/100/100/100 (CLS 0 tras fijar el layout desde el primer paint, TBT 180 ms con la máscara escaneando solo las filas del texto); switch Recording/Synth en el panel (resíntesis por envolvente, 3.4 KB).
 - 2026-10-17 — Banner del perfil de GitHub: GIF de las dos escenas sin UI ni nombre (`scripts/capture-hero.mjs` + `scripts/make-hero-banner.sh`), 2 MB.
 - 2026-10-17 — Repo `resume` público (historial reescrito sin emails, LICENSE MIT + README). Perfil GitHub: nombre, bio, website, LinkedIn, README nuevo, pins (xmontc, resume, header-editor, weird-science, mac-vs-linux-bench); `xmontc` con LICENSE/topics/homepage; descripciones y topics en los repos públicos; `renaiss-test-frontend` archivado.
 

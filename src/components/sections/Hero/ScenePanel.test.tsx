@@ -15,6 +15,8 @@ function setup() {
     onToggleSound: vi.fn(),
     volume: 0.5,
     onVolume: vi.fn(),
+    soundSource: 'clip' as const,
+    onSoundSource: vi.fn(),
   };
   render(<ScenePanel {...props} />);
   return props;
@@ -65,6 +67,10 @@ describe('ScenePanel', () => {
     fireEvent.click(trigger());
     fireEvent.change(screen.getByLabelText('Volume'), { target: { value: '0.2' } });
     expect(props.onVolume).toHaveBeenCalledWith(0.2);
+
+    expect(screen.getByRole('button', { name: 'Recording' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(screen.getByRole('button', { name: 'Synth' }));
+    expect(props.onSoundSource).toHaveBeenCalledWith('synth');
   });
 
   it('applies presets over defaults and resets', () => {

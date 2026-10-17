@@ -5,10 +5,12 @@ import {
   loadSceneChoice,
   loadSceneConfig,
   loadSoundPref,
+  loadSoundSource,
   parseStored,
   saveSceneChoice,
   saveSceneConfig,
   saveSoundPref,
+  saveSoundSource,
 } from './storage';
 
 beforeEach(() => {
@@ -77,6 +79,16 @@ describe('sound preference', () => {
     expect(loadSoundPref()).toBe(false);
     saveSoundPref(true);
     expect(loadSoundPref()).toBe(true);
+  });
+});
+
+describe('sound source', () => {
+  it('defaults to the recording and remembers synth', () => {
+    expect(loadSoundSource()).toBe('clip');
+    saveSoundSource('synth');
+    expect(loadSoundSource()).toBe('synth');
+    localStorage.setItem('hero:soundSource', 'kazoo');
+    expect(loadSoundSource()).toBe('clip');
   });
 });
 

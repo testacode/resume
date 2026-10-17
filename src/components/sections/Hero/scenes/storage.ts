@@ -3,6 +3,7 @@ import { STYLE_CONTROLS } from './shared';
 
 const CHOICE_KEY = 'hero:scene';
 const SOUND_KEY = 'hero:sound';
+const SOURCE_KEY = 'hero:soundSource';
 const CHOICES: ReadonlyArray<SceneChoice> = ['random', 'horizon', 'shore'];
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -71,6 +72,16 @@ export function loadSceneChoice(): SceneChoice {
 
 export function saveSceneChoice(choice: SceneChoice): void {
   safeStorage()?.setItem(CHOICE_KEY, choice);
+}
+
+export type SoundSource = 'clip' | 'synth';
+
+export function loadSoundSource(): SoundSource {
+  return safeStorage()?.getItem(SOURCE_KEY) === 'synth' ? 'synth' : 'clip';
+}
+
+export function saveSoundSource(source: SoundSource): void {
+  safeStorage()?.setItem(SOURCE_KEY, source);
 }
 
 export function loadSoundPref(): boolean {

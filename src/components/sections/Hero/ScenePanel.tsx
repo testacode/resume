@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { FiVolume2, FiVolumeX } from 'react-icons/fi';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import type { ControlSpec, SceneChoice, SceneConfig, SceneDef } from './scenes/types';
+import type { SoundSource } from './scenes/storage';
 import { STYLE_CONTROLS } from './scenes/shared';
 import styles from './ScenePanel.module.css';
 
@@ -18,7 +19,11 @@ type Props = {
   onToggleSound: () => void;
   volume: number;
   onVolume: (volume: number) => void;
+  soundSource: SoundSource;
+  onSoundSource: (source: SoundSource) => void;
 };
+
+const SOURCES: ReadonlyArray<[SoundSource, string]> = [['clip', 'Recording'], ['synth', 'Synth']];
 
 const CHOICES: ReadonlyArray<[SceneChoice, string]> = [['random', 'Random'], ['horizon', 'Horizon'], ['shore', 'Shore']];
 
@@ -69,7 +74,7 @@ function Control({ spec, value, onChange }: { spec: ControlSpec; value: number |
   );
 }
 
-export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset, soundOn, onToggleSound, volume, onVolume }: Props) {
+export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset, soundOn, onToggleSound, volume, onVolume, soundSource, onSoundSource }: Props) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -132,6 +137,13 @@ export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset,
 
           <section className={styles.section}>
             <h3 className={styles.heading}>Sound</h3>
+            <div className={styles.chips}>
+              {SOURCES.map(([value, label]) => (
+                <button key={value} type="button" className={styles.chip} aria-pressed={soundSource === value} onClick={() => onSoundSource(value)}>
+                  {label}
+                </button>
+              ))}
+            </div>
             <div className={styles.row}>
               <label htmlFor={volumeId}>Volume</label>
               <div className={styles.range}>

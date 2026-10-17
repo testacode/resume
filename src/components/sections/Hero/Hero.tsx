@@ -9,8 +9,10 @@ import type { PersonalInfo } from '@/types/resume';
 import { ShaderCanvas } from './ShaderCanvas';
 import { ScenePanel } from './ScenePanel';
 import { createOceanAudio, type OceanAudio } from './scenes/oceanAudio';
+import { createSeaSynth } from './scenes/seaSynth';
+import type { SoundSource } from './scenes/storage';
 import { hexToRgb } from './scenes/shared';
-import { SCENES, getServerSnapshot, getSnapshot, resetConfig, setChoice, setConfig, setSound, subscribe } from './scenes/store';
+import { SCENES, getServerSnapshot, getSnapshot, resetConfig, setChoice, setConfig, setSound, setSoundSource, subscribe } from './scenes/store';
 import type { SceneConfig, SceneId } from './scenes/types';
 import styles from './Hero.module.css';
 
@@ -55,7 +57,7 @@ export function Hero({ data }: Props) {
   const nameRef = useRef<HTMLHeadingElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const [readyScene, setReadyScene] = useState<SceneId | null>(null);
-  const audioRef = useRef<OceanAudio | null>(null);
+  const audioRef = useRef<{ kind: SoundSource; audio: OceanAudio } | null>(null);
   const [volume, setVolume] = useState(loadVolume);
 
   const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -63,6 +65,16 @@ export function Hero({ data }: Props) {
   const config = store ? store.configs[store.sceneId] : null;
   const ready = scene !== null && readyScene === scene.id;
   const soundOn = store?.sound ?? false;
+  const soundSource = store?.soundSource ?? 'clip';
+
+  // Clip player or envelope-following synth; swapping disposes the other one.
+  const audioEngine = (): OceanAudio => {
+    if (audioRef.current?.kind !== soundSource) {
+      audioRef.current?.audio.dispose();
+      audioRef.current = { kind: soundSource, audio: soundSource === 'synth' ? createSeaSynth() : createOceanAudio() };
+    }
+    return audioRef.current.audio;
+  };
 
   const onReady = useCallback((ok: boolean) => {
     setReadyScene(ok ? getSnapshot().sceneId : null);
@@ -77,12 +89,12 @@ export function Hero({ data }: Props) {
 
   const toggleSound = () => {
     setSound(!soundOn);
-    if (soundOn) audioRef.current?.stop();
+    if (soundOn) audioRef.current?.audio.stop();
   };
 
   const changeVolume = (next: number) => {
     setVolume(next);
-    audioRef.current?.setVolume(next);
+    audioRef.current?.audio.setVolume(next);
     try { localStorage.setItem(VOLUME_KEY, String(next)); } catch { /* private mode */ }
   };
 
@@ -90,7 +102,7 @@ export function Hero({ data }: Props) {
   // away (allowed on sites the user visits often) and otherwise on the first interaction.
   useEffect(() => {
     if (!soundOn || !scene) return;
-    const audio = (audioRef.current ??= createOceanAudio());
+    const audio = audioEngine();
     audio.setVolume(volume);
     audio.setScene(scene.id);
     const tryStart = () => {
@@ -107,7 +119,7 @@ export function Hero({ data }: Props) {
     };
     // `volume` is pushed through changeVolume; re-running on each slider move would restart listeners.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [soundOn, scene]);
+  }, [soundOn, scene, soundSource]);
 
   // Fade with scroll: full volume at the top, silent once the hero has scrolled away.
   useEffect(() => {
@@ -116,7 +128,7 @@ export function Hero({ data }: Props) {
     const update = () => {
       raf = 0;
       const height = heroRef.current?.offsetHeight ?? 0;
-      audioRef.current?.setDuck(height > 0 ? 1 - window.scrollY / height : 1);
+      audioRef.current?.audio.setDuck(height > 0 ? 1 - window.scrollY / height : 1);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -127,7 +139,7 @@ export function Hero({ data }: Props) {
     };
   }, [soundOn]);
 
-  useEffect(() => () => audioRef.current?.dispose(), []);
+  useEffect(() => () => audioRef.current?.audio.dispose(), []);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(CLI_COMMAND);
@@ -231,6 +243,8 @@ export function Hero({ data }: Props) {
           onToggleSound={toggleSound}
           volume={volume}
           onVolume={changeVolume}
+          soundSource={soundSource}
+          onSoundSource={setSoundSource}
         />
       )}
     </section>
