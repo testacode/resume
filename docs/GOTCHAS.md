@@ -23,3 +23,8 @@ Bugs difíciles, configs no documentadas y workarounds. Formato libre, por fecha
 - El shell tiene `cp` con `-i` (prompt "overwrite?") y `cp -f` no lo pisa: en scripts usar `command cp` o `cat src > dst`.
 - `agent-browser record start <path> <url>`: con URL abre la página antes de que apliquen cambios de `localStorage` hechos en la tab; para grabar un estado forzado, navegar + verificar primero y grabar sin URL.
 - El clasificador de permisos de Claude Code bloquea `filter-repo` y `push --force` aunque sea en `/tmp`; esos pasos los corre Carlos con `!`.
+
+## 2026-10-17 — Banner del perfil (GIF del hero)
+
+- `agent-browser record start` abre un **contexto nuevo** (sin `localStorage`, sin CSS inyectado): graba una escena al azar y con toda la UI. Y los screenshots por el wrapper salen a ~0.4 fps. Lo que funciona: `Page.startScreencast` por CDP directo sobre la tab propia (`scripts/capture-hero.mjs`, 35–45 fps reales) y `scripts/make-hero-banner.sh` para el GIF.
+- GIF de escenas con dither/grano: cada píxel cambia por frame y no comprime. `paletteuse=dither=none`, ≤64 colores, 6 fps y 720 px: 1.7 MB; con dither de ffmpeg y 10 fps a 960 px el mismo clip daba 20 MB.
