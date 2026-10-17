@@ -11,6 +11,10 @@ function setup() {
     config: { ...shore.defaults },
     onChange: vi.fn(),
     onReset: vi.fn(),
+    soundOn: false,
+    onToggleSound: vi.fn(),
+    volume: 0.5,
+    onVolume: vi.fn(),
   };
   render(<ScenePanel {...props} />);
   return props;
@@ -51,6 +55,16 @@ describe('ScenePanel', () => {
 
     fireEvent.change(screen.getByLabelText('Sand'), { target: { value: '#123456' } });
     expect(props.onChange).toHaveBeenLastCalledWith({ ...shore.defaults, sand: '#123456' });
+  });
+
+  it('toggles sound and changes the volume', () => {
+    const props = setup();
+    fireEvent.click(screen.getByRole('button', { name: 'Play sea sound' }));
+    expect(props.onToggleSound).toHaveBeenCalledOnce();
+
+    fireEvent.click(trigger());
+    fireEvent.change(screen.getByLabelText('Volume'), { target: { value: '0.2' } });
+    expect(props.onVolume).toHaveBeenCalledWith(0.2);
   });
 
   it('applies presets over defaults and resets', () => {

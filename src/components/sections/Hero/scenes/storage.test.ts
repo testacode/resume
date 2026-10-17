@@ -4,9 +4,11 @@ import { shore } from './shore';
 import {
   loadSceneChoice,
   loadSceneConfig,
+  loadSoundPref,
   parseStored,
   saveSceneChoice,
   saveSceneConfig,
+  saveSoundPref,
 } from './storage';
 
 beforeEach(() => {
@@ -65,6 +67,16 @@ describe('localStorage round trip', () => {
     expect(loadSceneChoice()).toBe('shore');
     localStorage.setItem('hero:scene', 'volcano');
     expect(loadSceneChoice()).toBe('random');
+  });
+});
+
+describe('sound preference', () => {
+  it('is on by default and remembers a mute', () => {
+    expect(loadSoundPref()).toBe(true);
+    saveSoundPref(false);
+    expect(loadSoundPref()).toBe(false);
+    saveSoundPref(true);
+    expect(loadSoundPref()).toBe(true);
   });
 });
 

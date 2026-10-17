@@ -88,6 +88,14 @@ describe('Hero — scene', () => {
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
   });
 
+  it('starts with sound on and persists a mute', () => {
+    render(<Hero data={personal} />);
+    const speaker = screen.getByRole('button', { name: 'Mute sea sound' });
+    fireEvent.click(speaker);
+    expect(screen.getByRole('button', { name: 'Play sea sound' })).toBeInTheDocument();
+    expect(localStorage.getItem('hero:sound')).toBe('off');
+  });
+
   it('switches scene from the panel and persists the choice', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.1);
     const { container } = render(<Hero data={personal} />);

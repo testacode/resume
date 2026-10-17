@@ -1,6 +1,6 @@
 import { horizon } from './horizon';
 import { shore } from './shore';
-import { clearSceneConfig, loadSceneChoice, loadSceneConfig, saveSceneChoice, saveSceneConfig } from './storage';
+import { clearSceneConfig, loadSceneChoice, loadSceneConfig, loadSoundPref, saveSceneChoice, saveSceneConfig, saveSoundPref } from './storage';
 import type { SceneChoice, SceneConfig, SceneDef, SceneId } from './types';
 
 export const SCENES: Record<SceneId, SceneDef> = { horizon, shore };
@@ -9,6 +9,7 @@ export type SceneState = {
   choice: SceneChoice;
   sceneId: SceneId;
   configs: Record<SceneId, SceneConfig>;
+  sound: boolean;
 };
 
 // Tiny external store so the Hero can hydrate with no scene (server snapshot) and pick one
@@ -34,6 +35,7 @@ export function getSnapshot(): SceneState {
       choice,
       sceneId: choice === 'random' ? pickRandom() : choice,
       configs: { horizon: loadSceneConfig(horizon), shore: loadSceneConfig(shore) },
+      sound: loadSoundPref(),
     };
   }
   return state;
@@ -54,6 +56,12 @@ export function setConfig(id: SceneId, config: SceneConfig): void {
   const current = getSnapshot();
   state = { ...current, configs: { ...current.configs, [id]: config } };
   saveSceneConfig(SCENES[id], config);
+  emit();
+}
+
+export function setSound(on: boolean): void {
+  state = { ...getSnapshot(), sound: on };
+  saveSoundPref(on);
   emit();
 }
 

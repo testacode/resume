@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState } from 'react';
+import { FiVolume2, FiVolumeX } from 'react-icons/fi';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import type { ControlSpec, SceneChoice, SceneConfig, SceneDef } from './scenes/types';
 import { STYLE_CONTROLS } from './scenes/shared';
@@ -13,6 +14,10 @@ type Props = {
   config: SceneConfig;
   onChange: (config: SceneConfig) => void;
   onReset: () => void;
+  soundOn: boolean;
+  onToggleSound: () => void;
+  volume: number;
+  onVolume: (volume: number) => void;
 };
 
 const CHOICES: ReadonlyArray<[SceneChoice, string]> = [['random', 'Random'], ['horizon', 'Horizon'], ['shore', 'Shore']];
@@ -64,11 +69,12 @@ function Control({ spec, value, onChange }: { spec: ControlSpec; value: number |
   );
 }
 
-export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset }: Props) {
+export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset, soundOn, onToggleSound, volume, onVolume }: Props) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
+  const volumeId = useId();
 
   useFocusTrap(panelRef, open);
 
@@ -124,11 +130,31 @@ export function ScenePanel({ choice, onChoice, scene, config, onChange, onReset 
             </details>
           ))}
 
+          <section className={styles.section}>
+            <h3 className={styles.heading}>Sound</h3>
+            <div className={styles.row}>
+              <label htmlFor={volumeId}>Volume</label>
+              <div className={styles.range}>
+                <input id={volumeId} type="range" min={0} max={1} step={0.02} value={volume} onChange={(e) => onVolume(Number(e.target.value))} />
+                <output htmlFor={volumeId}>{volume}</output>
+              </div>
+            </div>
+          </section>
+
           <button type="button" className={styles.reset} onClick={onReset}>
             Reset {scene.label.toLowerCase()}
           </button>
         </div>
       )}
+      <button
+        type="button"
+        className={styles.sound}
+        onClick={onToggleSound}
+        aria-label={soundOn ? 'Mute sea sound' : 'Play sea sound'}
+        aria-pressed={soundOn}
+      >
+        {soundOn ? <FiVolume2 size={12} /> : <FiVolumeX size={12} />}
+      </button>
       <button
         type="button"
         className={styles.trigger}

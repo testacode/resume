@@ -2,6 +2,7 @@ import type { ControlSpec, SceneChoice, SceneConfig, SceneDef } from './types';
 import { STYLE_CONTROLS } from './shared';
 
 const CHOICE_KEY = 'hero:scene';
+const SOUND_KEY = 'hero:sound';
 const CHOICES: ReadonlyArray<SceneChoice> = ['random', 'horizon', 'shore'];
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -70,4 +71,12 @@ export function loadSceneChoice(): SceneChoice {
 
 export function saveSceneChoice(choice: SceneChoice): void {
   safeStorage()?.setItem(CHOICE_KEY, choice);
+}
+
+export function loadSoundPref(): boolean {
+  return safeStorage()?.getItem(SOUND_KEY) !== 'off';
+}
+
+export function saveSoundPref(on: boolean): void {
+  safeStorage()?.setItem(SOUND_KEY, on ? 'on' : 'off');
 }

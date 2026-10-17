@@ -8,8 +8,9 @@ import { heroName, heroItem } from '@/lib/animations';
 import type { PersonalInfo } from '@/types/resume';
 import { ShaderCanvas } from './ShaderCanvas';
 import { ScenePanel } from './ScenePanel';
+import { createOceanAudio, type OceanAudio } from './scenes/oceanAudio';
 import { hexToRgb } from './scenes/shared';
-import { SCENES, getServerSnapshot, getSnapshot, resetConfig, setChoice, setConfig, subscribe } from './scenes/store';
+import { SCENES, getServerSnapshot, getSnapshot, resetConfig, setChoice, setConfig, setSound, subscribe } from './scenes/store';
 import type { SceneConfig, SceneId } from './scenes/types';
 import styles from './Hero.module.css';
 
@@ -18,6 +19,17 @@ type Props = {
 };
 
 const CLI_COMMAND = 'npx xmontc';
+const VOLUME_KEY = 'hero:volume';
+const GESTURES = ['pointerdown', 'keydown', 'touchend'] as const;
+
+function loadVolume(): number {
+  try {
+    const stored = Number(localStorage.getItem(VOLUME_KEY));
+    return stored > 0 && stored <= 1 ? stored : 0.35;
+  } catch {
+    return 0.35;
+  }
+}
 
 function sceneStyle(sceneId: SceneId, config: SceneConfig): CSSProperties {
   const vars: Record<string, string> = {
@@ -42,11 +54,14 @@ export function Hero({ data }: Props) {
   const copyTimeoutRef = useRef<number | null>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const [readyScene, setReadyScene] = useState<SceneId | null>(null);
+  const audioRef = useRef<OceanAudio | null>(null);
+  const [volume, setVolume] = useState(loadVolume);
 
   const store = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const scene = store ? SCENES[store.sceneId] : null;
   const config = store ? store.configs[store.sceneId] : null;
   const ready = scene !== null && readyScene === scene.id;
+  const soundOn = store?.sound ?? false;
 
   const onReady = useCallback((ok: boolean) => {
     setReadyScene(ok ? getSnapshot().sceneId : null);
@@ -58,6 +73,42 @@ export function Hero({ data }: Props) {
     document.documentElement.dataset.heroScene = scene.id;
     return () => { delete document.documentElement.dataset.heroScene; };
   }, [scene]);
+
+  const toggleSound = () => {
+    setSound(!soundOn);
+    if (soundOn) audioRef.current?.stop();
+  };
+
+  const changeVolume = (next: number) => {
+    setVolume(next);
+    audioRef.current?.setVolume(next);
+    try { localStorage.setItem(VOLUME_KEY, String(next)); } catch { /* private mode */ }
+  };
+
+  // Sound is on by default, but browsers only let it start after a user gesture: try right
+  // away (allowed on sites the user visits often) and otherwise on the first interaction.
+  useEffect(() => {
+    if (!soundOn || !scene) return;
+    const audio = (audioRef.current ??= createOceanAudio());
+    audio.setVolume(volume);
+    audio.setScene(scene.id);
+    const tryStart = () => {
+      void audio.start().then((started) => { if (started) stopListening(); });
+    };
+    const stopListening = () => GESTURES.forEach((type) => document.removeEventListener(type, tryStart));
+    GESTURES.forEach((type) => document.addEventListener(type, tryStart));
+    tryStart();
+    const onVisibility = () => { if (document.hidden) audio.stop(); else tryStart(); };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      stopListening();
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+    // `volume` is pushed through changeVolume; re-running on each slider move would restart listeners.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [soundOn, scene]);
+
+  useEffect(() => () => audioRef.current?.dispose(), []);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(CLI_COMMAND);
@@ -156,6 +207,10 @@ export function Hero({ data }: Props) {
           config={config}
           onChange={(next) => setConfig(scene.id, next)}
           onReset={() => resetConfig(scene.id)}
+          soundOn={soundOn}
+          onToggleSound={toggleSound}
+          volume={volume}
+          onVolume={changeVolume}
         />
       )}
     </section>
