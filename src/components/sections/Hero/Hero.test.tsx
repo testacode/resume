@@ -100,19 +100,20 @@ describe('Hero — scene', () => {
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
   });
 
-  it('fades the sound with scroll over the hero height', async () => {
+  it('fades the sound with scroll over the hero height', () => {
+    vi.useFakeTimers({ toFake: ['requestAnimationFrame', 'cancelAnimationFrame'] });
     const { container } = render(<Hero data={personal} />);
     const hero = container.querySelector('section') as HTMLElement;
     Object.defineProperty(hero, 'offsetHeight', { value: 800, configurable: true });
 
     Object.defineProperty(window, 'scrollY', { value: 400, configurable: true });
     fireEvent.scroll(window);
-    await act(async () => { await new Promise((r) => requestAnimationFrame(() => r(null))); });
+    act(() => { vi.advanceTimersByTime(32); });
     expect(audio.setDuck).toHaveBeenLastCalledWith(0.5);
 
     Object.defineProperty(window, 'scrollY', { value: 0, configurable: true });
     fireEvent.scroll(window);
-    await act(async () => { await new Promise((r) => requestAnimationFrame(() => r(null))); });
+    act(() => { vi.advanceTimersByTime(32); });
     expect(audio.setDuck).toHaveBeenLastCalledWith(1);
   });
 
