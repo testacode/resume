@@ -16,3 +16,10 @@ Bugs difíciles, configs no documentadas y workarounds. Formato libre, por fecha
 - **Pixabay bloquea `curl`** (Cloudflare) pero la página expone la URL del CDN en el HTML: se abre en el Chrome CDP, se lee `cdn.pixabay.com/download/audio/...` del DOM y *eso* sí baja con `curl`. Openverse (`api.openverse.org`) devuelve previews de Freesound con URL directa y filtro de licencia, mucho más cómodo.
 - **Opus sobrepasa el pico**: con limitador a −1 dBTP el `.ogg` salió a +1.2/+2.4 dBFS. Limitar a −3 dBTP antes de codificar. Y `alimiter` trae `level=true` por default: aplica make-up gain hasta el límite y te sube 3 dB la sonoridad que acabás de normalizar — `level=false`.
 - Loop sin costura: no usar `<audio loop>` (deja hueco); el crossfade va horneado en el archivo (`scripts/make-sea-loop.sh`) y `AudioBufferSourceNode.loop` lo reproduce exacto.
+
+## 2026-10-17 — Publicar el repo / perfil
+
+- **`git push --mirror` tras `filter-repo`** falla en `refs/pull/N/head` ("deny updating a hidden ref"): las ramas se fuerzan igual, pero los commits viejos quedan vivos en GitHub colgados de las PRs. Purgarlos de verdad = pedido a GitHub Support. Tenerlo en cuenta antes de prometer "sin rastro".
+- El shell tiene `cp` con `-i` (prompt "overwrite?") y `cp -f` no lo pisa: en scripts usar `command cp` o `cat src > dst`.
+- `agent-browser record start <path> <url>`: con URL abre la página antes de que apliquen cambios de `localStorage` hechos en la tab; para grabar un estado forzado, navegar + verificar primero y grabar sin URL.
+- El clasificador de permisos de Claude Code bloquea `filter-repo` y `push --force` aunque sea en `/tmp`; esos pasos los corre Carlos con `!`.

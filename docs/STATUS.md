@@ -4,7 +4,7 @@
 
 ## En curso
 
-- Hero scenes (rama `feat/hero-scenes`): Horizonte + Playa al azar por carga, panel `π`, sonido de mar (clip CC0 en loop, on por defecto tras el primer gesto, mute recordado) — `docs/hero-audio.md`. Aprobado por Carlos a oído y en pantalla. Falta: PR/merge a master (deploya solo) y Lighthouse sobre el deploy.
+- Perfil de GitHub: decidir el arte para el README (banner GIF del shader sin UI, o solo texto) y si se pide a GitHub Support el GC del repo `resume` (los commits viejos con el alias de email siguen colgados de `refs/pull/1..5`).
 
 ## Backlog
 
@@ -14,6 +14,9 @@
 
 
 ## Hecho reciente
+
+- 2026-10-17 — Hero scenes en producción: Horizonte + Playa al azar, panel `π`, sonido de mar CC0 con fade por scroll (`docs/hero-audio.md`). Tagline sin empleador; email fuera de `llms.txt`; GitLab oculto.
+- 2026-10-17 — Repo `resume` público (historial reescrito sin emails, LICENSE MIT + README). Perfil GitHub: nombre, bio, website, LinkedIn, README nuevo, pins (xmontc, resume, header-editor, weird-science, mac-vs-linux-bench); `xmontc` con LICENSE/topics/homepage; descripciones y topics en los repos públicos; `renaiss-test-frontend` archivado.
 
 - 2026-10-17 — LinkedIn Destacado: link a carlosmonti.com (la tarjeta puede mostrar el título viejo hasta refrescar en post-inspector)
 

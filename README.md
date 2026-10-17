@@ -2,8 +2,6 @@
 
 My portfolio. Next.js 16, React 19, TypeScript, CSS Modules, deployed to Cloudflare Workers with OpenNext.
 
-![Hero: procedural WebGL2 ocean horizon and shoreline scenes](docs/hero.gif)
-
 The hero is two procedural WebGL2 shader scenes, picked at random per load:
 
 - **Horizon** — an ocean at eye level; the name sits on the horizon line.
