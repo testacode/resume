@@ -30,7 +30,7 @@ export const resumeData: ResumeData = {
         name: 'GitLab',
         url: 'https://gitlab.com/carlosmonti',
         icon: 'gitlab',
-        enabled: true,
+        enabled: false,
       },
     ],
   },
