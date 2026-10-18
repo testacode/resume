@@ -10,12 +10,13 @@
 
 - Hero: el botón de copiar `npx xmontc` tiene nombre accesible distinto del texto visible (aviso `label-content-name-mismatch` de Lighthouse; A11y sigue en 100)
 - Hero audio: si el modo Synth convence, hacerlo default y borrar los clips (−500 KB de assets)
+- `carlosmonti.com` (y `www.`) da 404 `DEPLOYMENT_NOT_FOUND` de Vercel (2026-10-17): el dominio no está asignado a ningún proyecto y el CV vive en `www.xmontc.xyz` (Workers). Es el `SITE_URL` canónico y el link del Destacado de LinkedIn: redirigirlo a `www.xmontc.xyz` o reasignarlo
 
 
 ## Hecho reciente
 
 - 2026-10-17 — Hero scenes en producción: Horizonte + Playa al azar, panel `π`, sonido de mar CC0 con fade por scroll (`docs/hero-audio.md`). Tagline sin empleador; email fuera de `llms.txt`; GitLab oculto.
-- 2026-10-17 — Borrado el proyecto Vercel `xmontc/resume` (servía una copia pública en resume-xmontc.vercel.app en cada push); `vercel.json` y `.vercel/` fuera del repo. El widget de deploy de la status line (`llm-toolkit/scripts/deploy-status.sh`) ahora lee GitHub Actions cuando no hay Vercel.
+- 2026-10-17 — Incidente: borré el proyecto Vercel `xmontc/resume` creyendo que era un resto; carlosmonti.com **se sirve desde Vercel** y cayó ~15 min. Recreado (proyecto nuevo, dominio + www, git connect, deploy prod); `vercel.json` de vuelta. Docs corregidas (CLAUDE.md/README decían Cloudflare). El widget de deploy de la status line ahora también lee GitHub Actions.
 - 2026-10-17 — Hero: rótulo "♪ click / to listen" que sigue al puntero mientras el sonido espera el primer gesto.
 - 2026-10-17 — `xmontc` 0.2.1 publicado (tagline sin empleador, GitLab off) con el token de npm de 1Password (bypass 2FA).
 - 2026-10-17 — Hero: `?scene=horizon|shore` por URL; Lighthouse móvil 92/100/100/100 (CLS 0 tras fijar el layout desde el primer paint, TBT 180 ms con la máscara escaneando solo las filas del texto); switch Recording/Synth en el panel (resíntesis por envolvente, 3.4 KB).

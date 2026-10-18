@@ -29,3 +29,9 @@ Bugs difíciles, configs no documentadas y workarounds. Formato libre, por fecha
 - `agent-browser record start` abre un **contexto nuevo** (sin `localStorage`, sin CSS inyectado): graba una escena al azar y con toda la UI. Y los screenshots por el wrapper salen a ~0.4 fps. Lo que funciona: `Page.startScreencast` por CDP directo sobre la tab propia (`scripts/capture-hero.mjs`, 35–45 fps reales) y `scripts/make-hero-banner.sh` para el GIF.
 - GIF de escenas con dither/grano: cada píxel cambia por frame y no comprime. `paletteuse=dither=none`, ≤64 colores, 6 fps y 720 px: 1.7 MB; con dither de ffmpeg y 10 fps a 960 px el mismo clip daba 20 MB.
 - Formulario de GitHub Support (Repositories): el tema "Deletes" es para **borrar repos** y pide confirmación de borrado — no usarlo para limpieza de historial. Para purgar refs de PR después de un rewrite: "Repository features" → "Branches" → la página "Solution" ya reconoce el caso → "Continue to create a ticket" → tipo "Errors, problems".
+
+## 2026-10-17 — Incidente: borré el proyecto de Vercel y se cayó carlosmonti.com
+
+- CLAUDE.md/README decían "deployed to Cloudflare Workers" y el widget de la status line mostraba un status de Vercel que tomé por resto viejo. **El host real es Vercel**: el dominio está registrado ahí, los NS son `ns1/ns2.vercel-dns.com`, y el worker de Cloudflare solo sirve `www.xmontc.xyz`. `vercel project rm resume` → `404 DEPLOYMENT_NOT_FOUND` en carlosmonti.com durante ~15 min.
+- Restauración: `vercel link --yes --project resume` (proyecto nuevo), `vercel domains add carlosmonti.com resume` (+ `www`), `vercel git connect --yes`, `vercel deploy --prod --yes`. Los NS no cambian, así que vuelve al instante.
+- Regla: antes de borrar/mover cualquier cosa de hosting, `dig NS` + `curl -I` al dominio público; después, curlear **el dominio**, no la URL interna del proveedor. Lo que verifiqué fue `resume-xmontc.vercel.app` → 404 y lo leí como éxito.

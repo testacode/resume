@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal resume/portfolio website for Carlos Monti. Built with Next.js 16, React 19, TypeScript, and CSS Modules. Deployed to Cloudflare Workers via OpenNext.
+Personal resume/portfolio website for Carlos Monti. Built with Next.js 16, React 19, TypeScript, and CSS Modules. **Hosted on Vercel** (carlosmonti.com); a secondary OpenNext build runs on Cloudflare Workers at www.xmontc.xyz.
 
 ## Commands
 
@@ -52,8 +52,9 @@ src/
 - Node 22
 
 ## Deployment
-- Push to `master` → CI (lint + build) + deploy to Cloudflare Workers
-- **IMPORTANT**: Requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets
+- **carlosmonti.com is served by Vercel** — team `xmontc`, project `resume`, git-connected to this repo (push to `master` → production). The domain is registered at Vercel and its nameservers are Vercel's. **Never delete that Vercel project**: it takes the site down (it happened on 2026-10-17; see `docs/GOTCHAS.md`).
+- Push to `master` also runs CI (lint + build) and "Deploy to Cloudflare Workers", which publishes the OpenNext build to a worker serving `www.xmontc.xyz` (project subdomains live there). Requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
+- Before touching hosting/DNS: `dig NS carlosmonti.com` and `curl -I https://carlosmonti.com`; after any change, curl the public domain again.
 
 ## Design Context
 

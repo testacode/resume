@@ -1,6 +1,6 @@
 # carlosmonti.com
 
-My portfolio. Next.js 16, React 19, TypeScript, CSS Modules, deployed to Cloudflare Workers with OpenNext.
+My portfolio. Next.js 16, React 19, TypeScript, CSS Modules. Hosted on Vercel; an OpenNext build also runs on Cloudflare Workers (www.xmontc.xyz).
 
 The hero is two procedural WebGL2 shader scenes, picked at random per load:
 
