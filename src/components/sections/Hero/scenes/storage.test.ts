@@ -7,7 +7,6 @@ import {
   loadSoundPref,
   loadSoundSource,
   parseStored,
-  saveSceneChoice,
   saveSceneConfig,
   saveSoundPref,
   saveSoundSource,
@@ -63,12 +62,10 @@ describe('localStorage round trip', () => {
     expect(loadSceneConfig(horizon)).toEqual(horizon.defaults);
   });
 
-  it('saves and loads the scene choice, defaulting to random', () => {
+  it('always draws at random and drops a legacy persisted choice', () => {
+    localStorage.setItem('hero:scene', 'shore');
     expect(loadSceneChoice()).toBe('random');
-    saveSceneChoice('shore');
-    expect(loadSceneChoice()).toBe('shore');
-    localStorage.setItem('hero:scene', 'volcano');
-    expect(loadSceneChoice()).toBe('random');
+    expect(localStorage.getItem('hero:scene')).toBeNull();
   });
 });
 

@@ -92,12 +92,13 @@ describe('Hero — scene', () => {
     window.history.replaceState({}, '', '/');
   });
 
-  it('honours a stored scene choice over random', () => {
+  it('ignores a legacy stored scene choice and keeps drawing at random', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.9);
     localStorage.setItem('hero:scene', 'horizon');
     const { container } = render(<Hero data={personal} />);
 
-    expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
+    expect(container.querySelector('section')).toHaveAttribute('data-scene', 'shore');
+    expect(localStorage.getItem('hero:scene')).toBeNull();
   });
 
   it('fades the sound with scroll over the hero height', () => {
@@ -138,7 +139,7 @@ describe('Hero — scene', () => {
     expect(localStorage.getItem('hero:sound')).toBe('off');
   });
 
-  it('switches scene from the panel and persists the choice', () => {
+  it('switches scene from the panel for this session only', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.1);
     const { container } = render(<Hero data={personal} />);
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'horizon');
@@ -147,6 +148,6 @@ describe('Hero — scene', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Shore' }));
 
     expect(container.querySelector('section')).toHaveAttribute('data-scene', 'shore');
-    expect(localStorage.getItem('hero:scene')).toBe('shore');
+    expect(localStorage.getItem('hero:scene')).toBeNull();
   });
 });

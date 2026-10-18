@@ -1,6 +1,6 @@
 import { horizon } from './horizon';
 import { shore } from './shore';
-import { clearSceneConfig, loadSceneChoice, loadSceneConfig, loadSoundPref, loadSoundSource, saveSceneChoice, saveSceneConfig, saveSoundPref, saveSoundSource, type SoundSource } from './storage';
+import { clearSceneConfig, loadSceneChoice, loadSceneConfig, loadSoundPref, loadSoundSource, saveSceneConfig, saveSoundPref, saveSoundSource, type SoundSource } from './storage';
 import type { SceneChoice, SceneConfig, SceneDef, SceneId } from './types';
 
 export const SCENES: Record<SceneId, SceneDef> = { horizon, shore };
@@ -54,10 +54,10 @@ export function getServerSnapshot(): SceneState | null {
   return null;
 }
 
+/** Session-only: the next load draws at random again. */
 export function setChoice(choice: SceneChoice): void {
   const current = getSnapshot();
   state = { ...current, choice, sceneId: choice === 'random' ? pickRandom() : choice };
-  saveSceneChoice(choice);
   emit();
 }
 
