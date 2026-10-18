@@ -215,5 +215,15 @@ export const resumeData: ResumeData = {
       technologies: ['Next.js', 'Tailwind CSS', 'Three.js'],
       status: 'live',
     },
+    {
+      id: 'weird-science',
+      name: 'Weird Science',
+      description:
+        "Interactive 3D natural-science labs for primary and secondary school, following Argentina's NAP curriculum.",
+      url: `https://weird-science.${PROJECTS_DOMAIN}`,
+      githubUrl: 'https://github.com/testacode/weird-science',
+      technologies: ['Three.js', 'TypeScript', 'Vite'],
+      status: 'live',
+    },
   ],
 };
