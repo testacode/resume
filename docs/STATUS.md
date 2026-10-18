@@ -10,7 +10,6 @@
 
 - Hero: el botón de copiar `npx xmontc` tiene nombre accesible distinto del texto visible (aviso `label-content-name-mismatch` de Lighthouse; A11y sigue en 100)
 - Hero audio: si el modo Synth convence, hacerlo default y borrar los clips (−500 KB de assets)
-- `carlosmonti.com` (y `www.`) da 404 `DEPLOYMENT_NOT_FOUND` de Vercel (2026-10-17): el dominio no está asignado a ningún proyecto y el CV vive en `www.xmontc.xyz` (Workers). Es el `SITE_URL` canónico y el link del Destacado de LinkedIn: redirigirlo a `www.xmontc.xyz` o reasignarlo
 
 
 ## Hecho reciente
